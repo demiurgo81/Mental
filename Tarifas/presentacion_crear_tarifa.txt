@@ -1,0 +1,78 @@
+# Tarifa
+## RR
+### Divisiones
+#### Bidi
+- *RCE*
+- *REC*
+- *RAN*
+- *RAT*
+- *TVC*
+- *ROR*
+- *RVA*
+#### Uni
+- *CAL*
+- *CCB*
+- *CCC*
+- *CCO*
+- *CPA*
+- *CPE*
+- *CPV*
+- *SAT*
+
+## Cliente
+### Canal 
+#### Comercial
+  - Tarifas 
+      -  524.752
+  - Clientes
+      - 2.810.590
+ #### Retención	
+  - Tarifas	
+    -   18.332	  
+  - Clientes
+      -    330.942
+### Segmento
+#### Residencial
+- Tarifas 
+   -  487.073
+- Clientes
+    -   2.810.590
+#### Soho
+-  Tarifas
+   - 32.348
+-  Clientes
+     - 15.290
+#### Pymes
+-   Tarifas
+      - 23.189
+  - Clientes
+      - 183.546  
+ 
+### Tipo
+- Cortesias
+     - Tarifas
+       - 35
+     - Clientes
+        - 1.591
+ - Demos
+     - Tarifas
+         - 7
+     - Clientes
+         - 26
+  -  Empleados
+      - Tarifas
+         - 325
+      - Clientes
+          - 8757
+  - Señal Sin cobro
+      - Tarifas
+         - 14
+      - Clientes
+         - 1.241
+   - Organizaciones Internacionales
+        - Tarifas
+           - 5
+        - Clientes
+           - 1
+         
+

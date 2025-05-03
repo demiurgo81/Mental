@@ -1,0 +1,11 @@
+# TARIFA
+
+## Comercial
+### [Residencial](DivRes.html)
+### [Soho](DivSoho.html)
+### [Pymes](DivPymes.html)
+
+## Retención
+### [Residencial](DivRes.html)
+### [Soho](DivSoho.html)
+### [Pymes](DivPymes.html)
