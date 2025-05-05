@@ -1,5 +1,5 @@
 ---
-title: Flujo Gestión Estimaciones
+title: Inicio Flujo Gestión Estimaciones
 markmap:
   colorFreezeLevel: 2
   initialExpandLevel: 1
@@ -11,7 +11,7 @@ markmap:
 |-|-|-|-|
 | `insert` | DF_ESTIMACION | ID_ESTIMACION | *NEW*  |
 | `update` | DF_ESTIMACION | ESTADO_ESTIMACION | "PENDIENTE" |
-### Validad PEP
+### [x] **Validad PEP**
 #### [**Existe ID_PEP**](estadoPEP.html)
 #### **No Existe ID_PEP en DF_PEP**
 ##### 
@@ -22,65 +22,60 @@ markmap:
 ##### [INICIO](index.html)
 ## [**Consultar Estimación + PEP**](estadoPEP.html)
 
-
-ESTADOPEP
 ---
-title: ESTADO PEP
 markmap:
   colorFreezeLevel: 2
   initialExpandLevel: 1
 ---
+
+# [Validar Estado PEP](Index.html)
 ## **NUEVO**
-### ADV: "PEP [ID] existe,  estado no aprobado (NUEVO)"
-#### [**BLOQUEAR EJECUCION CRONOS**](bloqueoEjecucion.html)
-## [**APROBADO**](estadoEstimacion.html)
+### ==**ADV**: *"PEP [ID_PEP] existe,  estado no aprobado (NUEVO)"*==
+### [**BLOQUEAR EJECUCION CRONOS**](bloqueoEjecucion.html)
+## **APROBADO**
+### [x] **Validar Estado Estimacion**
+#### **PENDIENTE**
+##### ==**ADV:** *"Estimación [ID_ESTIMACION] esta PENDIENTE de aprobación y restringe ejecucion"*==
+##### [**INICIO**](index.html)
+#### [**APROBADA/CERRADA**](estadoSolped.html)
 ## **RECHAZADO** 
-### ADV: PEP [ID] está RECHAZADO"
-#### [**BLOQUEAR EJECUCION CRONOS**](bloqueoEjecucion.html)
-
+### ==**ADV:** *"PEP [ID_PEP] aparece RECHAZADO actualmente"*==
+### [**Validar Solped**](estadoSolped.html)
 
 ---
-title: ESTADO ESTIMACION
 markmap:
   colorFreezeLevel: 2
   initialExpandLevel: 1
 ---
-## **PENDIENTE**
-	- ADV: "Estimación [ID] PENDIENTE de aprobación"
-		- [**BLOQUEAR EJECUCION CRONOS**](bloqueoEjecucion.html)
-## [**APROBADA / CERRADA**](estadoSolped.html)
 
-
----
-title: ESTADO SOLPED
-markmap:
-  colorFreezeLevel: 2
-  initialExpandLevel: 1
----
+# [Validar Estado Solped](estadoPEP.html)
 ## **No Existe**
-### ADV: "No se ha creado SOLPED por $ESTIMACION para Est. [ID]. Pendiente [Area]."
-#### [Ejecucion/Estimacion](estadoEjecucion.html)
+### ==**ADV:** *"No se ha creado SOLPED por $ESTIMACION para la Estimacion. [ID_ESTIMACION]. Pendiente [Area]."*==
+### [**Validar Ejecucion/Estimacion**](estadoEjecucion.html)
 ## **CREADA**
-### MSG: "SOLPED [ID] CREADA (Valor: $ESTIMACION), pendiente OC por [Area]. Ejec: $EJECUCION"
-#### [Ejecucion/Estimacion](estadoEjecucion.html)
+### **MSG:** *"`SOLPED [ID_SOLPED] CREADA (Valor: $ESTIMACION), pendiente de gestion, OC por [Area]. Ejecucion actual: $EJECUCION`"*
+### [**Validar Ejecucion/Estimacion**](estadoEjecucion.html)
 ## **FINALIZADA** 
-### [Validar OC](estadoOC.html)
+### [x] **Validar OC**
+##### **No Existe OC**
+###### ==**ADV:** *"SOLPED [ID] FINALIZADA sin OC asociada, pendiente OC por [Area]. Ejec: $EJECUCION"*==
+###### [**Validar Ejecucion/Estimacion**](estadoEjecucion.html)
+##### [**OC CREADA/FINALIZADA**](estadoEjecucion.html)
 
-
----
-title: ESTADO OC
+---novalido
 markmap:
   colorFreezeLevel: 2
   initialExpandLevel: 1
 ---
+# [Validar Estado OC]()
 ## **No Existe OC**
-### ADV: "SOLPED [ID] FINALIZADA sin OC asociada, pendiente OC por [Area]. Ejec: $EJECUCION"
-#### [Ejecucion/Estimacion](estadoEjecucion.html)
-## [**OC CREADA**](estadoEjecucion.html)
+### ==**ADV:** *"SOLPED [ID] FINALIZADA sin OC asociada, pendiente OC por [Area]. Ejec: $EJECUCION"*==
+### [**Validar Ejecucion/Estimacion**](estadoEjecucion.html)
+## [**OC CREADA/FINALIZADA**](estadoEjecucion.html)
 ## [**OC FINALIZADA**](estadoEjecucion.html)
 ## **OC ALERTADA**
-	- ADV: "OC [ID] ya ALERTADA por sobre-ejecución. Ejec: $EJECUCION vs Est: $ESTIMACION. Pendiente [Area]."
-		- [**BLOQUEAR EJECUCION CRONOS**](bloqueoEjecucion.html)
+### ==**ADV:** *"OC [ID_OC] ya esta ALERTADA por sobre-ejecución. Ejecuto: $EJECUCION vs Estimo: $ESTIMACION. Pendiente [Area]."*==
+### [**BLOQUEAR EJECUCION CRONOS**](bloqueoEjecucion.html)
 
 ---
 title: BLOQUEO EJECUCION
