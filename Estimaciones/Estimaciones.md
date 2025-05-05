@@ -1,15 +1,24 @@
 ---
+title: Flujo Gestión Estimaciones
 markmap:
   colorFreezeLevel: 2
   initialExpandLevel: 1
 ---
 
-# Gestión Estimaciones
-## Relacionar Estimacion + PEP
-### [**Existe ID_PEP en DF_PEP**](estadoPEP.html)
-### **No Existe ID_PEP en DF_PEP**
-#### 1. Insertar registro en DF_PEP / DF_INICIATIVA
-#### 2. ESTADO_PEP = 'NUEVO'
+## Nueva Estimacion + PEP
+###
+| accion | tabla | campo | valor |
+|-|-|-|-|
+| `insert` | DF_ESTIMACION | ID_ESTIMACION | *NEW*  |
+| `update` | DF_ESTIMACION | ESTADO_ESTIMACION | "PENDIENTE" |
+### Validad PEP
+#### [**Existe ID_PEP**](estadoPEP.html)
+#### **No Existe ID_PEP en DF_PEP**
+##### 
+| accion | tabla | campo | valor |
+|-|-|-|-|
+| `insert` | DF_PEP| DF_PEP | ID_PEP | *PEP* |
+| `update` | DF_PEP| ESTADO_PEP | "NUEVO" |
 ##### [INICIO](index.html)
 ## [**Consultar Estimación + PEP**](estadoPEP.html)
 
