@@ -19,7 +19,7 @@ markmap:
 |-|-|-|-|
 | `insert` | DF_PEP| DF_PEP | ID_PEP | *PEP* |
 | `update` | DF_PEP| ESTADO_PEP | "NUEVO" |
-##### [INICIO](index.html)
+##### [INICIO](Index.html)
 ## [**Consultar Estimación + PEP**](estadoPEP.html)
 
 ---
@@ -36,7 +36,7 @@ markmap:
 ### [x] **Validar Estado Estimacion**
 #### **PENDIENTE**
 ##### ==**ADV:** *"Estimación [ID_ESTIMACION] esta PENDIENTE de aprobación y restringe ejecucion"*==
-##### [**INICIO**](index.html)
+##### [**INICIO**](Index.html)
 #### [**APROBADA/CERRADA**](estadoSolped.html)
 ## **RECHAZADO** 
 ### ==**ADV:** *"PEP [ID_PEP] aparece RECHAZADO actualmente"*==
