@@ -85,12 +85,15 @@ markmap:
 ### [x] **Sin Solped**
 #### **MSG:** *"`La estimacion [ID_ESTIMACION] por valor: $ESTIMADO, esta pendiente de gestion, SOLPED por [Area]. Ejecucion actual: $EJECUCION`"*
 ### [**INICIO**](Index.html)
+
 ## [x] **$EJECUCION > $ESTIMADO (Sobre-ejecución)**
 ### ==**ADV:** *"La estimacion [ID_ESTIMACION] por valor: $ESTIMADO, presenta una sobreejecucion por $ESTIMADO - $EJECUCION, la ejecucion sera restringida y la estimacion sera RESTRINGIDA urgente gestion por [Area]"*==
 ###
 | accion | tabla | campo | valor |
 |-|-|-|-|
 | `insert` | DF_EST_ALERTA| TIPO_ALERTA... | *"BLOQUEAR"*,ID_ESTIMACION,ID_SOLPED,ID_OC,ID_PEP |
+
+
 ### [**BLOQUEAR EJECUCION CRONOS**](bloqueoEjecucion.html)
 
 ---
@@ -110,6 +113,7 @@ markmap:
 |-|-|-|-|
 | `update` | DF_EST_ALERTA | SOBRECOSTO | $ESTIMADO-$EJECUTADO |
 ## [**INICIO**](Index.html)
+
 
 ## 5. Crear PEP
    - Insertar registro en DF_PEP / DF_INICIATIVA
