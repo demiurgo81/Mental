@@ -87,6 +87,10 @@ markmap:
 ### [**INICIO**](Index.html)
 ## [x] **$EJECUCION > $ESTIMACION (Sobre-ejecución)**
 ### ==**ADV:** *"La estimacion [ID_ESTIMACION] por valor: $ESTIMACION, presenta una sobreejecucion por $ESTIMACION - $EJECUCION, la ejecucion sera restringida y la estimacion sera RESTRINGIDA urgente gestion por [Area]"*==
+###
+| accion | tabla | campo | valor |
+|-|-|-|-|
+| `insert` | DF_SOBREEJECUCION | ID_ALERTA | *NEW*,ID_ESTIMACION,ID_SOLPED,ID_OC  |
 ### [**BLOQUEAR EJECUCION CRONOS**](bloqueoEjecucion.html)
 
 ---
@@ -95,7 +99,12 @@ markmap:
   colorFreezeLevel: 2
   initialExpandLevel: 1
 ---
+# [Bloqueo de Ejecucion Chronos](estadoPEP.html)
 ##
+| accion | tabla | campo | valor |
+|-|-|-|-|
+| `insert` | DF_ESTIMACION | ID_ESTIMACION | *NEW*  |
+| `update` | DF_ESTIMACION | ESTADO_ESTIMACION | "PENDIENTE" |
 
 
 ## 5. Crear PEP
