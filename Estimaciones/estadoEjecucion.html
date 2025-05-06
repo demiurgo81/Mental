@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Markmap</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+}
+#mindmap {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+}
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/markmap-toolbar@0.18.10/dist/style.css">
+</head>
+<body>
+<svg id="mindmap"></svg>
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script><script src="https://cdn.jsdelivr.net/npm/markmap-view@0.18.10/dist/browser/index.js"></script><script src="https://cdn.jsdelivr.net/npm/markmap-toolbar@0.18.10/dist/index.js"></script><script>(()=>{setTimeout(()=>{const{markmap:x,mm:K}=window,P=new x.Toolbar;P.attach(K);const F=P.render();F.setAttribute("style","position:absolute;bottom:20px;right:20px"),document.body.append(F)})})()</script><script>((b,L,T,D)=>{const H=b();window.mm=H.Markmap.create("svg#mindmap",(L||H.deriveOptions)(D),T)})(()=>window.markmap,null,{"content":"<a href=\"estadoSolped.html\"><strong>Validar Estado Ejecucion</strong></a>","children":[{"content":"<svg width=\"16\" height=\"16\" viewBox=\"0 -3 24 24\"><path d=\"M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2m-9 14-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8z\"/></svg> <strong>&#x24;EJECUCION &lt;= &#x24;ESTIMACION (Sub-ejecuci&#xf3;n)</strong>","children":[{"content":"<svg width=\"16\" height=\"16\" viewBox=\"0 -3 24 24\"><path d=\"M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2m-9 14-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8z\"/></svg> <strong>&#xbf;Existe OC?</strong>","children":[{"content":"<strong>MSG:</strong> -&gt; <em>&quot;<code>La OC [ID_OC] asociada a la estimacion [ID_ESTIMACION] por valor: &#x24;ESTIMACION, esta activa y en gestion por [Area]. Ejecucion actual: &#x24;EJECUCION</code>&quot;</em>","children":[],"payload":{"tag":"h4","lines":"8,9"}}],"payload":{"tag":"h3","lines":"7,8"}},{"content":"<svg width=\"16\" height=\"16\" viewBox=\"0 -3 24 24\"><path d=\"M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2m-9 14-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8z\"/></svg> <strong>&#xbf;Existe Solped?</strong>","children":[{"content":"<strong>MSG:</strong> <em>&quot;<code>SOLPED [ID_SOLPED] asociada a la estimacion [ID_ESTIMACION] por valor: &#x24;ESTIMACION), esta pendiente de gestion, OC por [Area]. Ejecucion actual: &#x24;EJECUCION</code>&quot;</em>","children":[],"payload":{"tag":"h4","lines":"10,11"}}],"payload":{"tag":"h3","lines":"9,10"}},{"content":"<svg width=\"16\" height=\"16\" viewBox=\"0 -3 24 24\"><path d=\"M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2m-9 14-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8z\"/></svg> <strong>Sin Solped</strong>","children":[{"content":"<strong>MSG:</strong> <em>&quot;<code>La estimacion [ID_ESTIMACION] por valor: &#x24;ESTIMACION, esta pendiente de gestion, SOLPED por [Area]. Ejecucion actual: &#x24;EJECUCION</code>&quot;</em>","children":[],"payload":{"tag":"h4","lines":"12,13"}}],"payload":{"tag":"h3","lines":"11,12"}},{"content":"<a href=\"Index.html\"><strong>INICIO</strong></a>","children":[],"payload":{"tag":"h3","lines":"13,14"}}],"payload":{"tag":"h2","lines":"6,7"}},{"content":"<svg width=\"16\" height=\"16\" viewBox=\"0 -3 24 24\"><path d=\"M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2m-9 14-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8z\"/></svg> <strong>&#x24;EJECUCION &gt; &#x24;ESTIMACION (Sobre-ejecuci&#xf3;n)</strong>","children":[{"content":"<mark><strong>ADV:</strong> <em>&quot;La estimacion [ID_ESTIMACION] por valor: &#x24;ESTIMACION, presenta una sobreejecucion por &#x24;ESTIMACION - &#x24;EJECUCION, la ejecucion sera restringida y la estimacion sera RESTRINGIDA urgente gestion por [Area]&quot;</em></mark>","children":[],"payload":{"tag":"h3","lines":"15,16"}},{"content":"<table data-lines=\"17,20\">\n<thead data-lines=\"17,18\">\n<tr data-lines=\"17,18\">\n<th>accion</th>\n<th>tabla</th>\n<th>campo</th>\n<th>valor</th>\n</tr>\n</thead>\n<tbody data-lines=\"19,20\">\n<tr data-lines=\"19,20\">\n<td><code>insert</code></td>\n<td>DF_EST_ALERTA</td>\n<td><em>varios</em></td>\n<td><em>nuevo</em>,ID_ESTIMACION,ID_SOLPED,ID_OC,ID_PEP</td>\n</tr>\n</tbody>\n</table>","children":[],"payload":{"tag":"table","lines":"17,20"}},{"content":"<a href=\"bloqueoEjecucion.html\"><strong>BLOQUEAR EJECUCION CRONOS</strong></a>","children":[],"payload":{"tag":"h3","lines":"20,21"}}],"payload":{"tag":"h2","lines":"14,15"}}],"payload":{"tag":"h1","lines":"5,6"}},{"colorFreezeLevel":2,"initialExpandLevel":1})</script>
+</body>
+</html>

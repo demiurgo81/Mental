@@ -47,7 +47,7 @@ markmap:
 ### **Validar Solped**
 #### [x] [**Solped EXISTE**](estadoSolped.html)
 #### [x] **Solped NO Existe**
-##### ==**ADV:** *"La estimacion [ID_ESTIMACION] por  $ESTIMACION no tiene Solped Asociada, no puede ejecutar"*==
+##### ==**ADV:** *"La estimacion [ID_ESTIMACION] por  $ESTIMADO no tiene Solped Asociada, no puede ejecutar"*==
 ##### [**BLOQUEAR EJECUCION CRONOS**](bloqueoEjecucion.html)
 
 
@@ -59,7 +59,7 @@ markmap:
 
 # [Validar Estado Solped](estadoPEP.html)
 ## **CREADA**
-### **MSG:** *"`SOLPED [ID_SOLPED] CREADA (Valor: $ESTIMACION), pendiente de gestion, OC por [Area]. Ejecucion actual: $EJECUCION`"*
+### **MSG:** *"`SOLPED [ID_SOLPED] CREADA (Valor: $ESTIMADO), pendiente de gestion, OC por [Area]. Ejecucion actual: $EJECUCION`"*
 ### [**Validar Ejecucion/Estimacion**](estadoEjecucion.html)
 ## **FINALIZADA** 
 ### [x] **Validar OC**
@@ -68,7 +68,7 @@ markmap:
 ###### [**Validar Ejecucion/Estimacion**](estadoEjecucion.html)
 ##### [**OC CREADA**](estadoEjecucion.html)
 ##### **OC FINALIZADA**
-###### ==**ADV:** *"LA OC [ID_OC] esta FINALIZADA, se han ejecutado [$EJECUCION] de [$ESTIMACION] estimados."*==
+###### ==**ADV:** *"LA OC [ID_OC] esta FINALIZADA, se han ejecutado [$EJECUCION] de [$ESTIMADO] estimados."*==
 ###### [**Validar Ejecucion/Estimacion**](estadoEjecucion.html)
 
 ---
@@ -77,26 +77,39 @@ markmap:
   initialExpandLevel: 1
 ---
 # [**Validar Estado Ejecucion**](estadoSolped.html)
-## [x] **$EJECUCION <= $ESTIMACION (Sub-ejecución)** 
+## [x] **$EJECUCION <= $ESTIMADO (Sub-ejecución)** 
 ### [x] **¿Existe OC?**
-#### **MSG:** -> *"`La OC [ID_OC] asociada a la estimacion [ID_ESTIMACION] por valor: $ESTIMACION, esta activa y en gestion por [Area]. Ejecucion actual: $EJECUCION`"*
+#### **MSG:** -> *"`La OC [ID_OC] asociada a la estimacion [ID_ESTIMACION] por valor: $ESTIMADO, esta activa y en gestion por [Area]. Ejecucion actual: $EJECUCION`"*
 ### [x] **¿Existe Solped?**
-#### **MSG:** *"`SOLPED [ID_SOLPED] asociada a la estimacion [ID_ESTIMACION] por valor: $ESTIMACION), esta pendiente de gestion, OC por [Area]. Ejecucion actual: $EJECUCION`"*
+#### **MSG:** *"`SOLPED [ID_SOLPED] asociada a la estimacion [ID_ESTIMACION] por valor: $ESTIMADO), esta pendiente de gestion, OC por [Area]. Ejecucion actual: $EJECUCION`"*
 ### [x] **Sin Solped**
-#### **MSG:** *"`La estimacion [ID_ESTIMACION] por valor: $ESTIMACION, esta pendiente de gestion, SOLPED por [Area]. Ejecucion actual: $EJECUCION`"*
+#### **MSG:** *"`La estimacion [ID_ESTIMACION] por valor: $ESTIMADO, esta pendiente de gestion, SOLPED por [Area]. Ejecucion actual: $EJECUCION`"*
 ### [**INICIO**](Index.html)
-## [x] **$EJECUCION > $ESTIMACION (Sobre-ejecución)**
-### ==**ADV:** *"La estimacion [ID_ESTIMACION] por valor: $ESTIMACION, presenta una sobreejecucion por $ESTIMACION - $EJECUCION, la ejecucion sera restringida y la estimacion sera RESTRINGIDA urgente gestion por [Area]"*==
+## [x] **$EJECUCION > $ESTIMADO (Sobre-ejecución)**
+### ==**ADV:** *"La estimacion [ID_ESTIMACION] por valor: $ESTIMADO, presenta una sobreejecucion por $ESTIMADO - $EJECUCION, la ejecucion sera restringida y la estimacion sera RESTRINGIDA urgente gestion por [Area]"*==
+###
+| accion | tabla | campo | valor |
+|-|-|-|-|
+| `insert` | DF_EST_ALERTA| TIPO_ALERTA... | *"BLOQUEAR"*,ID_ESTIMACION,ID_SOLPED,ID_OC,ID_PEP |
 ### [**BLOQUEAR EJECUCION CRONOS**](bloqueoEjecucion.html)
 
 ---
-title: BLOQUEO EJECUCION
 markmap:
   colorFreezeLevel: 2
   initialExpandLevel: 1
 ---
+# [**BLOQUEO EJECUCION CHRONOS**](Index.html)
+## ==**ADV:** *"La estimacion [ID_ESTIMACION] por valor: $ESTIMADO, sera bloqueada hasta que la sobre ejecucion por $ESTIMADO-$EJECUTADO sean cargados a un presupuesto diferente o se elimine."*==
 ##
-
+| accion | tabla | campo | valor |
+|-|-|-|-|
+| `update` | DF_ESTIMACION | ESTADO_ESTIMACION | "PENDIENTE" |
+## [x] **$EJECUCION > $ESTIMADO (Sobre-ejecución)**
+###
+| accion | tabla | campo | valor |
+|-|-|-|-|
+| `update` | DF_EST_ALERTA | SOBRECOSTO | $ESTIMADO-$EJECUTADO |
+## [**INICIO**](Index.html)
 
 ## 5. Crear PEP
    - Insertar registro en DF_PEP / DF_INICIATIVA
