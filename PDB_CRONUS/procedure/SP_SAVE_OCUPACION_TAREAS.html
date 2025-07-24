@@ -1,0 +1,379 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=Cp1252" />
+<script src="SP_SAVE_OCUPACION_TAREAS/report.js" type="text/javascript"></script>
+<link href="SP_SAVE_OCUPACION_TAREAS/report.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<div class="banner">
+<table width="98%"><tr>
+<td><h2 class="banner">SP_SAVE_OCUPACION_TAREAS</h2></td>
+</tr></table></div>
+<div id="maintabs">
+<div class="currentmaintab" onclick="onSelectMainTab(this, 0)">
+<div>
+<p>Doc</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 1)">
+<div>
+<p>Details</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 2)">
+<div>
+<p>Grants</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 3)">
+<div>
+<p>References</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 4)">
+<div>
+<p>Dependencies</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 5)">
+<div>
+<p>Code</p>
+</div>
+</div>
+</div>
+<br/>
+<div id="masterreports">
+<div id="Master.0">
+<div class="currentmasterreport">
+<TABLE CELLSPACING="0" CELLPADDING="1" WIDTH="100%" BORDER="0">
+<TR><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2">      SUMMARY:  <A HREF="#field_summary">FIELD</A> | <A HREF="#type_summary">TYPE</A> | <A HREF="#method_summary">METHOD</A></FONT></TD><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2"></TR></TABLE><HR><P></P><HR><P></P><A NAME="method_summary"></A><TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1"><TR CLASS="TableHeadingColor"><TD COLSPAN="2"><FONT SIZE="+2"><B>Method Summary</B></FONT></TD><TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#"SP_SAVE_OCUPACION_TAREAS"">"SP_SAVE_OCUPACION_TAREAS"</A></B>( P_CODEMPLEADOCREO IN NUMBER , P_CODEMPLEADOASIGNADO IN NUMBER , P_CODPROYECTO IN VARCHAR2 , P_FECHA_INI IN DATE , P_FECHA_FIN IN DATE , P_HORAS_OBLIGATORIAS IN NUMBER , V_S_RESPUESTA OUT VARCHAR2 , V_S_CODIGO OUT NUMBER ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD></TR>
+</TABLE>
+<P></P><A NAME="method_detail"></A><TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1"><TR CLASS="TableHeadingColor"><TD COLSPAN="2"><FONT SIZE="+2"><B>Method Detail</B></FONT></TD></TABLE><A NAME=""SP_SAVE_OCUPACION_TAREAS""></A>
+<H3>"SP_SAVE_OCUPACION_TAREAS"</H3><PRE>          <B>"SP_SAVE_OCUPACION_TAREAS"</B>( P_CODEMPLEADOCREO IN NUMBER , P_CODEMPLEADOASIGNADO IN NUMBER , P_CODPROYECTO IN VARCHAR2 , P_FECHA_INI IN DATE , P_FECHA_FIN IN DATE , P_HORAS_OBLIGATORIAS IN NUMBER , V_S_RESPUESTA OUT VARCHAR2 , V_S_CODIGO OUT NUMBER ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<DD><DL></DL></DD></DL><HR><TABLE CELLSPACING="0" CELLPADDING="1" WIDTH="100%" BORDER="0">
+<TR><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2">      SUMMARY:  <A HREF="#field_summary">FIELD</A> | <A HREF="#type_summary">TYPE</A> | <A HREF="#method_summary">METHOD</A></FONT></TD><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2"></TR></TABLE></div>
+</div>
+<div id="Master.1">
+<div class="masterreport">
+<table id="Table.0" cellpadding="0" cellspacing="0" summary="">
+<th>NAME</th>
+<th>VALUE</th>
+</tr>
+<tr>
+<td>OWNER</td>
+<td>PDB_CRONUS</td>
+</tr>
+<tr>
+<td>OBJECT_NAME</td>
+<td>SP_SAVE_OCUPACION_TAREAS</td>
+</tr>
+<tr>
+<td>SUBOBJECT_NAME</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OBJECT_ID</td>
+<td>93844</td>
+</tr>
+<tr>
+<td>DATA_OBJECT_ID</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OBJECT_TYPE</td>
+<td>PROCEDURE</td>
+</tr>
+<tr>
+<td>CREATED</td>
+<td>16/07/24</td>
+</tr>
+<tr>
+<td>LAST_DDL_TIME</td>
+<td>21/08/24</td>
+</tr>
+<tr>
+<td>TIMESTAMP</td>
+<td>2024-08-21:12:44:16</td>
+</tr>
+<tr>
+<td>STATUS</td>
+<td>INVALID</td>
+</tr>
+<tr>
+<td>TEMPORARY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>GENERATED</td>
+<td>N</td>
+</tr>
+<tr>
+<td>SECONDARY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>NAMESPACE</td>
+<td>1</td>
+</tr>
+<tr>
+<td>EDITION_NAME</td>
+<td>null</td>
+</tr>
+<tr>
+<td>SHARING</td>
+<td>NONE</td>
+</tr>
+<tr>
+<td>EDITIONABLE</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>ORACLE_MAINTAINED</td>
+<td>N</td>
+</tr>
+<tr>
+<td>APPLICATION</td>
+<td>N</td>
+</tr>
+<tr>
+<td>DEFAULT_COLLATION</td>
+<td>USING_NLS_COMP</td>
+</tr>
+<tr>
+<td>DUPLICATED</td>
+<td>N</td>
+</tr>
+<tr>
+<td>SHARDED</td>
+<td>N</td>
+</tr>
+<tr>
+<td>CREATED_APPID</td>
+<td>null</td>
+</tr>
+<tr>
+<td>CREATED_VSNID</td>
+<td>null</td>
+</tr>
+<tr>
+<td>MODIFIED_APPID</td>
+<td>null</td>
+</tr>
+<tr>
+<td>MODIFIED_VSNID</td>
+<td>null</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.2">
+<div class="masterreport">
+<table id="Table.1" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>PRIVILEGE</th>
+<th>GRANTEE</th>
+<th>GRANTABLE</th>
+<th>GRANTOR</th>
+<th>OBJECT_NAME</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.3">
+<div class="masterreport">
+<table id="Table.2" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>NAME</th>
+<th>OWNER</th>
+<th>TYPE</th>
+<th>OBJECT_ID</th>
+<th>STATUS</th>
+<th>TYPE_LINK</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.4">
+<div class="masterreport">
+<table id="Table.3" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>NAME</th>
+<th>OWNER</th>
+<th>TYPE</th>
+<th>OBJECT_ID</th>
+<th>STATUS</th>
+<th>TYPE_LINK</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.5">
+<div class="masterreport">
+<pre>
+PROCEDURE "SP_SAVE_OCUPACION_TAREAS" (
+    P_CODEMPLEADOCREO IN NUMBER,
+    P_CODEMPLEADOASIGNADO IN NUMBER,
+    P_CODPROYECTO IN VARCHAR2,
+    P_FECHA_INI IN DATE,
+    P_FECHA_FIN IN DATE,
+    P_HORAS_OBLIGATORIAS IN NUMBER,
+    V_S_RESPUESTA OUT VARCHAR2,
+    V_S_CODIGO OUT NUMBER
+)
+AS
+    V_JERARQUIA VARCHAR2(100) := '';
+    V_NIVEL NUMBER := 1;
+    V_TAREA_ESTADO_NUEVO NUMBER := 2;
+    V_TAREA_ESTADO VARCHAR2(1) := 'A';
+    V_TAREA_TIPO_NUEVO NUMBER := 66;
+    V_TAREA_DESCRIP VARCHAR2(50) := 'TAREA OCUPACION AUTOMATICA';
+    V_TAREA_NOMBRE VARCHAR2(50) := 'GESTION FUNCIONARIO';
+    V_ID_TAREA NUMBER := 0;
+    V_ESLOGRO NUMBER := 0;
+    V_EMPLEADOCONTROL_DESC VARCHAR2(100) := 'REGISTRO OCUPACION AUTOMATICA';
+    V_ID_EMPLEADOCONTROL NUMBER;
+    V_CANTIDADPROYECTO NUMBER;
+    V_HORAS_REAL NUMBER;
+    V_SUMATORIA_HORAS NUMBER := 0;
+    V_DIFERENCIA_HORAS NUMBER;
+    V_CANT_TAREAS_ACTUAL NUMBER;
+    V_CANT_HORAS_ACTUAL_DIF NUMBER := 0;
+    V_HORAS_OBLIGATORIAS_DIF NUMBER := 0;
+    V_PROYECTO_SOBRANTE VARCHAR2(100) := P_CODPROYECTO;
+BEGIN
+    BEGIN
+
+        SELECT COUNT(*) INTO V_CANT_TAREAS_ACTUAL 
+            FROM DF_TAREA 
+            WHERE FECHAINIREAL BETWEEN P_FECHA_INI AND P_FECHA_FIN
+              AND FECHAFINREAL BETWEEN P_FECHA_INI AND P_FECHA_FIN 
+              AND CODEMPLEADOASIGNADO = P_CODEMPLEADOASIGNADO
+              AND NOMBRE = V_TAREA_NOMBRE;
+
+        SELECT COUNT(*) INTO V_CANTIDADPROYECTO FROM TABLE(split_string(P_CODPROYECTO, ','));
+        DBMS_OUTPUT.PUT_LINE('P_HORAS_OBLIGATORIAS ' || P_HORAS_OBLIGATORIAS);
+        SELECT NVL(SUM(TIEMPOREAL), 0) INTO V_CANT_HORAS_ACTUAL_DIF 
+            FROM DF_TAREA 
+            WHERE FECHAINIREAL BETWEEN P_FECHA_INI AND P_FECHA_FIN
+              AND FECHAFINREAL BETWEEN P_FECHA_INI AND P_FECHA_FIN 
+              AND CODEMPLEADOASIGNADO = P_CODEMPLEADOASIGNADO
+              AND NOMBRE &lt;> V_TAREA_NOMBRE;
+
+       IF V_CANTIDADPROYECTO > 0 THEN
+            DBMS_OUTPUT.PUT_LINE('V_CANT_HORAS_ACTUAL_DIF ' || V_CANT_HORAS_ACTUAL_DIF);
+            V_HORAS_OBLIGATORIAS_DIF := P_HORAS_OBLIGATORIAS - V_CANT_HORAS_ACTUAL_DIF; 
+            V_HORAS_REAL := V_HORAS_OBLIGATORIAS_DIF / V_CANTIDADPROYECTO;
+
+            DBMS_OUTPUT.PUT_LINE('V_HORAS_OBLIGATORIAS_DIF ' || V_HORAS_OBLIGATORIAS_DIF);
+            DBMS_OUTPUT.PUT_LINE('V_HORAS_REAL ' || V_HORAS_REAL);
+        ELSE
+            DBMS_OUTPUT.PUT_LINE('Error: V_CANTIDADPROYECTO es cero.');
+            V_S_RESPUESTA := 'Error: La cantidad de proyectos es cero.';
+            V_S_CODIGO := 500;
+            RETURN;
+        END IF;
+
+        DBMS_OUTPUT.PUT_LINE('V_CANT_TAREAS_ACTUAL ' || V_CANT_TAREAS_ACTUAL);
+        IF V_CANT_TAREAS_ACTUAL > 0 THEN
+            FOR CURSOR_TAREAS IN (
+                SELECT ID, CODTAREAPADRE, CODPROYECTO, NOMBRE, TIEMPOESTIMADO, TIEMPOREAL, FECHAINIREAL, FECHAFINREAL 
+                FROM DF_TAREA 
+                WHERE FECHAINIREAL BETWEEN P_FECHA_INI AND P_FECHA_FIN
+                  AND FECHAFINREAL BETWEEN P_FECHA_INI AND P_FECHA_FIN 
+                  AND CODEMPLEADOASIGNADO = P_CODEMPLEADOASIGNADO
+                  AND NOMBRE = V_TAREA_NOMBRE
+            ) LOOP
+                DBMS_OUTPUT.PUT_LINE(' DEL CURSOR CODTAREA : ' || CURSOR_TAREAS.ID);
+
+                IF INSTR(',' || V_PROYECTO_SOBRANTE || ',', ',' || TO_CHAR(CURSOR_TAREAS.CODPROYECTO) || ',') > 0 THEN
+
+                    V_PROYECTO_SOBRANTE := FN_REMOVE_VALIDATED_NUMBER(V_PROYECTO_SOBRANTE, CURSOR_TAREAS.CODPROYECTO);    
+                    DBMS_OUTPUT.PUT_LINE('ULTIMO SOBRANTE ' || V_PROYECTO_SOBRANTE);
+                    SP_UPDATE_HORAS_DF_TAREA(CURSOR_TAREAS.ID, V_HORAS_REAL);
+                    DBMS_OUTPUT.PUT_LINE('TAREA A MODIFICAR ' || V_ID_TAREA );
+                    V_ID_TAREA := CURSOR_TAREAS.ID;
+                    SELECT ID INTO V_ID_EMPLEADOCONTROL FROM DF_EMPLEADOCONTROL
+                        WHERE CODEMPLEADO = P_CODEMPLEADOASIGNADO 
+                          AND CODTAREA = CURSOR_TAREAS.ID 
+                          AND DESCRIPCION = V_EMPLEADOCONTROL_DESC 
+                          AND FECHAHORAINICIO BETWEEN P_FECHA_INI AND P_FECHA_FIN
+                          AND FECHAHORAFIN BETWEEN P_FECHA_INI AND P_FECHA_FIN;
+
+                    SP_UPDATE_HORAS_DF_EMPCONTROL(V_ID_EMPLEADOCONTROL, V_HORAS_REAL);
+
+                    V_S_RESPUESTA := 'Actualización de las tareas existosamente';
+                    V_SUMATORIA_HORAS := V_SUMATORIA_HORAS + V_HORAS_REAL;    
+
+                 ELSE
+                    DBMS_OUTPUT.PUT_LINE('CODPROYECTO DE TAREA A BORRAR ' || CURSOR_TAREAS.CODPROYECTO);
+                    DBMS_OUTPUT.PUT_LINE('TAREA A BORRAR ' || CURSOR_TAREAS.ID );
+                    DELETE FROM DF_TAREA WHERE ID = CURSOR_TAREAS.ID;
+                    DELETE FROM DF_EMPLEADOCONTROL WHERE CODTAREA = CURSOR_TAREAS.ID;
+
+                END IF;
+                DBMS_OUTPUT.PUT_LINE('V_SUMATORIA_HORAS ' || V_SUMATORIA_HORAS);
+                --IF V_SUMATORIA_HORAS >= V_HORAS_OBLIGATORIAS_DIF THEN
+                    --EXIT;
+                --END IF;
+            END LOOP;
+            DBMS_OUTPUT.PUT_LINE('V_PROYECTO_SOBRANTE ' || V_PROYECTO_SOBRANTE);
+            IF V_PROYECTO_SOBRANTE IS NOT NULL THEN 
+            FOR REC IN (SELECT COLUMN_VALUE AS CODPROYECTO FROM TABLE(split_string(V_PROYECTO_SOBRANTE, ','))) 
+            LOOP
+                DBMS_OUTPUT.PUT_LINE(' REC.CODPROYECTO ' || REC.CODPROYECTO);
+                V_ID_TAREA := FN_INSERT_DF_TAREA_OCUPACION(P_CODEMPLEADOCREO, P_CODEMPLEADOASIGNADO, REC.CODPROYECTO, 
+                                                 P_FECHA_INI, P_FECHA_FIN, V_HORAS_REAL, V_TAREA_NOMBRE, 
+                                                 V_TAREA_DESCRIP, V_TAREA_TIPO_NUEVO, V_TAREA_ESTADO_NUEVO, 
+                                                 V_JERARQUIA, V_NIVEL, V_ESLOGRO, V_TAREA_ESTADO);
+
+                V_ID_EMPLEADOCONTROL := FN_INSERT_DF_EMPLEADOCONTROL(P_CODEMPLEADOASIGNADO, V_ID_TAREA, 
+                                                                     V_EMPLEADOCONTROL_DESC, P_FECHA_INI, 
+                                                                     P_FECHA_FIN, V_HORAS_REAL);
+                V_S_RESPUESTA := 'Creación de las tareas existosamente';
+                V_SUMATORIA_HORAS := V_SUMATORIA_HORAS + V_HORAS_REAL;
+
+                IF V_SUMATORIA_HORAS >= V_HORAS_OBLIGATORIAS_DIF THEN
+                    EXIT;
+                END IF;
+            END LOOP;
+            END IF; 
+        ELSE
+            FOR REC IN (SELECT COLUMN_VALUE AS CODPROYECTO FROM TABLE(split_string(P_CODPROYECTO, ','))) 
+            LOOP
+                DBMS_OUTPUT.PUT_LINE(' REC.CODPROYECTO ' || REC.CODPROYECTO);
+                V_ID_TAREA := FN_INSERT_DF_TAREA_OCUPACION(P_CODEMPLEADOCREO, P_CODEMPLEADOASIGNADO, REC.CODPROYECTO, 
+                                                 P_FECHA_INI, P_FECHA_FIN, V_HORAS_REAL, V_TAREA_NOMBRE, 
+                                                 V_TAREA_DESCRIP, V_TAREA_TIPO_NUEVO, V_TAREA_ESTADO_NUEVO, 
+                                                 V_JERARQUIA, V_NIVEL, V_ESLOGRO, V_TAREA_ESTADO);
+
+                V_ID_EMPLEADOCONTROL := FN_INSERT_DF_EMPLEADOCONTROL(P_CODEMPLEADOASIGNADO, V_ID_TAREA, 
+                                                                     V_EMPLEADOCONTROL_DESC, P_FECHA_INI, 
+                                                                     P_FECHA_FIN, V_HORAS_REAL);
+                V_S_RESPUESTA := 'Creación de las tareas existosamente';
+                V_SUMATORIA_HORAS := V_SUMATORIA_HORAS + V_HORAS_REAL;
+
+                IF V_SUMATORIA_HORAS >= V_HORAS_OBLIGATORIAS_DIF THEN
+                    EXIT;
+                END IF;
+            END LOOP; 
+        END IF;
+
+        IF V_SUMATORIA_HORAS &lt; V_HORAS_OBLIGATORIAS_DIF THEN
+            V_DIFERENCIA_HORAS := V_HORAS_OBLIGATORIAS_DIF - V_SUMATORIA_HORAS;
+            DBMS_OUTPUT.PUT_LINE(' AJUSTA LAS HORAS ' || V_ID_TAREA);
+            SP_UPDATE_HORAS_DF_TAREA(V_ID_TAREA, V_HORAS_REAL + V_DIFERENCIA_HORAS);
+            SP_UPDATE_HORAS_DF_EMPCONTROL(V_ID_EMPLEADOCONTROL, V_HORAS_REAL + V_DIFERENCIA_HORAS);
+        END IF;
+
+        V_S_CODIGO := 200;
+    EXCEPTION
+        WHEN OTHERS THEN
+            ROLLBACK;
+            V_S_CODIGO := 500;
+            V_S_RESPUESTA := 'Error: ' || SQLERRM;
+    END;
+END SP_SAVE_OCUPACION_TAREAS;</pre>
+</div>
+</div>
+</div>
+</body>
+</html>
