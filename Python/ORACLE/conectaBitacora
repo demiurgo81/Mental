@@ -1,0 +1,9 @@
+import cx_Oracle
+
+dsn_tns = cx_Oracle.makedsn("192.168.18.198", "1523", service_name="srvctl")
+try:
+    connection = cx_Oracle.connect(user="USR_EAP_LOGS", password="3oKF$72Cvtf$", dsn=dsn_tns)
+    print("Conexión exitosa")
+    connection.close()
+except cx_Oracle.DatabaseError as e:
+    print(f"Error de conexión: {e}")
