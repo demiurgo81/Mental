@@ -1,0 +1,336 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=Cp1252" />
+<script src="SP_REGISTRO_TAREA_HORAS_EXCEL/report.js" type="text/javascript"></script>
+<link href="SP_REGISTRO_TAREA_HORAS_EXCEL/report.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<div class="banner">
+<table width="98%"><tr>
+<td><h2 class="banner">SP_REGISTRO_TAREA_HORAS_EXCEL</h2></td>
+</tr></table></div>
+<div id="maintabs">
+<div class="currentmaintab" onclick="onSelectMainTab(this, 0)">
+<div>
+<p>Doc</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 1)">
+<div>
+<p>Details</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 2)">
+<div>
+<p>Grants</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 3)">
+<div>
+<p>References</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 4)">
+<div>
+<p>Dependencies</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 5)">
+<div>
+<p>Code</p>
+</div>
+</div>
+</div>
+<br/>
+<div id="masterreports">
+<div id="Master.0">
+<div class="currentmasterreport">
+<TABLE CELLSPACING="0" CELLPADDING="1" WIDTH="100%" BORDER="0">
+<TR><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2">      SUMMARY:  <A HREF="#field_summary">FIELD</A> | <A HREF="#type_summary">TYPE</A> | <A HREF="#method_summary">METHOD</A></FONT></TD><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2"></TR></TABLE><HR><P></P><HR><P></P><A NAME="method_summary"></A><TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1"><TR CLASS="TableHeadingColor"><TD COLSPAN="2"><FONT SIZE="+2"><B>Method Summary</B></FONT></TD><TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#SP_REGISTRO_TAREA_HORAS_EXCEL">SP_REGISTRO_TAREA_HORAS_EXCEL</A></B>( P_CODEMPLEADO IN NUMBER , P_PROYECTO IN NUMBER , P_TAREA_PADRE IN VARCHAR2 , P_NOMBRE_TAREA IN VARCHAR2 , P_FECHA_INI IN DATE , P_FECHA_FIN IN DATE , P_FECHA_REGISTRO IN DATE , P_HORAS IN NUMBER , P_TIPO_TAREA IN NUMBER , P_DESCRIP_TAREA IN VARCHAR2 , V_S_RESPUESTA OUT VARCHAR2 , V_S_CODIGO OUT NUMBER ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD></TR>
+</TABLE>
+<P></P><A NAME="method_detail"></A><TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1"><TR CLASS="TableHeadingColor"><TD COLSPAN="2"><FONT SIZE="+2"><B>Method Detail</B></FONT></TD></TABLE><A NAME="SP_REGISTRO_TAREA_HORAS_EXCEL"></A>
+<H3>SP_REGISTRO_TAREA_HORAS_EXCEL</H3><PRE>          <B>SP_REGISTRO_TAREA_HORAS_EXCEL</B>( P_CODEMPLEADO IN NUMBER , P_PROYECTO IN NUMBER , P_TAREA_PADRE IN VARCHAR2 , P_NOMBRE_TAREA IN VARCHAR2 , P_FECHA_INI IN DATE , P_FECHA_FIN IN DATE , P_FECHA_REGISTRO IN DATE , P_HORAS IN NUMBER , P_TIPO_TAREA IN NUMBER , P_DESCRIP_TAREA IN VARCHAR2 , V_S_RESPUESTA OUT VARCHAR2 , V_S_CODIGO OUT NUMBER ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<DD><DL></DL></DD></DL><HR><TABLE CELLSPACING="0" CELLPADDING="1" WIDTH="100%" BORDER="0">
+<TR><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2">      SUMMARY:  <A HREF="#field_summary">FIELD</A> | <A HREF="#type_summary">TYPE</A> | <A HREF="#method_summary">METHOD</A></FONT></TD><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2"></TR></TABLE></div>
+</div>
+<div id="Master.1">
+<div class="masterreport">
+<table id="Table.0" cellpadding="0" cellspacing="0" summary="">
+<th>NAME</th>
+<th>VALUE</th>
+</tr>
+<tr>
+<td>OWNER</td>
+<td>PDB_CRONUS</td>
+</tr>
+<tr>
+<td>OBJECT_NAME</td>
+<td>SP_REGISTRO_TAREA_HORAS_EXCEL</td>
+</tr>
+<tr>
+<td>SUBOBJECT_NAME</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OBJECT_ID</td>
+<td>95835</td>
+</tr>
+<tr>
+<td>DATA_OBJECT_ID</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OBJECT_TYPE</td>
+<td>PROCEDURE</td>
+</tr>
+<tr>
+<td>CREATED</td>
+<td>21/08/24</td>
+</tr>
+<tr>
+<td>LAST_DDL_TIME</td>
+<td>29/01/25</td>
+</tr>
+<tr>
+<td>TIMESTAMP</td>
+<td>2025-01-29:16:46:07</td>
+</tr>
+<tr>
+<td>STATUS</td>
+<td>INVALID</td>
+</tr>
+<tr>
+<td>TEMPORARY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>GENERATED</td>
+<td>N</td>
+</tr>
+<tr>
+<td>SECONDARY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>NAMESPACE</td>
+<td>1</td>
+</tr>
+<tr>
+<td>EDITION_NAME</td>
+<td>null</td>
+</tr>
+<tr>
+<td>SHARING</td>
+<td>NONE</td>
+</tr>
+<tr>
+<td>EDITIONABLE</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>ORACLE_MAINTAINED</td>
+<td>N</td>
+</tr>
+<tr>
+<td>APPLICATION</td>
+<td>N</td>
+</tr>
+<tr>
+<td>DEFAULT_COLLATION</td>
+<td>USING_NLS_COMP</td>
+</tr>
+<tr>
+<td>DUPLICATED</td>
+<td>N</td>
+</tr>
+<tr>
+<td>SHARDED</td>
+<td>N</td>
+</tr>
+<tr>
+<td>CREATED_APPID</td>
+<td>null</td>
+</tr>
+<tr>
+<td>CREATED_VSNID</td>
+<td>null</td>
+</tr>
+<tr>
+<td>MODIFIED_APPID</td>
+<td>null</td>
+</tr>
+<tr>
+<td>MODIFIED_VSNID</td>
+<td>null</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.2">
+<div class="masterreport">
+<table id="Table.1" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>PRIVILEGE</th>
+<th>GRANTEE</th>
+<th>GRANTABLE</th>
+<th>GRANTOR</th>
+<th>OBJECT_NAME</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.3">
+<div class="masterreport">
+<table id="Table.2" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>NAME</th>
+<th>OWNER</th>
+<th>TYPE</th>
+<th>OBJECT_ID</th>
+<th>STATUS</th>
+<th>TYPE_LINK</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.4">
+<div class="masterreport">
+<table id="Table.3" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>NAME</th>
+<th>OWNER</th>
+<th>TYPE</th>
+<th>OBJECT_ID</th>
+<th>STATUS</th>
+<th>TYPE_LINK</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.5">
+<div class="masterreport">
+<pre>
+PROCEDURE SP_REGISTRO_TAREA_HORAS_EXCEL (
+    P_CODEMPLEADO IN NUMBER,
+    P_PROYECTO IN NUMBER,
+    P_TAREA_PADRE IN VARCHAR2,
+    P_NOMBRE_TAREA IN VARCHAR2,
+    P_FECHA_INI IN DATE, 
+    P_FECHA_FIN IN DATE,
+    P_FECHA_REGISTRO IN DATE,
+    P_HORAS IN NUMBER,
+    P_TIPO_TAREA IN NUMBER,
+    P_DESCRIP_TAREA IN VARCHAR2,
+    V_S_RESPUESTA OUT VARCHAR2,
+    V_S_CODIGO OUT NUMBER
+)
+AS
+    V_RESPUESTA VARCHAR2(4000);
+    V_CODIGO NUMBER;
+    V_MENSAJE VARCHAR2(4000);
+    V_CODEMPLEADOLIDER NUMBER;
+    V_CANT_TAREA_PADRE NUMBER;
+    V_COD_TAREAESTADO NUMBER := 3;
+    V_NIVEL_TAREA_PADRE NUMBER := 1;
+    V_ID_TAREA_PADRE NUMBER;
+    V_ESLOGRO NUMBER := 1;
+    V_ESTADO VARCHAR(1) := 'A';
+    V_ID_TAREA NUMBER := 0;
+    V_ID_EMPLEADOCONTROL NUMBER;
+    V_RESPUESTA_EMPLEADO VARCHAR2(4000);
+    V_HORAS_INIT NUMBER:= 0.01;
+    
+BEGIN
+    BEGIN
+    
+        BEGIN
+        -- TRAE EL CODEMPLEADO DEL LIDER
+            SELECT CODEMPLEADOLIDER INTO V_CODEMPLEADOLIDER FROM DF_EMPLEADO_VU WHERE CODEMPLEADO = P_CODEMPLEADO;
+            DBMS_OUTPUT.PUT_LINE('ENCUENTRA EL CODEMPLEADOLIDER ' || V_CODEMPLEADOLIDER);
+         EXCEPTION
+            WHEN NO_DATA_FOUND THEN
+                V_CODEMPLEADOLIDER := P_CODEMPLEADO;
+                DBMS_OUTPUT.PUT_LINE('NO ENCUENTRA EL V_ID_TAREA_PADRE ' || V_ID_TAREA_PADRE);
+        END;
+        
+        IF P_HORAS > 1 THEN 
+            V_HORAS_INIT := P_HORAS;
+        END IF;
+        
+        -- CONSULTA SI TAREA PADRE EXISTE, SINO LA CREA
+        BEGIN
+            SELECT ID INTO V_ID_TAREA_PADRE FROM DF_TAREA WHERE NOMBRE = P_TAREA_PADRE 
+                AND CODPROYECTO = P_PROYECTO AND CODEMPLEADOASIGNADO = P_CODEMPLEADO 
+                AND ROWNUM = 1;
+            DBMS_OUTPUT.PUT_LINE('ENCUENTRA EL V_ID_TAREA_PADRE ' || V_ID_TAREA_PADRE);
+        EXCEPTION
+            WHEN NO_DATA_FOUND THEN
+                V_ID_TAREA_PADRE := 0;
+                V_CANT_TAREA_PADRE := 0;
+                DBMS_OUTPUT.PUT_LINE('NO ENCUENTRA EL V_ID_TAREA_PADRE ' || V_ID_TAREA_PADRE);
+        END;
+
+        IF V_ID_TAREA_PADRE = 0  THEN
+            --- CREA TAREA PADRE
+            DBMS_OUTPUT.PUT_LINE('LLAMADO A CREAR TAREA_PADRE ' || V_ID_TAREA_PADRE);
+            SP_SAVE_DF_TAREA(V_ID_TAREA_PADRE, V_ID_TAREA_PADRE, 
+                P_TIPO_TAREA, V_COD_TAREAESTADO, V_CODEMPLEADOLIDER, 
+                P_CODEMPLEADO, P_PROYECTO, '', 
+                P_TAREA_PADRE, V_NIVEL_TAREA_PADRE, P_DESCRIP_TAREA, 
+                P_FECHA_INI, P_FECHA_FIN, 
+                P_FECHA_INI, P_FECHA_FIN, V_HORAS_INIT, V_HORAS_INIT, V_ESLOGRO, V_ESTADO,
+                CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '', 0, V_RESPUESTA, V_CODIGO, V_MENSAJE );
+            --RETORNAR EL ID DE LA TAREA PADRE CREADA
+            V_ID_TAREA_PADRE := TO_NUMBER(V_RESPUESTA);
+            DBMS_OUTPUT.PUT_LINE('CREA tareapadre ' || V_ID_TAREA_PADRE);
+        END IF;
+        
+        
+        -- CONSULTA SI TAREA HIJA EXISTE, SINO LA CREA
+        BEGIN
+            SELECT ID INTO V_ID_TAREA FROM DF_TAREA WHERE NOMBRE = P_NOMBRE_TAREA 
+                AND CODPROYECTO = P_PROYECTO AND CODEMPLEADOASIGNADO = P_CODEMPLEADO
+                AND FECHAINIESTIMADA BETWEEN P_FECHA_INI AND P_FECHA_FIN AND ROWNUM = 1;
+            DBMS_OUTPUT.PUT_LINE('ENCUENTRA EL V_ID_TAREA ' || V_ID_TAREA);
+        EXCEPTION
+            WHEN NO_DATA_FOUND THEN
+                V_ID_TAREA := 0;
+                V_CANT_TAREA_PADRE := 0;
+                DBMS_OUTPUT.PUT_LINE('NO ENCUENTRA EL V_ID_TAREA ' || V_ID_TAREA);
+        END;
+        
+        --IF V_ID_TAREA = 0  THEN
+        
+        SP_SAVE_DF_TAREA(V_ID_TAREA, V_ID_TAREA_PADRE, P_TIPO_TAREA, V_COD_TAREAESTADO, 
+            V_CODEMPLEADOLIDER, P_CODEMPLEADO, P_PROYECTO, '', 
+                P_NOMBRE_TAREA, V_NIVEL_TAREA_PADRE, P_DESCRIP_TAREA, P_FECHA_INI, 
+                P_FECHA_FIN, P_FECHA_INI, P_FECHA_FIN, V_HORAS_INIT, V_HORAS_INIT, V_ESLOGRO, V_ESTADO,
+                CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '', 0, V_RESPUESTA, V_CODIGO, V_MENSAJE );
+        --RETORNAR EL ID DE LA TAREA CREADA
+        V_ID_TAREA := TO_NUMBER(V_RESPUESTA);
+        DBMS_OUTPUT.PUT_LINE('CREA tarea HIJA ' || V_ID_TAREA);
+    
+        SP_SAVE_DF_EMPLEADOCONTROL(P_DESCRIP_TAREA, P_HORAS, P_CODEMPLEADO, V_ID_TAREA, 
+            P_FECHA_REGISTRO, P_FECHA_REGISTRO, V_RESPUESTA_EMPLEADO, V_CODIGO);
+        
+        --V_ID_EMPLEADOCONTROL := FN_INSERT_DF_EMPLEADOCONTROL(P_CODEMPLEADO, V_ID_TAREA, P_DESCRIP_TAREA, P_FECHA_REGISTRO, P_FECHA_REGISTRO, P_HORAS);
+        --DBMS_OUTPUT.PUT_LINE('CREA REGISTRO EMPLEADOCONTROL ' || V_ID_EMPLEADOCONTROL);
+        
+        --END IF;
+        
+        COMMIT;
+        
+        V_S_CODIGO := 200;
+        V_S_RESPUESTA := 'REGISTRO Correcto Tarea: ' || V_ID_TAREA || ' ';
+    EXCEPTION
+        WHEN NO_DATA_FOUND THEN
+            ROLLBACK;
+            V_S_CODIGO := 500;
+            V_S_RESPUESTA := 'No Fue posible traer la data';
+            RAISE;
+    END;
+END SP_REGISTRO_TAREA_HORAS_EXCEL;</pre>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,129 @@
+---
+markmap:
+  initialExpandLevel: 2
+---
+
+# [MIX](ResEstrato.html)
+## Productos 
+### Todo Claro
+#### Triple
+##### Television
+###### TV Básica
+###### TV Avanzada 
+###### TV Plus
+###### Tv Superior
+##### Internet
+###### 200 Meggas
+###### 300 Megas
+###### 350 Megas...
+##### Telefonía
+###### Voz 
+
+#### Doble
+#####  Televisión + Internet 
+    - TV Básica + 200 Megas
+    - Tv Avanzada + 300 megas
+    - Tv PLus + 350 Megas
+    - Tv Superior + 400 Megas
+##### Televisión + Voz 
+    - TV Básica + Voz
+    - Tv Avanzada + Voz
+    - Tv PLus + Voz
+    - Tv Superior + Voz
+
+####Sencillo
+#####  Televisión / Internet / Voz
+
+### No Todo Claro
+#### Triple
+##### Television
+###### TV Básica
+###### TV Avanzada 
+###### TV Plus
+###### Tv Superior
+##### Internet
+###### 200 Meggas
+###### 300 Megas
+###### 350 Megas...
+##### Telefonía
+###### Voz 
+
+#### Doble
+#####  Televisión + Internet 
+    - TV Básica + 200 Megas
+    - Tv Avanzada + 300 megas
+    - Tv PLus + 350 Megas
+    - Tv Superior + 400 Megas
+##### Televisión + Voz 
+    - TV Básica + Voz
+    - Tv Avanzada + Voz
+    - Tv PLus + Voz
+    - Tv Superior + Voz
+
+#### Sencillo
+#####  Televisión / Internet / Voz
+
+### Claro Tv Plus
+
+#### Triple
+##### Television
+###### TV Básica
+###### TV Avanzada 
+###### TV Plus
+###### Tv Superior
+##### Internet
+###### 200 Meggas
+###### 300 Megas
+###### 350 Megas...
+##### Telefonía
+###### Voz 
+
+#### Doble
+#####  Televisión + Internet 
+    - TV Básica + 200 Megas
+    - Tv Avanzada + 300 megas
+    - Tv PLus + 350 Megas
+    - Tv Superior + 400 Megas
+##### Televisión + Voz 
+    - TV Básica + Voz
+    - Tv Avanzada + Voz
+    - Tv PLus + Voz
+    - Tv Superior + Voz
+
+#### Sencillo
+#####  Televisión / Internet / Voz
+## Otras
+### Cortesias/Demos
+### Empleados
+### Ong
+### Pruebas
+
+## Ofertas
+### Triple
+##### Television
+###### TV Básica
+###### TV Avanzada 
+###### TV Plus
+###### Tv Superior
+##### Internet
+###### 200 Meggas
+###### 300 Megas
+###### 350 Megas...
+##### Telefonía
+###### Voz 
+
+### Doble
+#####  Televisión + Internet 
+    - TV Básica + 200 Megas
+    - Tv Avanzada + 300 megas
+    - Tv PLus + 350 Megas
+    - Tv Superior + 400 Megas
+##### Televisión + Voz 
+    - TV Básica + Voz
+    - Tv Avanzada + Voz
+    - Tv PLus + Voz
+    - Tv Superior + Voz
+
+### Sencillo
+#####  Televisión / Internet / Voz
+

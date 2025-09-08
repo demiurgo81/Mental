@@ -1,0 +1,365 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=Cp1252" />
+<script src="DF_HORAS_EXTRAS_PKG/report.js" type="text/javascript"></script>
+<link href="DF_HORAS_EXTRAS_PKG/report.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<div class="banner">
+<table width="98%"><tr>
+<td><h2 class="banner">DF_HORAS_EXTRAS_PKG</h2></td>
+</tr></table></div>
+<div id="maintabs">
+<div class="currentmaintab" onclick="onSelectMainTab(this, 0)">
+<div>
+<p>Doc</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 1)">
+<div>
+<p>Details</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 2)">
+<div>
+<p>Grants</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 3)">
+<div>
+<p>References</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 4)">
+<div>
+<p>Dependencies</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 5)">
+<div>
+<p>Code</p>
+</div>
+</div>
+</div>
+<br/>
+<div id="masterreports">
+<div id="Master.0">
+<div class="currentmasterreport">
+<TABLE CELLSPACING="0" CELLPADDING="1" WIDTH="100%" BORDER="0">
+<TR><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2">      SUMMARY:  <A HREF="#field_summary">FIELD</A> | <A HREF="#type_summary">TYPE</A> | <A HREF="#method_summary">METHOD</A></FONT></TD><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2"></TR></TABLE><HR><P>----------------------------------------------------------------------------------------------------------------------<BR>    Nombre        : DF_Horas_Extras_PKG<BR>    Tipo          : Paquete<BR>    Objetivo      : Calcular el detalle de hora extras<BR>    Realizado Por : CINTE - Manuel Benítez Fajardo<BR>    Fecha: Fecha  : 2020-09-17<BR>  ------------------------------------------------------------------------------------------------------------------------</P><HR><P></P><A NAME="type_summary"></A><TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1"><TR CLASS="TableHeadingColor"><TD COLSPAN="2"><FONT SIZE="+2"><B>Type Summary</B></FONT></TD><TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#Typ_Rec_LQ_Hora">Typ_Rec_LQ_Hora</A></B>( Tipo_Extra DF_Extra_Tipo . Tipo_Extra % TYPE , Hora_Inicial DF_Extra_Tipo . HIni % TYPE , Hora_Final DF_Extra_Tipo . HFin % TYPE , Multiplicador DF_Extra_Tipo . Multiplicador % TYPE , Numero_Horas DF_Detalles_Novedad . Horas_Normal % TYPE ) ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Detalle de cada hora que se desglose</TD></TR>
+</TABLE><P></P><A NAME="method_summary"></A><TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1"><TR CLASS="TableHeadingColor"><TD COLSPAN="2"><FONT SIZE="+2"><B>Method Summary</B></FONT></TD><TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#PR_Borrar_Horas_Extras">PR_Borrar_Horas_Extras</A></B>( inID_Novedad IN DF_Novedad . ID % TYPE ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;----------------------------------------------------------------------------------------------------------------------<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Nombre           : PR_Borrar_Horas_Extras<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Tipo             : Procedimiento<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Description      : Dado el ID de la novedad, hacer el borrado logico del registro de detalle de ese registro de novedad<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Parametros       : inID_Novedad      ID del registro de novedad a borrar<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     F E C H A             A U T O R            OBJETIVO<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    ---------- ------------------------------- ----------------------------------------------------------------------------<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    2020-09-17 CINTE - Manuel Benítez Fajardo  Creacion<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  ------------------------------------------------------------------------------------------------------------------------</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#PR_Procesar_Horas_Extras">PR_Procesar_Horas_Extras</A></B>( inID_Novedad IN DF_Novedad . ID % TYPE DEFAULT NULL ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;----------------------------------------------------------------------------------------------------------------------<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Nombre           : PR_Procesar_Horas_Extras<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Tipo             : Procedimiento<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Description      : Procesar los registro de novedades con tipo de novedad 23 - Trabajo Fuera de Horario Laboral - EXTRA<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Parametros       : inID_Novedad - Opcional -<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     F E C H A             A U T O R            OBJETIVO<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    ---------- ------------------------------- ----------------------------------------------------------------------------<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    2020-09-17 CINTE - Manuel Benítez Fajardo  Creacion<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  ------------------------------------------------------------------------------------------------------------------------</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#PR_Procesar_Horas_Extras">PR_Procesar_Horas_Extras</A></B>( inID_Novedad IN DF_Novedad . ID % TYPE , inIni_Novedad IN DF_Novedad . Ini_Novedad % TYPE , inFin_Novedad IN DF_Novedad . Fin_Novedad % TYPE , inAprobado IN DF_Novedad . Aprobado % TYPE ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;----------------------------------------------------------------------------------------------------------------------<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Nombre           : PR_Procesar_Horas_Extras<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Tipo             : Procedimiento<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Description      : Dado el ID del Registro de novedad, obtener el detalle de las horas extras<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Parametros       : inID_Novedad       ID del registro de novedad a Procesar<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                       inIni_Novedad      Fecha en que inicia la novedad<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                       inFin_Novedad      Fecha en la finaliza la novedad<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     F E C H A             A U T O R            OBJETIVO<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    ---------- ------------------------------- ----------------------------------------------------------------------------<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    2020-09-17 CINTE - Manuel Benítez Fajardo  Creacion<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  ------------------------------------------------------------------------------------------------------------------------</TD></TR>
+</TABLE>
+<P></P><A NAME="type_detail"></A><TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1"><TR CLASS="TableHeadingColor"><TD COLSPAN="2"><FONT SIZE="+2"><B>Type Detail</B></FONT></TD></TABLE><A NAME="Typ_Rec_LQ_Hora"></A>
+<H3>Typ_Rec_LQ_Hora</H3><PRE>          <B>Typ_Rec_LQ_Hora</B>( Tipo_Extra DF_Extra_Tipo . Tipo_Extra % TYPE , Hora_Inicial DF_Extra_Tipo . HIni % TYPE , Hora_Final DF_Extra_Tipo . HFin % TYPE , Multiplicador DF_Extra_Tipo . Multiplicador % TYPE , Numero_Horas DF_Detalles_Novedad . Horas_Normal % TYPE ) ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Detalle de cada hora que se desglose<DD><DL></DL></DD></DL><HR><P></P><A NAME="method_detail"></A><TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1"><TR CLASS="TableHeadingColor"><TD COLSPAN="2"><FONT SIZE="+2"><B>Method Detail</B></FONT></TD></TABLE><A NAME="PR_Borrar_Horas_Extras"></A>
+<H3>PR_Borrar_Horas_Extras</H3><PRE>          <B>PR_Borrar_Horas_Extras</B>( inID_Novedad IN DF_Novedad . ID % TYPE ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;----------------------------------------------------------------------------------------------------------------------<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Nombre           : PR_Borrar_Horas_Extras<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Tipo             : Procedimiento<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Description      : Dado el ID de la novedad, hacer el borrado logico del registro de detalle de ese registro de novedad<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Parametros       : inID_Novedad      ID del registro de novedad a borrar<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     F E C H A             A U T O R            OBJETIVO<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    ---------- ------------------------------- ----------------------------------------------------------------------------<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    2020-09-17 CINTE - Manuel Benítez Fajardo  Creacion<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  ------------------------------------------------------------------------------------------------------------------------<DD><DL></DL></DD></DL><HR><A NAME="PR_Procesar_Horas_Extras"></A>
+<H3>PR_Procesar_Horas_Extras</H3><PRE>          <B>PR_Procesar_Horas_Extras</B>( inID_Novedad IN DF_Novedad . ID % TYPE DEFAULT NULL ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;----------------------------------------------------------------------------------------------------------------------<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Nombre           : PR_Procesar_Horas_Extras<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Tipo             : Procedimiento<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Description      : Procesar los registro de novedades con tipo de novedad 23 - Trabajo Fuera de Horario Laboral - EXTRA<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Parametros       : inID_Novedad - Opcional -<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     F E C H A             A U T O R            OBJETIVO<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    ---------- ------------------------------- ----------------------------------------------------------------------------<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    2020-09-17 CINTE - Manuel Benítez Fajardo  Creacion<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  ------------------------------------------------------------------------------------------------------------------------<DD><DL></DL></DD></DL><HR><A NAME="PR_Procesar_Horas_Extras"></A>
+<H3>PR_Procesar_Horas_Extras</H3><PRE>          <B>PR_Procesar_Horas_Extras</B>( inID_Novedad IN DF_Novedad . ID % TYPE , inIni_Novedad IN DF_Novedad . Ini_Novedad % TYPE , inFin_Novedad IN DF_Novedad . Fin_Novedad % TYPE , inAprobado IN DF_Novedad . Aprobado % TYPE ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;----------------------------------------------------------------------------------------------------------------------<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Nombre           : PR_Procesar_Horas_Extras<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Tipo             : Procedimiento<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Description      : Dado el ID del Registro de novedad, obtener el detalle de las horas extras<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Parametros       : inID_Novedad       ID del registro de novedad a Procesar<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                       inIni_Novedad      Fecha en que inicia la novedad<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                       inFin_Novedad      Fecha en la finaliza la novedad<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     F E C H A             A U T O R            OBJETIVO<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    ---------- ------------------------------- ----------------------------------------------------------------------------<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    2020-09-17 CINTE - Manuel Benítez Fajardo  Creacion<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  ------------------------------------------------------------------------------------------------------------------------<DD><DL></DL></DD></DL><HR><TABLE CELLSPACING="0" CELLPADDING="1" WIDTH="100%" BORDER="0">
+<TR><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2">      SUMMARY:  <A HREF="#field_summary">FIELD</A> | <A HREF="#type_summary">TYPE</A> | <A HREF="#method_summary">METHOD</A></FONT></TD><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2"></TR></TABLE></div>
+</div>
+<div id="Master.1">
+<div class="masterreport">
+<table id="Table.0" cellpadding="0" cellspacing="0" summary="">
+<th>NAME</th>
+<th>VALUE</th>
+</tr>
+<tr>
+<td>OWNER</td>
+<td>PDB_CRONUS</td>
+</tr>
+<tr>
+<td>OBJECT_NAME</td>
+<td>DF_HORAS_EXTRAS_PKG</td>
+</tr>
+<tr>
+<td>SUBOBJECT_NAME</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OBJECT_ID</td>
+<td>80333</td>
+</tr>
+<tr>
+<td>DATA_OBJECT_ID</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OBJECT_TYPE</td>
+<td>PACKAGE</td>
+</tr>
+<tr>
+<td>CREATED</td>
+<td>13/07/22</td>
+</tr>
+<tr>
+<td>LAST_DDL_TIME</td>
+<td>31/07/24</td>
+</tr>
+<tr>
+<td>TIMESTAMP</td>
+<td>2024-07-31:08:43:53</td>
+</tr>
+<tr>
+<td>STATUS</td>
+<td>VALID</td>
+</tr>
+<tr>
+<td>TEMPORARY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>GENERATED</td>
+<td>N</td>
+</tr>
+<tr>
+<td>SECONDARY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>NAMESPACE</td>
+<td>1</td>
+</tr>
+<tr>
+<td>EDITION_NAME</td>
+<td>null</td>
+</tr>
+<tr>
+<td>SHARING</td>
+<td>NONE</td>
+</tr>
+<tr>
+<td>EDITIONABLE</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>ORACLE_MAINTAINED</td>
+<td>N</td>
+</tr>
+<tr>
+<td>APPLICATION</td>
+<td>N</td>
+</tr>
+<tr>
+<td>DEFAULT_COLLATION</td>
+<td>USING_NLS_COMP</td>
+</tr>
+<tr>
+<td>DUPLICATED</td>
+<td>N</td>
+</tr>
+<tr>
+<td>SHARDED</td>
+<td>N</td>
+</tr>
+<tr>
+<td>CREATED_APPID</td>
+<td>null</td>
+</tr>
+<tr>
+<td>CREATED_VSNID</td>
+<td>null</td>
+</tr>
+<tr>
+<td>MODIFIED_APPID</td>
+<td>null</td>
+</tr>
+<tr>
+<td>MODIFIED_VSNID</td>
+<td>null</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.2">
+<div class="masterreport">
+<table id="Table.1" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>PRIVILEGE</th>
+<th>GRANTEE</th>
+<th>GRANTABLE</th>
+<th>GRANTOR</th>
+<th>OBJECT_NAME</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.3">
+<div class="masterreport">
+<table id="Table.2" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>NAME</th>
+<th>OWNER</th>
+<th>TYPE</th>
+<th>OBJECT_ID</th>
+<th>STATUS</th>
+<th>TYPE_LINK</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.4">
+<div class="masterreport">
+<table id="Table.3" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>NAME</th>
+<th>OWNER</th>
+<th>TYPE</th>
+<th>OBJECT_ID</th>
+<th>STATUS</th>
+<th>TYPE_LINK</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.5">
+<div class="masterreport">
+<pre>
+PACKAGE              "DF_HORAS_EXTRAS_PKG" IS
+  /*----------------------------------------------------------------------------------------------------------------------
+    Nombre        : DF_Horas_Extras_PKG
+    Tipo          : Paquete
+    Objetivo      : Calcular el detalle de hora extras
+    Realizado Por : CINTE - Manuel Benítez Fajardo
+    Fecha: Fecha  : 2020-09-17
+  ------------------------------------------------------------------------------------------------------------------------*/
+
+  CONST_SI                          CONSTANT NUMBER (1) := 1;
+  CONST_NO                          CONSTANT NUMBER (1) := 0;
+
+  CONST_Estado_Activo               CONSTANT NUMBER (1) := 1;
+  CONST_Estado_Borrado              CONSTANT NUMBER (1) := 9;
+
+  Const_Lunes                       CONSTANT VARCHAR2 (9) := 'LUN';
+  Const_Martes                      CONSTANT VARCHAR2 (9) := 'MAR';
+  Const_Miercoles                   CONSTANT VARCHAR2 (9) := 'MIÉ';
+  Const_Jueves                      CONSTANT VARCHAR2 (9) := 'JUE';
+  Const_Viernes                     CONSTANT VARCHAR2 (9) := 'VIE';
+  Const_Sabado                      CONSTANT VARCHAR2 (9) := 'SÁB';
+  Const_Domingo                     CONSTANT VARCHAR2 (9) := 'DOM';
+
+  CONST_Hr_Normal                 CONSTANT NUMBER (2)   :=  1;
+  CONST_Hr_Extra                  CONSTANT NUMBER (2)   :=  2;
+  CONST_Hr_Extra_Nocturno         CONSTANT NUMBER (2)   :=  3;
+  CONST_Hr_Extra_Nocturno_MD      CONSTANT NUMBER (2)   :=  4;
+  CONST_Hr_Extra_Madrugada        CONSTANT NUMBER (2)   :=  5;
+  CONST_Hr_Festivo                CONSTANT NUMBER (2)   :=  6;
+  CONST_Hr_Festivo_Nocturno       CONSTANT NUMBER (2)   :=  7;
+  CONST_Hr_Festivo_Nocturno_MD    CONSTANT NUMBER (2)   :=  8;
+  CONST_Hr_Sabado                 CONSTANT NUMBER (2)   :=  9;
+  CONST_Hr_Sabado_Nocturno        CONSTANT NUMBER (2)   := 10;
+  CONST_Hr_Sabado_Nocturno_MD     CONSTANT NUMBER (2)   := 11;
+
+
+  CONST_Str_Normal                CONSTANT DF_Extra_Tipo.Tipo_Extra%TYPE := 'NORMAL';
+  CONST_Str_Extra                 CONSTANT DF_Extra_Tipo.Tipo_Extra%TYPE := 'EXTRA';
+  CONST_Str_Extra_Nocturno        CONSTANT DF_Extra_Tipo.Tipo_Extra%TYPE := 'EXTRA NOCTURNO';
+  CONST_Str_Extra_Nocturno_MD     CONSTANT DF_Extra_Tipo.Tipo_Extra%TYPE := 'EXTRA NOCTURNO MADRUGADA';
+  CONST_Str_Extra_Madrugada       CONSTANT DF_Extra_Tipo.Tipo_Extra%TYPE := 'EXTRA MADRUGADA';
+  CONST_Str_Festivo               CONSTANT DF_Extra_Tipo.Tipo_Extra%TYPE := 'FESTIVO';
+  CONST_Str_Festivo_Nocturno      CONSTANT DF_Extra_Tipo.Tipo_Extra%TYPE := 'FESTIVO NOCTURNO NOCHE';
+  CONST_Str_Festivo_Nocturno_MD   CONSTANT DF_Extra_Tipo.Tipo_Extra%TYPE := 'FESTIVO NOCTURNO MADRUGADA';
+  CONST_Str_Sabado                CONSTANT DF_Extra_Tipo.Tipo_Extra%TYPE := 'SABADO';
+  CONST_Str_Sabado_Nocturno       CONSTANT DF_Extra_Tipo.Tipo_Extra%TYPE := 'SABADO NOCTURNO NOCHE';
+  CONST_Str_Sabado_Nocturno_MD    CONSTANT DF_Extra_Tipo.Tipo_Extra%TYPE := 'SABADO NOCTURNO MADRUGADA';
+
+  v_Desde_Normal                    VARCHAR2 (8);
+  v_Hasta_Normal                    VARCHAR2 (8);
+  v_Desde_Extra                     VARCHAR2 (8);
+  v_Hasta_Extra                     VARCHAR2 (8);
+  v_Desde_Extra_Nocturno            VARCHAR2 (8);
+  v_Hasta_Extra_Nocturno            VARCHAR2 (8);
+  v_Desde_Extra_Nocturno_MD         VARCHAR2 (8);
+  v_Hasta_Extra_Nocturno_MD         VARCHAR2 (8);
+  v_Desde_Extra_Madrugada           VARCHAR2 (8);
+  v_Hasta_Extra_Madrugada           VARCHAR2 (8);
+  v_Desde_Festivo                   VARCHAR2 (8);
+  v_Hasta_Festivo                   VARCHAR2 (8);
+  v_Desde_Festivo_Nocturno          VARCHAR2 (8);
+  v_Hasta_Festivo_Nocturno          VARCHAR2 (8);
+  v_Desde_Festivo_Nocturno_MD       VARCHAR2 (8);
+  v_Hasta_Festivo_Nocturno_MD       VARCHAR2 (8);
+  v_Desde_Sabado                    VARCHAR2 (8);
+  v_Hasta_Sabado                    VARCHAR2 (8);
+  v_Desde_Sabado_Nocturno           VARCHAR2 (8);
+  v_Hasta_Sabado_Nocturno           VARCHAR2 (8);
+  v_Desde_Sabado_Nocturno_MD        VARCHAR2 (8);
+  v_Hasta_Sabado_Nocturno_MD        VARCHAR2 (8);
+
+  -- Detalle de cada hora que se desglose
+
+  TYPE Typ_Rec_LQ_Hora              IS RECORD (
+     Tipo_Extra                       DF_Extra_Tipo.Tipo_Extra%TYPE
+    ,Hora_Inicial                     DF_Extra_Tipo.HIni%TYPE
+    ,Hora_Final                       DF_Extra_Tipo.HFin%TYPE
+    ,Multiplicador                    DF_Extra_Tipo.Multiplicador%TYPE
+    ,Numero_Horas                     DF_Detalles_Novedad.Horas_Normal%TYPE
+  );
+
+  -- Detalle para un rango de horas que estan en un mismo día
+  TYPE Typ_Tbl_LQ_Detalle_Novedad   IS TABLE OF Typ_Rec_LQ_Hora
+                                       INDEX BY PLS_INTEGER;
+
+  TYPE Typ_Rec_LQ_Rango_Fecha       IS RECORD (
+     Fecha_Inicial                    DF_Extra_Tipo.HIni%TYPE
+    ,Fecha_Final                      DF_Extra_Tipo.HFin%TYPE
+    ,LQ_Rango_Fecha                   Typ_Tbl_LQ_Detalle_Novedad
+  );
+
+  -- Desglose de horas para un rango de fecha dado, cada elemento correspoden a un dia
+  TYPE Typ_Tbl_LQ_Rango_Fecha       IS TABLE OF Typ_Rec_LQ_Rango_Fecha
+                                       INDEX BY PLS_INTEGER;
+
+
+  /*----------------------------------------------------------------------------------------------------------------------
+    Nombre           : PR_Procesar_Horas_Extras
+    Tipo             : Procedimiento
+    Description      : Procesar los registro de novedades con tipo de novedad 23 - Trabajo Fuera de Horario Laboral - EXTRA
+    Parametros       : inID_Novedad - Opcional -
+
+     F E C H A             A U T O R            OBJETIVO
+    ---------- ------------------------------- ----------------------------------------------------------------------------
+    2020-09-17 CINTE - Manuel Benítez Fajardo  Creacion
+  ------------------------------------------------------------------------------------------------------------------------*/
+  PROCEDURE PR_Procesar_Horas_Extras(
+     inID_Novedad                   IN    DF_Novedad.ID%TYPE                   DEFAULT NULL
+  );
+
+  /*----------------------------------------------------------------------------------------------------------------------
+    Nombre           : PR_Procesar_Horas_Extras
+    Tipo             : Procedimiento
+    Description      : Dado el ID del Registro de novedad, obtener el detalle de las horas extras
+    Parametros       : inID_Novedad       ID del registro de novedad a Procesar
+                       inIni_Novedad      Fecha en que inicia la novedad
+                       inFin_Novedad      Fecha en la finaliza la novedad
+     F E C H A             A U T O R            OBJETIVO
+    ---------- ------------------------------- ----------------------------------------------------------------------------
+    2020-09-17 CINTE - Manuel Benítez Fajardo  Creacion
+  ------------------------------------------------------------------------------------------------------------------------*/
+  PROCEDURE PR_Procesar_Horas_Extras (
+     inID_Novedad                   IN    DF_Novedad.ID%TYPE
+    ,inIni_Novedad                  IN    DF_Novedad.Ini_Novedad%TYPE
+    ,inFin_Novedad                  IN    DF_Novedad.Fin_Novedad%TYPE
+    ,inAprobado                     IN    DF_Novedad.Aprobado%TYPE
+  );
+
+  /*----------------------------------------------------------------------------------------------------------------------
+    Nombre           : PR_Borrar_Horas_Extras
+    Tipo             : Procedimiento
+    Description      : Dado el ID de la novedad, hacer el borrado logico del registro de detalle de ese registro de novedad
+    Parametros       : inID_Novedad      ID del registro de novedad a borrar
+
+     F E C H A             A U T O R            OBJETIVO
+    ---------- ------------------------------- ----------------------------------------------------------------------------
+    2020-09-17 CINTE - Manuel Benítez Fajardo  Creacion
+  ------------------------------------------------------------------------------------------------------------------------*/
+  PROCEDURE PR_Borrar_Horas_Extras (
+     inID_Novedad                   IN    DF_Novedad.ID%TYPE
+  );
+
+END DF_Horas_Extras_PKG;</pre>
+</div>
+</div>
+</div>
+</body>
+</html>

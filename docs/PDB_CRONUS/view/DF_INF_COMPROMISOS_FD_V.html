@@ -1,0 +1,983 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=Cp1252" />
+<script src="DF_INF_COMPROMISOS_FD_V/report.js" type="text/javascript"></script>
+<link href="DF_INF_COMPROMISOS_FD_V/report.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<div class="banner">
+<table width="98%"><tr>
+<td><h2 class="banner">DF_INF_COMPROMISOS_FD_V</h2></td>
+</tr></table></div>
+<div id="maintabs">
+<div class="currentmaintab" onclick="onSelectMainTab(this, 0)">
+<div>
+<p>Columnas</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 1)">
+<div>
+<p>Permisos</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 2)">
+<div>
+<p>Dependencias</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 3)">
+<div>
+<p>Detalles</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 4)">
+<div>
+<p>Disparadores</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 5)">
+<div>
+<p>Errores</p>
+</div>
+</div>
+</div>
+<br/>
+<div id="masterreports">
+<div id="Master.0">
+<div class="currentmasterreport">
+<table id="Table.0" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>COLUMN_NAME</th>
+<th>DATA_TYPE</th>
+<th>NULLABLE</th>
+<th>DATA_DEFAULT</th>
+<th>COLUMN_ID</th>
+<th>COMMENTS</th>
+<th>INSERTABLE</th>
+<th>UPDATABLE</th>
+<th>DELETABLE</th>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 0)" class="currentrow">
+<td class="currentcell">PROYECTO</td>
+<td class="currentcell">VARCHAR2(2000)</td>
+<td class="currentcell">Yes</td>
+<td class="currentcell">null</td>
+<td class="currentcell">1</td>
+<td class="currentcell">null</td>
+<td class="currentcell">NO</td>
+<td class="currentcell">NO</td>
+<td class="currentcell">NO</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 1)">
+<td>ESTADO</td>
+<td>VARCHAR2(100)</td>
+<td>Yes</td>
+<td>null</td>
+<td>2</td>
+<td>null</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 2)">
+<td>STOPPER</td>
+<td>VARCHAR2(4000)</td>
+<td>Yes</td>
+<td>null</td>
+<td>3</td>
+<td>null</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 3)">
+<td>IDPROYECTO</td>
+<td>VARCHAR2(50)</td>
+<td>Yes</td>
+<td>null</td>
+<td>4</td>
+<td>null</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 4)">
+<td>ELEMENTO_PEP</td>
+<td>VARCHAR2(50)</td>
+<td>Yes</td>
+<td>null</td>
+<td>5</td>
+<td>null</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 5)">
+<td>GERENTE</td>
+<td>VARCHAR2(4000)</td>
+<td>Yes</td>
+<td>null</td>
+<td>6</td>
+<td>null</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 6)">
+<td>FECHA_SOLICITUD</td>
+<td>VARCHAR2(10)</td>
+<td>Yes</td>
+<td>null</td>
+<td>7</td>
+<td>null</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 7)">
+<td>IDBRIEF</td>
+<td>VARCHAR2(100)</td>
+<td>Yes</td>
+<td>null</td>
+<td>8</td>
+<td>null</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 8)">
+<td>IDLINEA</td>
+<td>NUMBER</td>
+<td>Yes</td>
+<td>null</td>
+<td>9</td>
+<td>null</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 9)">
+<td>LINEAPRODUCTO</td>
+<td>VARCHAR2(100)</td>
+<td>Yes</td>
+<td>null</td>
+<td>10</td>
+<td>null</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 10)">
+<td>DESCRIPCIONLINEA</td>
+<td>VARCHAR2(3000)</td>
+<td>Yes</td>
+<td>null</td>
+<td>11</td>
+<td>null</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 11)">
+<td>FASE</td>
+<td>NUMBER</td>
+<td>Yes</td>
+<td>null</td>
+<td>12</td>
+<td>null</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 12)">
+<td>FECHAINICIOPROCESO</td>
+<td>VARCHAR2(10)</td>
+<td>Yes</td>
+<td>null</td>
+<td>13</td>
+<td>null</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 13)">
+<td>FECHAENTREGA</td>
+<td>VARCHAR2(10)</td>
+<td>Yes</td>
+<td>null</td>
+<td>14</td>
+<td>null</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 14)">
+<td>FECHAQAINI</td>
+<td>VARCHAR2(10)</td>
+<td>Yes</td>
+<td>null</td>
+<td>15</td>
+<td>null</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 15)">
+<td>FECHAQAFIN</td>
+<td>VARCHAR2(10)</td>
+<td>Yes</td>
+<td>null</td>
+<td>16</td>
+<td>null</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 16)">
+<td>FECHA_DESPLIEGUE</td>
+<td>VARCHAR2(10)</td>
+<td>Yes</td>
+<td>null</td>
+<td>17</td>
+<td>null</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 17)">
+<td>FECHA_DESP_REAL</td>
+<td>VARCHAR2(10)</td>
+<td>Yes</td>
+<td>null</td>
+<td>18</td>
+<td>null</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 18)">
+<td>ID_CAMBIO</td>
+<td>VARCHAR2(100)</td>
+<td>Yes</td>
+<td>null</td>
+<td>19</td>
+<td>null</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 19)">
+<td>RESULTADODELCAMBIO</td>
+<td>VARCHAR2(100)</td>
+<td>Yes</td>
+<td>null</td>
+<td>20</td>
+<td>null</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 20)">
+<td>JUSTIFICACION</td>
+<td>VARCHAR2(3000)</td>
+<td>Yes</td>
+<td>null</td>
+<td>21</td>
+<td>null</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 21)">
+<td>COORDINADOR</td>
+<td>VARCHAR2(4000)</td>
+<td>Yes</td>
+<td>null</td>
+<td>22</td>
+<td>null</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 22)">
+<td>PROVEEDOR</td>
+<td>VARCHAR2(200)</td>
+<td>Yes</td>
+<td>null</td>
+<td>23</td>
+<td>null</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 23)">
+<td>CONPRESUPUESTO</td>
+<td>CHAR(2)</td>
+<td>Yes</td>
+<td>null</td>
+<td>24</td>
+<td>null</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 24)">
+<td>FECHA_PRESUPUESTO</td>
+<td>VARCHAR2(10)</td>
+<td>Yes</td>
+<td>null</td>
+<td>25</td>
+<td>null</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 25)">
+<td>CELULA</td>
+<td>VARCHAR2(200)</td>
+<td>Yes</td>
+<td>null</td>
+<td>26</td>
+<td>null</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 26)">
+<td>PM</td>
+<td>VARCHAR2(1000)</td>
+<td>Yes</td>
+<td>null</td>
+<td>27</td>
+<td>null</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 27)">
+<td>LT</td>
+<td>VARCHAR2(1000)</td>
+<td>Yes</td>
+<td>null</td>
+<td>28</td>
+<td>null</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 28)">
+<td>EVIDENCIA</td>
+<td>VARCHAR2(500)</td>
+<td>Yes</td>
+<td>null</td>
+<td>29</td>
+<td>null</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 29)">
+<td>ID</td>
+<td>NUMBER</td>
+<td>Yes</td>
+<td>null</td>
+<td>30</td>
+<td>null</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 30)">
+<td>CODPROYECTO</td>
+<td>NUMBER</td>
+<td>Yes</td>
+<td>null</td>
+<td>31</td>
+<td>null</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 31)">
+<td>CODPRESUPUESTO</td>
+<td>NUMBER</td>
+<td>Yes</td>
+<td>null</td>
+<td>32</td>
+<td>null</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 32)">
+<td>IDENINFO</td>
+<td>NUMBER</td>
+<td>Yes</td>
+<td>null</td>
+<td>33</td>
+<td>null</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 33)">
+<td>CODPERI</td>
+<td>NUMBER</td>
+<td>Yes</td>
+<td>null</td>
+<td>34</td>
+<td>null</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 34)">
+<td>PERNI</td>
+<td>NUMBER</td>
+<td>Yes</td>
+<td>null</td>
+<td>35</td>
+<td>null</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 35)">
+<td>PERTI</td>
+<td>NUMBER</td>
+<td>Yes</td>
+<td>null</td>
+<td>36</td>
+<td>null</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 36)">
+<td>PROVI</td>
+<td>NUMBER</td>
+<td>Yes</td>
+<td>null</td>
+<td>37</td>
+<td>null</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 37)">
+<td>FECHAMODIFICACION</td>
+<td>VARCHAR2(10)</td>
+<td>Yes</td>
+<td>null</td>
+<td>38</td>
+<td>null</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 38)">
+<td>HORAS_LL</td>
+<td>NUMBER</td>
+<td>Yes</td>
+<td>null</td>
+<td>39</td>
+<td>null</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 39)">
+<td>HORAS_HL</td>
+<td>NUMBER</td>
+<td>Yes</td>
+<td>null</td>
+<td>40</td>
+<td>null</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 40)">
+<td>HORAS_REAL</td>
+<td>NUMBER</td>
+<td>Yes</td>
+<td>null</td>
+<td>41</td>
+<td>null</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.1">
+<div class="masterreport">
+<table id="Table.1" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>PRIVILEGE</th>
+<th>GRANTEE</th>
+<th>GRANTABLE</th>
+<th>GRANTOR</th>
+<th>OBJECT_NAME</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.2">
+<div class="masterreport">
+<table id="Table.2" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>OWNER</th>
+<th>NAME</th>
+<th>TYPE</th>
+<th>REFERENCED_OWNER</th>
+<th>REFERENCED_NAME</th>
+<th>REFERENCED_TYPE</th>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 2, 0)" class="currentrow">
+<td class="currentcell">PDB_CRONUS</td>
+<td class="currentcell">DF_INDICADOR_CUMPLIMIENTO_V</td>
+<td class="currentcell">VIEW</td>
+<td class="currentcell">PDB_CRONUS</td>
+<td class="currentcell">DF_INF_COMPROMISOS_FD_V</td>
+<td class="currentcell">VIEW</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 2, 1)">
+<td>PDB_CRONUS</td>
+<td>DF_INDICADOR_CALIDAD_V</td>
+<td>VIEW</td>
+<td>PDB_CRONUS</td>
+<td>DF_INF_COMPROMISOS_FD_V</td>
+<td>VIEW</td>
+</tr>
+</table>
+<br/>
+<hr/>
+<br/><div id="ChildTabs.2">
+<div class="currentchildtab" onclick="onSelectChildTab(this, 0)">
+<div>
+<p>Referencias</p>
+</div>
+</div>
+</div>
+<br/>
+<div id="ChildReports.2">
+<div id="Child.0.0.2">
+<div class="currentchildreport"><table id="Table.3" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>OWNER</th>
+<th>NAME</th>
+<th>TYPE</th>
+<th>REFERENCED_OWNER</th>
+<th>REFERENCED_NAME</th>
+<th>REFERENCED_TYPE</th>
+</tr>
+<tr onclick="table_onSelectRow(this, 3)" class="currentrow">
+<td class="currentcell">PDB_CRONUS</td>
+<td class="currentcell">DF_INF_COMPROMISOS_FD_V</td>
+<td class="currentcell">VIEW</td>
+<td class="currentcell">PDB_CRONUS</td>
+<td class="currentcell">DF_EMPLEADO_VU</td>
+<td class="currentcell">VIEW</td>
+</tr>
+<tr onclick="table_onSelectRow(this, 3)">
+<td>PDB_CRONUS</td>
+<td>DF_INF_COMPROMISOS_FD_V</td>
+<td>VIEW</td>
+<td>PDB_CRONUS</td>
+<td>DF_ESTRUCTURAORGANIZACIONAL</td>
+<td>TABLE</td>
+</tr>
+<tr onclick="table_onSelectRow(this, 3)">
+<td>PDB_CRONUS</td>
+<td>DF_INF_COMPROMISOS_FD_V</td>
+<td>VIEW</td>
+<td>PDB_CRONUS</td>
+<td>DF_PRESUPUESTO</td>
+<td>TABLE</td>
+</tr>
+<tr onclick="table_onSelectRow(this, 3)">
+<td>PDB_CRONUS</td>
+<td>DF_INF_COMPROMISOS_FD_V</td>
+<td>VIEW</td>
+<td>PDB_CRONUS</td>
+<td>DF_PROVEEDOR</td>
+<td>TABLE</td>
+</tr>
+<tr onclick="table_onSelectRow(this, 3)">
+<td>PDB_CRONUS</td>
+<td>DF_INF_COMPROMISOS_FD_V</td>
+<td>VIEW</td>
+<td>PDB_CRONUS</td>
+<td>DF_PROYECTO</td>
+<td>TABLE</td>
+</tr>
+<tr onclick="table_onSelectRow(this, 3)">
+<td>PDB_CRONUS</td>
+<td>DF_INF_COMPROMISOS_FD_V</td>
+<td>VIEW</td>
+<td>PDB_CRONUS</td>
+<td>DF_PRY_BRIEF_IDRLP</td>
+<td>TABLE</td>
+</tr>
+<tr onclick="table_onSelectRow(this, 3)">
+<td>PDB_CRONUS</td>
+<td>DF_INF_COMPROMISOS_FD_V</td>
+<td>VIEW</td>
+<td>PDB_CRONUS</td>
+<td>DF_RANGO</td>
+<td>TABLE</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Child.0.1.2">
+<div class="childreport"><table id="Table.4" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>OWNER</th>
+<th>NAME</th>
+<th>TYPE</th>
+<th>REFERENCED_OWNER</th>
+<th>REFERENCED_NAME</th>
+<th>REFERENCED_TYPE</th>
+</tr>
+<tr onclick="table_onSelectRow(this, 4)" class="currentrow">
+<td class="currentcell">PDB_CRONUS</td>
+<td class="currentcell">DF_INF_COMPROMISOS_FD_V</td>
+<td class="currentcell">VIEW</td>
+<td class="currentcell">PDB_CRONUS</td>
+<td class="currentcell">DF_EMPLEADO_VU</td>
+<td class="currentcell">VIEW</td>
+</tr>
+<tr onclick="table_onSelectRow(this, 4)">
+<td>PDB_CRONUS</td>
+<td>DF_INF_COMPROMISOS_FD_V</td>
+<td>VIEW</td>
+<td>PDB_CRONUS</td>
+<td>DF_ESTRUCTURAORGANIZACIONAL</td>
+<td>TABLE</td>
+</tr>
+<tr onclick="table_onSelectRow(this, 4)">
+<td>PDB_CRONUS</td>
+<td>DF_INF_COMPROMISOS_FD_V</td>
+<td>VIEW</td>
+<td>PDB_CRONUS</td>
+<td>DF_PRESUPUESTO</td>
+<td>TABLE</td>
+</tr>
+<tr onclick="table_onSelectRow(this, 4)">
+<td>PDB_CRONUS</td>
+<td>DF_INF_COMPROMISOS_FD_V</td>
+<td>VIEW</td>
+<td>PDB_CRONUS</td>
+<td>DF_PROVEEDOR</td>
+<td>TABLE</td>
+</tr>
+<tr onclick="table_onSelectRow(this, 4)">
+<td>PDB_CRONUS</td>
+<td>DF_INF_COMPROMISOS_FD_V</td>
+<td>VIEW</td>
+<td>PDB_CRONUS</td>
+<td>DF_PROYECTO</td>
+<td>TABLE</td>
+</tr>
+<tr onclick="table_onSelectRow(this, 4)">
+<td>PDB_CRONUS</td>
+<td>DF_INF_COMPROMISOS_FD_V</td>
+<td>VIEW</td>
+<td>PDB_CRONUS</td>
+<td>DF_PRY_BRIEF_IDRLP</td>
+<td>TABLE</td>
+</tr>
+<tr onclick="table_onSelectRow(this, 4)">
+<td>PDB_CRONUS</td>
+<td>DF_INF_COMPROMISOS_FD_V</td>
+<td>VIEW</td>
+<td>PDB_CRONUS</td>
+<td>DF_RANGO</td>
+<td>TABLE</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="Master.3">
+<div class="masterreport">
+<table id="Table.5" cellpadding="0" cellspacing="0" summary="">
+<th>NAME</th>
+<th>VALUE</th>
+</tr>
+<tr>
+<td>CREATED</td>
+<td>29/07/22</td>
+</tr>
+<tr>
+<td>LAST_DDL_TIME</td>
+<td>15/05/25</td>
+</tr>
+<tr>
+<td>OWNER</td>
+<td>PDB_CRONUS</td>
+</tr>
+<tr>
+<td>VIEW_NAME</td>
+<td>DF_INF_COMPROMISOS_FD_V</td>
+</tr>
+<tr>
+<td>TEXT_LENGTH</td>
+<td>1974</td>
+</tr>
+<tr>
+<td>TEXT</td>
+<td>SELECT&nbsp;/*+&nbsp;USE_MERGE(R,E2,EO,PRO,E,PR,P)&nbsp;ORDERED&nbsp;*/&nbsp;DISTINCT
+&nbsp;&nbsp;&nbsp;&nbsp;P.NOMBRE&nbsp;PROYECTO
+&nbsp;&nbsp;&nbsp;&nbsp;,IP.ESTADO
+&nbsp;&nbsp;&nbsp;&nbsp;,IP.STOPPER
+&nbsp;&nbsp;&nbsp;&nbsp;,P.CODIGOPROYECTO&nbsp;IDPROYECTO
+&nbsp;&nbsp;&nbsp;&nbsp;,PR.ELEMENTO_PEP
+&nbsp;&nbsp;&nbsp;&nbsp;,E.NOMBRE&nbsp;GERENTE
+&nbsp;&nbsp;&nbsp;&nbsp;,TO_CHAR(IP.FECHA_SOLICITUD,'DD/MM/YYYY')&nbsp;FECHA_SOLICITUD
+&nbsp;&nbsp;&nbsp;&nbsp;,IP.BRIEF&nbsp;IDBRIEF
+&nbsp;&nbsp;&nbsp;&nbsp;,IP.IDRLP&nbsp;IDLINEA
+&nbsp;&nbsp;&nbsp;&nbsp;,IP.LINEAPRODUCTO
+&nbsp;&nbsp;&nbsp;&nbsp;,IP.DESCRIPCION&nbsp;DESCRIPCIONLINEA
+&nbsp;&nbsp;&nbsp;&nbsp;,IP.FASE
+&nbsp;&nbsp;&nbsp;&nbsp;,TO_CHAR(IP.FECHAINICIO,'DD/MM/YYYY')&nbsp;FECHAINICIOPROCESO
+&nbsp;&nbsp;&nbsp;&nbsp;,TO_CHAR(IP.FECHAFIN,'DD/MM/YYYY')&nbsp;FECHAENTREGA
+&nbsp;&nbsp;&nbsp;&nbsp;,TO_CHAR(IP.FECHAQAINI,'DD/MM/YYYY')&nbsp;FECHAQAINI
+&nbsp;&nbsp;&nbsp;&nbsp;,TO_CHAR(IP.FECHAQAFIN,'DD/MM/YYYY')&nbsp;FECHAQAFIN
+&nbsp;&nbsp;&nbsp;&nbsp;,TO_CHAR(IP.FECHA_DESPLIEGUE,'DD/MM/YYYY')&nbsp;FECHA_DESPLIEGUE
+&nbsp;&nbsp;&nbsp;&nbsp;,TO_CHAR(IP.FECHA_DESP_REAL,'DD/MM/YYYY')&nbsp;FECHA_DESP_REAL
+&nbsp;&nbsp;&nbsp;&nbsp;,IP.ID_CAMBIO
+&nbsp;&nbsp;&nbsp;&nbsp;,IP.RESULTADO&nbsp;RESULTADODELCAMBIO
+&nbsp;&nbsp;&nbsp;&nbsp;,IP.JUSTIFICACION
+&nbsp;&nbsp;&nbsp;&nbsp;,E2.NOMBRE&nbsp;COORDINADOR
+&nbsp;&nbsp;&nbsp;&nbsp;,PRO.NOMBRE&nbsp;PROVEEDOR
+&nbsp;&nbsp;&nbsp;&nbsp;,(CASE&nbsp;SIGN(NVL(PR.SALDO_COP,0))&nbsp;WHEN&nbsp;1&nbsp;THEN&nbsp;'SI'&nbsp;ELSE&nbsp;'NO'&nbsp;END)&nbsp;CONPRESUPUESTO
+&nbsp;&nbsp;&nbsp;&nbsp;,TO_CHAR(IP.FECHA_PRESUPUESTO,'DD/MM/YYYY')&nbsp;FECHA_PRESUPUESTO
+&nbsp;&nbsp;&nbsp;&nbsp;,EO.NOMBRE&nbsp;CELULA
+&nbsp;&nbsp;&nbsp;&nbsp;,IP.PM
+&nbsp;&nbsp;&nbsp;&nbsp;,IP.LT
+&nbsp;&nbsp;&nbsp;&nbsp;,EVIDENCIA
+&nbsp;&nbsp;&nbsp;&nbsp;,IP.ID
+&nbsp;&nbsp;&nbsp;&nbsp;,P.ID&nbsp;CODPROYECTO
+&nbsp;&nbsp;&nbsp;&nbsp;,PR.ID&nbsp;CODPRESUPUESTO
+&nbsp;&nbsp;&nbsp;&nbsp;,IP.CODPROYECTO&nbsp;IDENINFO
+&nbsp;&nbsp;&nbsp;&nbsp;,IP.CODPERFIL&nbsp;CODPERI
+&nbsp;&nbsp;&nbsp;&nbsp;,IP.CODPERFILNIVEL&nbsp;PERNI
+&nbsp;&nbsp;&nbsp;&nbsp;,IP.CODPERFILTIPO&nbsp;PERTI
+&nbsp;&nbsp;&nbsp;&nbsp;,IP.CODPROVEEDOR&nbsp;PROVI
+&nbsp;&nbsp;&nbsp;&nbsp;,TO_CHAR(IP.FECHAMODIFICACION,'DD/MM/YYYY')&nbsp;FECHAMODIFICACION
+&nbsp;&nbsp;&nbsp;&nbsp;,HORAS_LL
+&nbsp;&nbsp;&nbsp;&nbsp;,HORAS_HL
+&nbsp;&nbsp;&nbsp;&nbsp;,HORAS_REAL
+FROM
+&nbsp;&nbsp;&nbsp;&nbsp;DF_PRY_BRIEF_IDRLP&nbsp;IP
+&nbsp;&nbsp;&nbsp;&nbsp;LEFT&nbsp;JOIN&nbsp;DF_PROYECTO&nbsp;P&nbsp;ON
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;P.ID&nbsp;=&nbsp;IP.CODPROYECTO
+&nbsp;&nbsp;&nbsp;&nbsp;LEFT&nbsp;JOIN&nbsp;DF_PRESUPUESTO&nbsp;PR&nbsp;ON&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PR.ID&nbsp;=&nbsp;P.CODPRESUPUESTO
+&nbsp;&nbsp;&nbsp;&nbsp;LEFT&nbsp;JOIN&nbsp;DF_EMPLEADO_VU&nbsp;E&nbsp;ON
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E.CODEMPLEADO&nbsp;=&nbsp;PR.CODEMPLEADOGERENTE
+&nbsp;&nbsp;&nbsp;&nbsp;LEFT&nbsp;JOIN&nbsp;DF_PROVEEDOR&nbsp;PRO&nbsp;ON&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRO.ID&nbsp;=&nbsp;IP.CODPROVEEDOR
+&nbsp;&nbsp;&nbsp;&nbsp;LEFT&nbsp;JOIN&nbsp;DF_ESTRUCTURAORGANIZACIONAL&nbsp;EO&nbsp;ON&nbsp;EO.ID&nbsp;=&nbsp;IP.CODESTRUCTURA
+&nbsp;&nbsp;&nbsp;&nbsp;LEFT&nbsp;JOIN&nbsp;DF_EMPLEADO_VU&nbsp;E2&nbsp;ON&nbsp;E2.CODTIPOESTRUCTURA&nbsp;=&nbsp;2&nbsp;AND&nbsp;E2.JERARQUIA&nbsp;=&nbsp;SUBSTR(EO.JERARQUIA,&nbsp;0,&nbsp;20)
+&nbsp;&nbsp;&nbsp;&nbsp;JOIN&nbsp;DF_RANGO&nbsp;R&nbsp;ON&nbsp;1=1
+WHERE
+&nbsp;&nbsp;&nbsp;&nbsp;IP.CODESTRUCTURA&nbsp;IN(SELECT&nbsp;ID&nbsp;FROM&nbsp;DF_ESTRUCTURAORGANIZACIONAL&nbsp;WHERE&nbsp;(CODPADRE&nbsp;=&nbsp;R.COORD))</td>
+</tr>
+<tr>
+<td>TEXT_VC</td>
+<td>SELECT&nbsp;/*+&nbsp;USE_MERGE(R,E2,EO,PRO,E,PR,P)&nbsp;ORDERED&nbsp;*/&nbsp;DISTINCT
+&nbsp;&nbsp;&nbsp;&nbsp;P.NOMBRE&nbsp;PROYECTO
+&nbsp;&nbsp;&nbsp;&nbsp;,IP.ESTADO
+&nbsp;&nbsp;&nbsp;&nbsp;,IP.STOPPER
+&nbsp;&nbsp;&nbsp;&nbsp;,P.CODIGOPROYECTO&nbsp;IDPROYECTO
+&nbsp;&nbsp;&nbsp;&nbsp;,PR.ELEMENTO_PEP
+&nbsp;&nbsp;&nbsp;&nbsp;,E.NOMBRE&nbsp;GERENTE
+&nbsp;&nbsp;&nbsp;&nbsp;,TO_CHAR(IP.FECHA_SOLICITUD,'DD/MM/YYYY')&nbsp;FECHA_SOLICITUD
+&nbsp;&nbsp;&nbsp;&nbsp;,IP.BRIEF&nbsp;IDBRIEF
+&nbsp;&nbsp;&nbsp;&nbsp;,IP.IDRLP&nbsp;IDLINEA
+&nbsp;&nbsp;&nbsp;&nbsp;,IP.LINEAPRODUCTO
+&nbsp;&nbsp;&nbsp;&nbsp;,IP.DESCRIPCION&nbsp;DESCRIPCIONLINEA
+&nbsp;&nbsp;&nbsp;&nbsp;,IP.FASE
+&nbsp;&nbsp;&nbsp;&nbsp;,TO_CHAR(IP.FECHAINICIO,'DD/MM/YYYY')&nbsp;FECHAINICIOPROCESO
+&nbsp;&nbsp;&nbsp;&nbsp;,TO_CHAR(IP.FECHAFIN,'DD/MM/YYYY')&nbsp;FECHAENTREGA
+&nbsp;&nbsp;&nbsp;&nbsp;,TO_CHAR(IP.FECHAQAINI,'DD/MM/YYYY')&nbsp;FECHAQAINI
+&nbsp;&nbsp;&nbsp;&nbsp;,TO_CHAR(IP.FECHAQAFIN,'DD/MM/YYYY')&nbsp;FECHAQAFIN
+&nbsp;&nbsp;&nbsp;&nbsp;,TO_CHAR(IP.FECHA_DESPLIEGUE,'DD/MM/YYYY')&nbsp;FECHA_DESPLIEGUE
+&nbsp;&nbsp;&nbsp;&nbsp;,TO_CHAR(IP.FECHA_DESP_REAL,'DD/MM/YYYY')&nbsp;FECHA_DESP_REAL
+&nbsp;&nbsp;&nbsp;&nbsp;,IP.ID_CAMBIO
+&nbsp;&nbsp;&nbsp;&nbsp;,IP.RESULTADO&nbsp;RESULTADODELCAMBIO
+&nbsp;&nbsp;&nbsp;&nbsp;,IP.JUSTIFICACION
+&nbsp;&nbsp;&nbsp;&nbsp;,E2.NOMBRE&nbsp;COORDINADOR
+&nbsp;&nbsp;&nbsp;&nbsp;,PRO.NOMBRE&nbsp;PROVEEDOR
+&nbsp;&nbsp;&nbsp;&nbsp;,(CASE&nbsp;SIGN(NVL(PR.SALDO_COP,0))&nbsp;WHEN&nbsp;1&nbsp;THEN&nbsp;'SI'&nbsp;ELSE&nbsp;'NO'&nbsp;END)&nbsp;CONPRESUPUESTO
+&nbsp;&nbsp;&nbsp;&nbsp;,TO_CHAR(IP.FECHA_PRESUPUESTO,'DD/MM/YYYY')&nbsp;FECHA_PRESUPUESTO
+&nbsp;&nbsp;&nbsp;&nbsp;,EO.NOMBRE&nbsp;CELULA
+&nbsp;&nbsp;&nbsp;&nbsp;,IP.PM
+&nbsp;&nbsp;&nbsp;&nbsp;,IP.LT
+&nbsp;&nbsp;&nbsp;&nbsp;,EVIDENCIA
+&nbsp;&nbsp;&nbsp;&nbsp;,IP.ID
+&nbsp;&nbsp;&nbsp;&nbsp;,P.ID&nbsp;CODPROYECTO
+&nbsp;&nbsp;&nbsp;&nbsp;,PR.ID&nbsp;CODPRESUPUESTO
+&nbsp;&nbsp;&nbsp;&nbsp;,IP.CODPROYECTO&nbsp;IDENINFO
+&nbsp;&nbsp;&nbsp;&nbsp;,IP.CODPERFIL&nbsp;CODPERI
+&nbsp;&nbsp;&nbsp;&nbsp;,IP.CODPERFILNIVEL&nbsp;PERNI
+&nbsp;&nbsp;&nbsp;&nbsp;,IP.CODPERFILTIPO&nbsp;PERTI
+&nbsp;&nbsp;&nbsp;&nbsp;,IP.CODPROVEEDOR&nbsp;PROVI
+&nbsp;&nbsp;&nbsp;&nbsp;,TO_CHAR(IP.FECHAMODIFICACION,'DD/MM/YYYY')&nbsp;FECHAMODIFICACION
+&nbsp;&nbsp;&nbsp;&nbsp;,HORAS_LL
+&nbsp;&nbsp;&nbsp;&nbsp;,HORAS_HL
+&nbsp;&nbsp;&nbsp;&nbsp;,HORAS_REAL
+FROM
+&nbsp;&nbsp;&nbsp;&nbsp;DF_PRY_BRIEF_IDRLP&nbsp;IP
+&nbsp;&nbsp;&nbsp;&nbsp;LEFT&nbsp;JOIN&nbsp;DF_PROYECTO&nbsp;P&nbsp;ON
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;P.ID&nbsp;=&nbsp;IP.CODPROYECTO
+&nbsp;&nbsp;&nbsp;&nbsp;LEFT&nbsp;JOIN&nbsp;DF_PRESUPUESTO&nbsp;PR&nbsp;ON&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PR.ID&nbsp;=&nbsp;P.CODPRESUPUESTO
+&nbsp;&nbsp;&nbsp;&nbsp;LEFT&nbsp;JOIN&nbsp;DF_EMPLEADO_VU&nbsp;E&nbsp;ON
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E.CODEMPLEADO&nbsp;=&nbsp;PR.CODEMPLEADOGERENTE
+&nbsp;&nbsp;&nbsp;&nbsp;LEFT&nbsp;JOIN&nbsp;DF_PROVEEDOR&nbsp;PRO&nbsp;ON&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRO.ID&nbsp;=&nbsp;IP.CODPROVEEDOR
+&nbsp;&nbsp;&nbsp;&nbsp;LEFT&nbsp;JOIN&nbsp;DF_ESTRUCTURAORGANIZACIONAL&nbsp;EO&nbsp;ON&nbsp;EO.ID&nbsp;=&nbsp;IP.CODESTRUCTURA
+&nbsp;&nbsp;&nbsp;&nbsp;LEFT&nbsp;JOIN&nbsp;DF_EMPLEADO_VU&nbsp;E2&nbsp;ON&nbsp;E2.CODTIPOESTRUCTURA&nbsp;=&nbsp;2&nbsp;AND&nbsp;E2.JERARQUIA&nbsp;=&nbsp;SUBSTR(EO.JERARQUIA,&nbsp;0,&nbsp;20)
+&nbsp;&nbsp;&nbsp;&nbsp;JOIN&nbsp;DF_RANGO&nbsp;R&nbsp;ON&nbsp;1=1
+WHERE
+&nbsp;&nbsp;&nbsp;&nbsp;IP.CODESTRUCTURA&nbsp;IN(SELECT&nbsp;ID&nbsp;FROM&nbsp;DF_ESTRUCTURAORGANIZACIONAL&nbsp;WHERE&nbsp;(CODPADRE&nbsp;=&nbsp;R.COORD))</td>
+</tr>
+<tr>
+<td>TYPE_TEXT_LENGTH</td>
+<td>null</td>
+</tr>
+<tr>
+<td>TYPE_TEXT</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OID_TEXT_LENGTH</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OID_TEXT</td>
+<td>null</td>
+</tr>
+<tr>
+<td>VIEW_TYPE_OWNER</td>
+<td>null</td>
+</tr>
+<tr>
+<td>VIEW_TYPE</td>
+<td>null</td>
+</tr>
+<tr>
+<td>SUPERVIEW_NAME</td>
+<td>null</td>
+</tr>
+<tr>
+<td>EDITIONING_VIEW</td>
+<td>N</td>
+</tr>
+<tr>
+<td>READ_ONLY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>CONTAINER_DATA</td>
+<td>N</td>
+</tr>
+<tr>
+<td>BEQUEATH</td>
+<td>DEFINER</td>
+</tr>
+<tr>
+<td>ORIGIN_CON_ID</td>
+<td>4</td>
+</tr>
+<tr>
+<td>DEFAULT_COLLATION</td>
+<td>USING_NLS_COMP</td>
+</tr>
+<tr>
+<td>CONTAINERS_DEFAULT</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>CONTAINER_MAP</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>EXTENDED_DATA_LINK</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>EXTENDED_DATA_LINK_MAP</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>HAS_SENSITIVE_COLUMN</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>ADMIT_NULL</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>PDB_LOCAL_ONLY</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>DUPLICATED</td>
+<td>N</td>
+</tr>
+<tr>
+<td>SHARDED</td>
+<td>N</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.4">
+<div class="masterreport">
+<table id="Table.6" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>OWNER</th>
+<th>TRIGGER_NAME</th>
+<th>TRIGGER_TYPE</th>
+<th>TRIGGERING_EVENT</th>
+<th>STATUS</th>
+<th>OBJECT_ID</th>
+</tr>
+</table>
+<br/>
+<hr/>
+<br/><div id="ChildTabs.4">
+<div class="currentchildtab" onclick="onSelectChildTab(this, 0)">
+<div>
+<p></p>
+</div>
+</div>
+</div>
+<br/>
+<div id="ChildReports.4">
+</div>
+</div>
+</div>
+<div id="Master.5">
+<div class="masterreport">
+<table id="Table.7" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>ATTRIBUTE</th>
+<th>Line:Position</th>
+<th>TEXT</th>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</body>
+</html>

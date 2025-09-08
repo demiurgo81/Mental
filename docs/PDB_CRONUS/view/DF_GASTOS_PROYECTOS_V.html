@@ -1,0 +1,568 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=Cp1252" />
+<script src="DF_GASTOS_PROYECTOS_V/report.js" type="text/javascript"></script>
+<link href="DF_GASTOS_PROYECTOS_V/report.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<div class="banner">
+<table width="98%"><tr>
+<td><h2 class="banner">DF_GASTOS_PROYECTOS_V</h2></td>
+</tr></table></div>
+<div id="maintabs">
+<div class="currentmaintab" onclick="onSelectMainTab(this, 0)">
+<div>
+<p>Columnas</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 1)">
+<div>
+<p>Permisos</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 2)">
+<div>
+<p>Dependencias</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 3)">
+<div>
+<p>Detalles</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 4)">
+<div>
+<p>Disparadores</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 5)">
+<div>
+<p>Errores</p>
+</div>
+</div>
+</div>
+<br/>
+<div id="masterreports">
+<div id="Master.0">
+<div class="currentmasterreport">
+<table id="Table.0" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>COLUMN_NAME</th>
+<th>DATA_TYPE</th>
+<th>NULLABLE</th>
+<th>DATA_DEFAULT</th>
+<th>COLUMN_ID</th>
+<th>COMMENTS</th>
+<th>INSERTABLE</th>
+<th>UPDATABLE</th>
+<th>DELETABLE</th>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 0)" class="currentrow">
+<td class="currentcell">CODPROYECTO</td>
+<td class="currentcell">UNDEFINED()</td>
+<td class="currentcell">Yes</td>
+<td class="currentcell">null</td>
+<td class="currentcell">1</td>
+<td class="currentcell">null</td>
+<td class="currentcell">YES</td>
+<td class="currentcell">YES</td>
+<td class="currentcell">YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 1)">
+<td>MES</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>2</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 2)">
+<td>AÑO</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>3</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 3)">
+<td>FINI</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>4</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 4)">
+<td>FFIN</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>5</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 5)">
+<td>PROVEEDOR</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>6</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 6)">
+<td>DIASHRANGO</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>7</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 7)">
+<td>HORASHRANGO</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>8</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 8)">
+<td>CODPROVEEDOR</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>9</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 9)">
+<td>CELULA</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>10</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 10)">
+<td>IDPROYECTO</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>11</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 11)">
+<td>PROYECTO</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>12</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 12)">
+<td>HORAS</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>13</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 13)">
+<td>HEST</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>14</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 14)">
+<td>HPRY</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>15</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 15)">
+<td>HORACONESTRUCTURA</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>16</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 16)">
+<td>COSTOTOTAL</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>17</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 17)">
+<td>HORAS_HL</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>18</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 18)">
+<td>HORAS_LL</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>19</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 19)">
+<td>HORAS_REAL</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>20</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.1">
+<div class="masterreport">
+<table id="Table.1" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>PRIVILEGE</th>
+<th>GRANTEE</th>
+<th>GRANTABLE</th>
+<th>GRANTOR</th>
+<th>OBJECT_NAME</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.2">
+<div class="masterreport">
+<table id="Table.2" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>OWNER</th>
+<th>NAME</th>
+<th>TYPE</th>
+<th>REFERENCED_OWNER</th>
+<th>REFERENCED_NAME</th>
+<th>REFERENCED_TYPE</th>
+</tr>
+</table>
+<br/>
+<hr/>
+<br/><div id="ChildTabs.2">
+<div class="currentchildtab" onclick="onSelectChildTab(this, 0)">
+<div>
+<p>Referencias</p>
+</div>
+</div>
+</div>
+<br/>
+<div id="ChildReports.2">
+</div>
+</div>
+</div>
+<div id="Master.3">
+<div class="masterreport">
+<table id="Table.3" cellpadding="0" cellspacing="0" summary="">
+<th>NAME</th>
+<th>VALUE</th>
+</tr>
+<tr>
+<td>CREATED</td>
+<td>29/07/22</td>
+</tr>
+<tr>
+<td>LAST_DDL_TIME</td>
+<td>09/08/24</td>
+</tr>
+<tr>
+<td>OWNER</td>
+<td>PDB_CRONUS</td>
+</tr>
+<tr>
+<td>VIEW_NAME</td>
+<td>DF_GASTOS_PROYECTOS_V</td>
+</tr>
+<tr>
+<td>TEXT_LENGTH</td>
+<td>959</td>
+</tr>
+<tr>
+<td>TEXT</td>
+<td>SELECT&nbsp;DISTINCT
+&nbsp;&nbsp;&nbsp;&nbsp;EJ.CODPROYECTO
+&nbsp;&nbsp;&nbsp;&nbsp;,EJ.MES
+&nbsp;&nbsp;&nbsp;&nbsp;,EJ.AÑO
+&nbsp;&nbsp;&nbsp;&nbsp;,EJ.FINI
+&nbsp;&nbsp;&nbsp;&nbsp;,EJ.FFIN
+&nbsp;&nbsp;&nbsp;&nbsp;,EJ.PROVEEDOR
+&nbsp;&nbsp;&nbsp;&nbsp;,EJ.DIASHRANGO
+&nbsp;&nbsp;&nbsp;&nbsp;,EJ.HORASHRANGO
+&nbsp;&nbsp;&nbsp;&nbsp;,EJ.CODPROVEEDOR
+&nbsp;&nbsp;&nbsp;&nbsp;,EJ.CELULA
+&nbsp;&nbsp;&nbsp;&nbsp;,EJ.IDPROYECTO
+&nbsp;&nbsp;&nbsp;&nbsp;,EJ.PROYECTO
+&nbsp;&nbsp;&nbsp;&nbsp;,SUM((NVL(HORAS,0)))&nbsp;HORAS
+&nbsp;&nbsp;&nbsp;&nbsp;,SUM((NVL(HEST,0)))&nbsp;HEST
+&nbsp;&nbsp;&nbsp;&nbsp;,SUM(NVL(HPRY,0))&nbsp;HPRY
+&nbsp;&nbsp;&nbsp;&nbsp;,SUM((NVL(HORAS,0))&nbsp;+&nbsp;((NVL(HEST,0))&nbsp;*&nbsp;(((NVL(HORAS,0))&nbsp;*&nbsp;100)&nbsp;/&nbsp;(NVL(HPRY,0))/100)))&nbsp;HORACONESTRUCTURA
+&nbsp;&nbsp;&nbsp;&nbsp;,SUM(COSTORECURSO*((NVL(HORAS,0))&nbsp;+&nbsp;((NVL(HEST,0))&nbsp;*&nbsp;(((NVL(HORAS,0))&nbsp;*&nbsp;100)&nbsp;/&nbsp;(NVL(HPRY,0))/100))))&nbsp;COSTOTOTAL
+&nbsp;&nbsp;&nbsp;&nbsp;,SUM(CG.HORAS_HL)&nbsp;HORAS_HL
+&nbsp;&nbsp;&nbsp;&nbsp;,SUM(CG.HORAS_LL)&nbsp;HORAS_LL
+&nbsp;&nbsp;&nbsp;&nbsp;,SUM(CG.HORAS_REAL)&nbsp;HORAS_REAL
+FROM
+&nbsp;&nbsp;&nbsp;&nbsp;DF_EJECUCION1_V&nbsp;EJ
+&nbsp;&nbsp;&nbsp;&nbsp;LEFT&nbsp;JOIN&nbsp;DF_PRY_BRIEF_IDRLP&nbsp;CG&nbsp;ON&nbsp;CG.CODPROYECTO&nbsp;=&nbsp;EJ.CODPROYECTO
+WHERE
+&nbsp;&nbsp;&nbsp;EJ.CODPROYECTO&nbsp;&lt;>&nbsp;22
+GROUP&nbsp;BY
+&nbsp;&nbsp;&nbsp;&nbsp;EJ.CODPROYECTO
+&nbsp;&nbsp;&nbsp;&nbsp;,EJ.CODPROVEEDOR
+&nbsp;&nbsp;&nbsp;&nbsp;,EJ.MES
+&nbsp;&nbsp;&nbsp;&nbsp;,EJ.AÑO
+&nbsp;&nbsp;&nbsp;&nbsp;,EJ.FINI
+&nbsp;&nbsp;&nbsp;&nbsp;,EJ.FFIN
+&nbsp;&nbsp;&nbsp;&nbsp;,EJ.IDPROYECTO
+&nbsp;&nbsp;&nbsp;&nbsp;,EJ.PROYECTO
+&nbsp;&nbsp;&nbsp;&nbsp;,EJ.CELULA
+&nbsp;&nbsp;&nbsp;&nbsp;,EJ.PROVEEDOR
+&nbsp;&nbsp;&nbsp;&nbsp;,EJ.DIASHRANGO
+&nbsp;&nbsp;&nbsp;&nbsp;,EJ.HORASHRANGO</td>
+</tr>
+<tr>
+<td>TEXT_VC</td>
+<td>SELECT&nbsp;DISTINCT
+&nbsp;&nbsp;&nbsp;&nbsp;EJ.CODPROYECTO
+&nbsp;&nbsp;&nbsp;&nbsp;,EJ.MES
+&nbsp;&nbsp;&nbsp;&nbsp;,EJ.AÑO
+&nbsp;&nbsp;&nbsp;&nbsp;,EJ.FINI
+&nbsp;&nbsp;&nbsp;&nbsp;,EJ.FFIN
+&nbsp;&nbsp;&nbsp;&nbsp;,EJ.PROVEEDOR
+&nbsp;&nbsp;&nbsp;&nbsp;,EJ.DIASHRANGO
+&nbsp;&nbsp;&nbsp;&nbsp;,EJ.HORASHRANGO
+&nbsp;&nbsp;&nbsp;&nbsp;,EJ.CODPROVEEDOR
+&nbsp;&nbsp;&nbsp;&nbsp;,EJ.CELULA
+&nbsp;&nbsp;&nbsp;&nbsp;,EJ.IDPROYECTO
+&nbsp;&nbsp;&nbsp;&nbsp;,EJ.PROYECTO
+&nbsp;&nbsp;&nbsp;&nbsp;,SUM((NVL(HORAS,0)))&nbsp;HORAS
+&nbsp;&nbsp;&nbsp;&nbsp;,SUM((NVL(HEST,0)))&nbsp;HEST
+&nbsp;&nbsp;&nbsp;&nbsp;,SUM(NVL(HPRY,0))&nbsp;HPRY
+&nbsp;&nbsp;&nbsp;&nbsp;,SUM((NVL(HORAS,0))&nbsp;+&nbsp;((NVL(HEST,0))&nbsp;*&nbsp;(((NVL(HORAS,0))&nbsp;*&nbsp;100)&nbsp;/&nbsp;(NVL(HPRY,0))/100)))&nbsp;HORACONESTRUCTURA
+&nbsp;&nbsp;&nbsp;&nbsp;,SUM(COSTORECURSO*((NVL(HORAS,0))&nbsp;+&nbsp;((NVL(HEST,0))&nbsp;*&nbsp;(((NVL(HORAS,0))&nbsp;*&nbsp;100)&nbsp;/&nbsp;(NVL(HPRY,0))/100))))&nbsp;COSTOTOTAL
+&nbsp;&nbsp;&nbsp;&nbsp;,SUM(CG.HORAS_HL)&nbsp;HORAS_HL
+&nbsp;&nbsp;&nbsp;&nbsp;,SUM(CG.HORAS_LL)&nbsp;HORAS_LL
+&nbsp;&nbsp;&nbsp;&nbsp;,SUM(CG.HORAS_REAL)&nbsp;HORAS_REAL
+FROM
+&nbsp;&nbsp;&nbsp;&nbsp;DF_EJECUCION1_V&nbsp;EJ
+&nbsp;&nbsp;&nbsp;&nbsp;LEFT&nbsp;JOIN&nbsp;DF_PRY_BRIEF_IDRLP&nbsp;CG&nbsp;ON&nbsp;CG.CODPROYECTO&nbsp;=&nbsp;EJ.CODPROYECTO
+WHERE
+&nbsp;&nbsp;&nbsp;EJ.CODPROYECTO&nbsp;&lt;>&nbsp;22
+GROUP&nbsp;BY
+&nbsp;&nbsp;&nbsp;&nbsp;EJ.CODPROYECTO
+&nbsp;&nbsp;&nbsp;&nbsp;,EJ.CODPROVEEDOR
+&nbsp;&nbsp;&nbsp;&nbsp;,EJ.MES
+&nbsp;&nbsp;&nbsp;&nbsp;,EJ.AÑO
+&nbsp;&nbsp;&nbsp;&nbsp;,EJ.FINI
+&nbsp;&nbsp;&nbsp;&nbsp;,EJ.FFIN
+&nbsp;&nbsp;&nbsp;&nbsp;,EJ.IDPROYECTO
+&nbsp;&nbsp;&nbsp;&nbsp;,EJ.PROYECTO
+&nbsp;&nbsp;&nbsp;&nbsp;,EJ.CELULA
+&nbsp;&nbsp;&nbsp;&nbsp;,EJ.PROVEEDOR
+&nbsp;&nbsp;&nbsp;&nbsp;,EJ.DIASHRANGO
+&nbsp;&nbsp;&nbsp;&nbsp;,EJ.HORASHRANGO</td>
+</tr>
+<tr>
+<td>TYPE_TEXT_LENGTH</td>
+<td>null</td>
+</tr>
+<tr>
+<td>TYPE_TEXT</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OID_TEXT_LENGTH</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OID_TEXT</td>
+<td>null</td>
+</tr>
+<tr>
+<td>VIEW_TYPE_OWNER</td>
+<td>null</td>
+</tr>
+<tr>
+<td>VIEW_TYPE</td>
+<td>null</td>
+</tr>
+<tr>
+<td>SUPERVIEW_NAME</td>
+<td>null</td>
+</tr>
+<tr>
+<td>EDITIONING_VIEW</td>
+<td>N</td>
+</tr>
+<tr>
+<td>READ_ONLY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>CONTAINER_DATA</td>
+<td>N</td>
+</tr>
+<tr>
+<td>BEQUEATH</td>
+<td>DEFINER</td>
+</tr>
+<tr>
+<td>ORIGIN_CON_ID</td>
+<td>4</td>
+</tr>
+<tr>
+<td>DEFAULT_COLLATION</td>
+<td>USING_NLS_COMP</td>
+</tr>
+<tr>
+<td>CONTAINERS_DEFAULT</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>CONTAINER_MAP</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>EXTENDED_DATA_LINK</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>EXTENDED_DATA_LINK_MAP</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>HAS_SENSITIVE_COLUMN</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>ADMIT_NULL</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>PDB_LOCAL_ONLY</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>DUPLICATED</td>
+<td>N</td>
+</tr>
+<tr>
+<td>SHARDED</td>
+<td>N</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.4">
+<div class="masterreport">
+<table id="Table.4" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>OWNER</th>
+<th>TRIGGER_NAME</th>
+<th>TRIGGER_TYPE</th>
+<th>TRIGGERING_EVENT</th>
+<th>STATUS</th>
+<th>OBJECT_ID</th>
+</tr>
+</table>
+<br/>
+<hr/>
+<br/><div id="ChildTabs.4">
+<div class="currentchildtab" onclick="onSelectChildTab(this, 0)">
+<div>
+<p></p>
+</div>
+</div>
+</div>
+<br/>
+<div id="ChildReports.4">
+</div>
+</div>
+</div>
+<div id="Master.5">
+<div class="masterreport">
+<table id="Table.5" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>ATTRIBUTE</th>
+<th>Line:Position</th>
+<th>TEXT</th>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 5, 0)" class="currentrow">
+<td class="currentcell">ERROR</td>
+<td class="currentcell">0:0</td>
+<td class="currentcell">ORA-04063:&nbsp;view&nbsp;"PDB_CRONUS.DF_EJECUCION1_V"&nbsp;has&nbsp;errors
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</body>
+</html>

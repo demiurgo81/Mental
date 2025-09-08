@@ -1,0 +1,803 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=Cp1252" />
+<script src="VW_INGRESO_RETIRO/report.js" type="text/javascript"></script>
+<link href="VW_INGRESO_RETIRO/report.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<div class="banner">
+<table width="98%"><tr>
+<td><h2 class="banner">VW_INGRESO_RETIRO</h2></td>
+</tr></table></div>
+<div id="maintabs">
+<div class="currentmaintab" onclick="onSelectMainTab(this, 0)">
+<div>
+<p>Columnas</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 1)">
+<div>
+<p>Permisos</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 2)">
+<div>
+<p>Dependencias</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 3)">
+<div>
+<p>Detalles</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 4)">
+<div>
+<p>Disparadores</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 5)">
+<div>
+<p>Errores</p>
+</div>
+</div>
+</div>
+<br/>
+<div id="masterreports">
+<div id="Master.0">
+<div class="currentmasterreport">
+<table id="Table.0" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>COLUMN_NAME</th>
+<th>DATA_TYPE</th>
+<th>NULLABLE</th>
+<th>DATA_DEFAULT</th>
+<th>COLUMN_ID</th>
+<th>COMMENTS</th>
+<th>INSERTABLE</th>
+<th>UPDATABLE</th>
+<th>DELETABLE</th>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 0)" class="currentrow">
+<td class="currentcell">TIPO_DE_CLIENTE</td>
+<td class="currentcell">UNDEFINED()</td>
+<td class="currentcell">Yes</td>
+<td class="currentcell">null</td>
+<td class="currentcell">33</td>
+<td class="currentcell">null</td>
+<td class="currentcell">YES</td>
+<td class="currentcell">YES</td>
+<td class="currentcell">YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 1)">
+<td>CARRUSEL</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>34</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 2)">
+<td>FECHA_EJECUCION</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>35</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 3)">
+<td>NOMBRE</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>1</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 4)">
+<td>APELLIDO_1</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>2</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 5)">
+<td>APELLIDO_2</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>3</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 6)">
+<td>TIPO_DOCU</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>4</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 7)">
+<td>IDENTIFICACION</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>5</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 8)">
+<td>TELEFONO_1</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>6</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 9)">
+<td>TELEFONO_2</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>7</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 10)">
+<td>DIRECCION</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>8</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 11)">
+<td>TIPO_USUARIO</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>9</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 12)">
+<td>ESTRATO</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>10</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 13)">
+<td>ESTADO</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>11</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 14)">
+<td>CUENTA</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>12</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 15)">
+<td>ID_BENEFICIARIO</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>13</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 16)">
+<td>FECHA_INI_OPERA</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>14</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 17)">
+<td>FECHA_RETIRO</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>15</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 18)">
+<td>DIFERENCIA</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>16</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 19)">
+<td>FECHA_INSTALACION</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>17</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 20)">
+<td>NOVEDAD</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>18</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 21)">
+<td>FECHA_NOVEDAD</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>19</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 22)">
+<td>CANTIDAD_DIAS</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>20</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 23)">
+<td>CIUDAD</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>21</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 24)">
+<td>COD_DANE_CIUDAD</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>22</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 25)">
+<td>DEPARTAMENTO</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>23</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 26)">
+<td>COD_DATE_DEPART</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>24</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 27)">
+<td>REGION</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>25</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 28)">
+<td>CONTR_APOR_MINTIC</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>26</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 29)">
+<td>BARRIO</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>27</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 30)">
+<td>EMAIL</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>28</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 31)">
+<td>LATITUD</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>29</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 32)">
+<td>LONGITUD</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>30</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 33)">
+<td>ESTADO_FONTIC</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>31</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 0, 34)">
+<td>LEGALIZADO</td>
+<td>UNDEFINED()</td>
+<td>Yes</td>
+<td>null</td>
+<td>32</td>
+<td>null</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.1">
+<div class="masterreport">
+<table id="Table.1" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>PRIVILEGE</th>
+<th>GRANTEE</th>
+<th>GRANTABLE</th>
+<th>GRANTOR</th>
+<th>OBJECT_NAME</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.2">
+<div class="masterreport">
+<table id="Table.2" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>OWNER</th>
+<th>NAME</th>
+<th>TYPE</th>
+<th>REFERENCED_OWNER</th>
+<th>REFERENCED_NAME</th>
+<th>REFERENCED_TYPE</th>
+</tr>
+</table>
+<br/>
+<hr/>
+<br/><div id="ChildTabs.2">
+<div class="currentchildtab" onclick="onSelectChildTab(this, 0)">
+<div>
+<p>Referencias</p>
+</div>
+</div>
+</div>
+<br/>
+<div id="ChildReports.2">
+</div>
+</div>
+</div>
+<div id="Master.3">
+<div class="masterreport">
+<table id="Table.3" cellpadding="0" cellspacing="0" summary="">
+<th>NAME</th>
+<th>VALUE</th>
+</tr>
+<tr>
+<td>CREATED</td>
+<td>23/07/24</td>
+</tr>
+<tr>
+<td>LAST_DDL_TIME</td>
+<td>23/07/24</td>
+</tr>
+<tr>
+<td>OWNER</td>
+<td>PDB_CRONUS</td>
+</tr>
+<tr>
+<td>VIEW_NAME</td>
+<td>VW_INGRESO_RETIRO</td>
+</tr>
+<tr>
+<td>TEXT_LENGTH</td>
+<td>2420</td>
+</tr>
+<tr>
+<td>TEXT</td>
+<td>SELECT&nbsp;REPLACE(O.NOMBRE,&nbsp;'"',&nbsp;'')&nbsp;NOMBRE,
+REPLACE(O.APELLIDO_1,&nbsp;'"',&nbsp;'')&nbsp;APELLIDO_1,
+REPLACE(O.APELLIDO_2,&nbsp;'"',&nbsp;'')&nbsp;APELLIDO_2,
+O.TIPO_DOCU,
+O.IDENTIFICACION,
+O.TELEFONO_1,
+O.TELEFONO_2,
+REPLACE(O.DIRECCION,&nbsp;'"',&nbsp;'')&nbsp;DIRECCION,
+O.TIPO_USUARIO,
+O.ESTRATO,
+O.ESTADO,
+O.CUENTA,
+O.ID_BENEFICIARIO,
+REPLACE(TO_CHAR(O.FECHA_INI_OPERA,&nbsp;'DD/MM/YYYY'),&nbsp;'00',&nbsp;'20')&nbsp;FECHA_INI_OPERA,
+REPLACE(TO_CHAR(O.FECHA_RETIRO,&nbsp;'DD/MM/YYYY'),&nbsp;'00',&nbsp;'20')&nbsp;FECHA_RETIRO,
+CASE
+WHEN&nbsp;TRIM(O.NOVEDAD)&nbsp;=&nbsp;'INGRESO'&nbsp;THEN&nbsp;TO_DATE(REPLACE(TO_CHAR(O.FECHA_INI_OPERA,&nbsp;'DD/MM/YYYY'),&nbsp;'00',&nbsp;'20'))-
+(SELECT&nbsp;MAX&nbsp;(TO_DATE(REPLACE(TO_CHAR(FECHA_RETIRO,&nbsp;'DD/MM/YYYY'),&nbsp;'00',&nbsp;'20')))
+FROM&nbsp;MINT_OPERACIONES_ODI&nbsp;BENFIC
+WHERE&nbsp;BENFIC.ID_BENEFICIARIO&nbsp;=&nbsp;O.ID_BENEFICIARIO
+AND&nbsp;BENFIC.CONTR_APOR_MINTIC&nbsp;=&nbsp;O.CONTR_APOR_MINTIC
+AND&nbsp;BENFIC.FECHA_RETIRO&nbsp;=
+(SELECT&nbsp;MAX&nbsp;(FECHA_RETIRO)
+FROM&nbsp;MINT_OPERACIONES_ODI&nbsp;RETIRO
+WHERE&nbsp;RETIRO.ID_BENEFICIARIO&nbsp;=&nbsp;BENFIC.ID_BENEFICIARIO
+AND&nbsp;RETIRO.CONTR_APOR_MINTIC&nbsp;=&nbsp;BENFIC.CONTR_APOR_MINTIC
+AND&nbsp;RETIRO.NOVEDAD&nbsp;=&nbsp;'RETIRO'&nbsp;)
+AND&nbsp;BENFIC.NOVEDAD&nbsp;=&nbsp;'RETIRO'
+AND&nbsp;BENFIC.ID_BENEFICIARIO&nbsp;=&nbsp;O.ID_BENEFICIARIO&nbsp;)
+ELSE&nbsp;NULL
+END&nbsp;DIFERENCIA,
+REPLACE(TO_CHAR(O.FECHA_INSTALACION,&nbsp;'DD/MM/YYYY'),&nbsp;'00',&nbsp;'20')&nbsp;FECHA_INSTALACION,
+O.NOVEDAD,
+REPLACE(TO_CHAR(O.FECHA_NOVEDAD,&nbsp;'DD/MM/YYYY'),&nbsp;'00',&nbsp;'20')&nbsp;FECHA_NOVEDAD,
+O.CANTIDAD_DIAS,
+REPLACE(O.CIUDAD,&nbsp;'"',&nbsp;'')&nbsp;CIUDAD,
+REPLACE(O.COD_DANE_CIUDAD,&nbsp;'"',&nbsp;'')&nbsp;COD_DANE_CIUDAD,
+REPLACE(O.DEPARTAMENTO,&nbsp;'"',&nbsp;'')&nbsp;DEPARTAMENTO,
+REPLACE(O.COD_DATE_DEPART,&nbsp;'"',&nbsp;'')&nbsp;COD_DATE_DEPART,
+REPLACE(O.REGION,&nbsp;'"',&nbsp;'')&nbsp;REGION,
+O.CONTR_APOR_MINTIC,
+REPLACE(O.BARRIO,&nbsp;'"',&nbsp;'')&nbsp;BARRIO,
+REPLACE(O.EMAIL,&nbsp;'"',&nbsp;'')&nbsp;EMAIL,
+REPLACE(O.LATITUD,&nbsp;'"',&nbsp;'')&nbsp;LATITUD,
+REPLACE(O.LONGITUD,&nbsp;'"',&nbsp;'')&nbsp;LONGITUD,
+O.ESTADO_FONTIC,
+O.LEGALIZADO,
+O.TIPO_DE_CLIENTE,
+REPLACE(O.CARRUSEL,&nbsp;'"',&nbsp;'')&nbsp;CARRUSEL,
+B.FECHA_EJECUCION
+FROM&nbsp;MINT_OPERACIONES_ODI&nbsp;O
+LEFT&nbsp;JOIN
+(SELECT&nbsp;ID_BENEFICIARIO,
+CUENTA_RETIRO&nbsp;CUENTA,
+'RETIRO'&nbsp;NOVEDAD,
+MAX(FECHA_REGISTRO)&nbsp;FECHA_EJECUCION
+FROM&nbsp;LOG_PROCESO
+GROUP&nbsp;BY
+ID_BENEFICIARIO,
+CUENTA_RETIRO
+UNION
+SELECT&nbsp;ID_BENEFICIARIO,
+CUENTA_INGRESO&nbsp;CUENTA,
+'INGRESO'&nbsp;NOVEDAD,
+MAX(FECHA_REGISTRO)&nbsp;FECHA_EJECUCION
+FROM&nbsp;LOG_PROCESO
+GROUP&nbsp;BY
+ID_BENEFICIARIO,
+CUENTA_INGRESO&nbsp;)&nbsp;B&nbsp;ON&nbsp;O.ID_BENEFICIARIO&nbsp;=&nbsp;B.ID_BENEFICIARIO&nbsp;AND&nbsp;O.CUENTA&nbsp;=&nbsp;B.CUENTA&nbsp;AND&nbsp;O.NOVEDAD&nbsp;=&nbsp;B.NOVEDAD
+WHERE&nbsp;O.CONTR_APOR_MINTIC&nbsp;=&nbsp;877&nbsp;--#PRY_ODI_INFO_MINTIC.V_003_NUMCONTRATO&nbsp;
+AND&nbsp;O.NOVEDAD&nbsp;IN&nbsp;('INGRESO','RETIRO')
+ORDER&nbsp;BY&nbsp;O.ID_BENEFICIARIO,
+O.NOVEDAD&nbsp;ASC,
+O.FECHA_NOVEDAD&nbsp;DESC</td>
+</tr>
+<tr>
+<td>TEXT_VC</td>
+<td>SELECT&nbsp;REPLACE(O.NOMBRE,&nbsp;'"',&nbsp;'')&nbsp;NOMBRE,
+REPLACE(O.APELLIDO_1,&nbsp;'"',&nbsp;'')&nbsp;APELLIDO_1,
+REPLACE(O.APELLIDO_2,&nbsp;'"',&nbsp;'')&nbsp;APELLIDO_2,
+O.TIPO_DOCU,
+O.IDENTIFICACION,
+O.TELEFONO_1,
+O.TELEFONO_2,
+REPLACE(O.DIRECCION,&nbsp;'"',&nbsp;'')&nbsp;DIRECCION,
+O.TIPO_USUARIO,
+O.ESTRATO,
+O.ESTADO,
+O.CUENTA,
+O.ID_BENEFICIARIO,
+REPLACE(TO_CHAR(O.FECHA_INI_OPERA,&nbsp;'DD/MM/YYYY'),&nbsp;'00',&nbsp;'20')&nbsp;FECHA_INI_OPERA,
+REPLACE(TO_CHAR(O.FECHA_RETIRO,&nbsp;'DD/MM/YYYY'),&nbsp;'00',&nbsp;'20')&nbsp;FECHA_RETIRO,
+CASE
+WHEN&nbsp;TRIM(O.NOVEDAD)&nbsp;=&nbsp;'INGRESO'&nbsp;THEN&nbsp;TO_DATE(REPLACE(TO_CHAR(O.FECHA_INI_OPERA,&nbsp;'DD/MM/YYYY'),&nbsp;'00',&nbsp;'20'))-
+(SELECT&nbsp;MAX&nbsp;(TO_DATE(REPLACE(TO_CHAR(FECHA_RETIRO,&nbsp;'DD/MM/YYYY'),&nbsp;'00',&nbsp;'20')))
+FROM&nbsp;MINT_OPERACIONES_ODI&nbsp;BENFIC
+WHERE&nbsp;BENFIC.ID_BENEFICIARIO&nbsp;=&nbsp;O.ID_BENEFICIARIO
+AND&nbsp;BENFIC.CONTR_APOR_MINTIC&nbsp;=&nbsp;O.CONTR_APOR_MINTIC
+AND&nbsp;BENFIC.FECHA_RETIRO&nbsp;=
+(SELECT&nbsp;MAX&nbsp;(FECHA_RETIRO)
+FROM&nbsp;MINT_OPERACIONES_ODI&nbsp;RETIRO
+WHERE&nbsp;RETIRO.ID_BENEFICIARIO&nbsp;=&nbsp;BENFIC.ID_BENEFICIARIO
+AND&nbsp;RETIRO.CONTR_APOR_MINTIC&nbsp;=&nbsp;BENFIC.CONTR_APOR_MINTIC
+AND&nbsp;RETIRO.NOVEDAD&nbsp;=&nbsp;'RETIRO'&nbsp;)
+AND&nbsp;BENFIC.NOVEDAD&nbsp;=&nbsp;'RETIRO'
+AND&nbsp;BENFIC.ID_BENEFICIARIO&nbsp;=&nbsp;O.ID_BENEFICIARIO&nbsp;)
+ELSE&nbsp;NULL
+END&nbsp;DIFERENCIA,
+REPLACE(TO_CHAR(O.FECHA_INSTALACION,&nbsp;'DD/MM/YYYY'),&nbsp;'00',&nbsp;'20')&nbsp;FECHA_INSTALACION,
+O.NOVEDAD,
+REPLACE(TO_CHAR(O.FECHA_NOVEDAD,&nbsp;'DD/MM/YYYY'),&nbsp;'00',&nbsp;'20')&nbsp;FECHA_NOVEDAD,
+O.CANTIDAD_DIAS,
+REPLACE(O.CIUDAD,&nbsp;'"',&nbsp;'')&nbsp;CIUDAD,
+REPLACE(O.COD_DANE_CIUDAD,&nbsp;'"',&nbsp;'')&nbsp;COD_DANE_CIUDAD,
+REPLACE(O.DEPARTAMENTO,&nbsp;'"',&nbsp;'')&nbsp;DEPARTAMENTO,
+REPLACE(O.COD_DATE_DEPART,&nbsp;'"',&nbsp;'')&nbsp;COD_DATE_DEPART,
+REPLACE(O.REGION,&nbsp;'"',&nbsp;'')&nbsp;REGION,
+O.CONTR_APOR_MINTIC,
+REPLACE(O.BARRIO,&nbsp;'"',&nbsp;'')&nbsp;BARRIO,
+REPLACE(O.EMAIL,&nbsp;'"',&nbsp;'')&nbsp;EMAIL,
+REPLACE(O.LATITUD,&nbsp;'"',&nbsp;'')&nbsp;LATITUD,
+REPLACE(O.LONGITUD,&nbsp;'"',&nbsp;'')&nbsp;LONGITUD,
+O.ESTADO_FONTIC,
+O.LEGALIZADO,
+O.TIPO_DE_CLIENTE,
+REPLACE(O.CARRUSEL,&nbsp;'"',&nbsp;'')&nbsp;CARRUSEL,
+B.FECHA_EJECUCION
+FROM&nbsp;MINT_OPERACIONES_ODI&nbsp;O
+LEFT&nbsp;JOIN
+(SELECT&nbsp;ID_BENEFICIARIO,
+CUENTA_RETIRO&nbsp;CUENTA,
+'RETIRO'&nbsp;NOVEDAD,
+MAX(FECHA_REGISTRO)&nbsp;FECHA_EJECUCION
+FROM&nbsp;LOG_PROCESO
+GROUP&nbsp;BY
+ID_BENEFICIARIO,
+CUENTA_RETIRO
+UNION
+SELECT&nbsp;ID_BENEFICIARIO,
+CUENTA_INGRESO&nbsp;CUENTA,
+'INGRESO'&nbsp;NOVEDAD,
+MAX(FECHA_REGISTRO)&nbsp;FECHA_EJECUCION
+FROM&nbsp;LOG_PROCESO
+GROUP&nbsp;BY
+ID_BENEFICIARIO,
+CUENTA_INGRESO&nbsp;)&nbsp;B&nbsp;ON&nbsp;O.ID_BENEFICIARIO&nbsp;=&nbsp;B.ID_BENEFICIARIO&nbsp;AND&nbsp;O.CUENTA&nbsp;=&nbsp;B.CUENTA&nbsp;AND&nbsp;O.NOVEDAD&nbsp;=&nbsp;B.NOVEDAD
+WHERE&nbsp;O.CONTR_APOR_MINTIC&nbsp;=&nbsp;877&nbsp;--#PRY_ODI_INFO_MINTIC.V_003_NUMCONTRATO&nbsp;
+AND&nbsp;O.NOVEDAD&nbsp;IN&nbsp;('INGRESO','RETIRO')
+ORDER&nbsp;BY&nbsp;O.ID_BENEFICIARIO,
+O.NOVEDAD&nbsp;ASC,
+O.FECHA_NOVEDAD&nbsp;DESC</td>
+</tr>
+<tr>
+<td>TYPE_TEXT_LENGTH</td>
+<td>null</td>
+</tr>
+<tr>
+<td>TYPE_TEXT</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OID_TEXT_LENGTH</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OID_TEXT</td>
+<td>null</td>
+</tr>
+<tr>
+<td>VIEW_TYPE_OWNER</td>
+<td>null</td>
+</tr>
+<tr>
+<td>VIEW_TYPE</td>
+<td>null</td>
+</tr>
+<tr>
+<td>SUPERVIEW_NAME</td>
+<td>null</td>
+</tr>
+<tr>
+<td>EDITIONING_VIEW</td>
+<td>N</td>
+</tr>
+<tr>
+<td>READ_ONLY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>CONTAINER_DATA</td>
+<td>N</td>
+</tr>
+<tr>
+<td>BEQUEATH</td>
+<td>DEFINER</td>
+</tr>
+<tr>
+<td>ORIGIN_CON_ID</td>
+<td>4</td>
+</tr>
+<tr>
+<td>DEFAULT_COLLATION</td>
+<td>USING_NLS_COMP</td>
+</tr>
+<tr>
+<td>CONTAINERS_DEFAULT</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>CONTAINER_MAP</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>EXTENDED_DATA_LINK</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>EXTENDED_DATA_LINK_MAP</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>HAS_SENSITIVE_COLUMN</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>ADMIT_NULL</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>PDB_LOCAL_ONLY</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>DUPLICATED</td>
+<td>N</td>
+</tr>
+<tr>
+<td>SHARDED</td>
+<td>N</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.4">
+<div class="masterreport">
+<table id="Table.4" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>OWNER</th>
+<th>TRIGGER_NAME</th>
+<th>TRIGGER_TYPE</th>
+<th>TRIGGERING_EVENT</th>
+<th>STATUS</th>
+<th>OBJECT_ID</th>
+</tr>
+</table>
+<br/>
+<hr/>
+<br/><div id="ChildTabs.4">
+<div class="currentchildtab" onclick="onSelectChildTab(this, 0)">
+<div>
+<p></p>
+</div>
+</div>
+</div>
+<br/>
+<div id="ChildReports.4">
+</div>
+</div>
+</div>
+<div id="Master.5">
+<div class="masterreport">
+<table id="Table.5" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>ATTRIBUTE</th>
+<th>Line:Position</th>
+<th>TEXT</th>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 5, 0)" class="currentrow">
+<td class="currentcell">ERROR</td>
+<td class="currentcell">0:0</td>
+<td class="currentcell">ORA-00942:&nbsp;table&nbsp;or&nbsp;view&nbsp;does&nbsp;not&nbsp;exist
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</body>
+</html>
