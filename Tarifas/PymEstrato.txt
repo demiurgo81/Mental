@@ -1,6 +1,0 @@
-# [Tecnologia](DivRes.html) 
-##  Estrato  NR
-### [Triple](Grilla.html)
-### [Doble](Grilla.html)
-### [Sencillo](Grilla.html)
-
