@@ -1,0 +1,81 @@
+2025-09-17 12:17:20,880 - INFO - 
+==================================================
+2025-09-17 12:17:20,880 - INFO -                INICIO DE EJECUCIÓN                
+2025-09-17 12:17:20,881 - INFO - ==================================================
+
+2025-09-17 12:17:20,881 - INFO - Iniciando conexión a MongoDB Atlas...
+2025-09-17 12:17:24,561 - INFO - Conexión a MongoDB establecida correctamente
+2025-09-17 12:17:24,893 - INFO - Buscando consultas en MongoDB...
+2025-09-17 12:17:25,060 - INFO - Encontradas 4 consultas a procesar
+2025-09-17 12:17:25,061 - INFO - Estableciendo conexión Oracle...
+2025-09-17 12:17:25,675 - INFO - Conexión Oracle validada
+2025-09-17 12:17:25,675 - INFO - 
+------------ Procesando consulta 1/4 -------------
+2025-09-17 12:17:25,676 - INFO - Ejecutando consulta:
+SELECT
+    proveedor,
+    nombre,
+    numerodocumento            documento,
+    estructuraorganizacional   celula,
+    gerencia,
+    coordinacion,
+    gerente,
+    coordinador,
+    lider,
+    perfil,
+...
+2025-09-17 12:17:28,544 - INFO - Archivo generado exitosamente: D:\OneDrive\Documentos\cronoimport\empleados_activos.csv
+2025-09-17 12:17:28,545 - INFO - Registros exportados: 1274
+2025-09-17 12:17:28,545 - INFO - 
+------------ Procesando consulta 2/4 -------------
+2025-09-17 12:17:28,546 - INFO - Ejecutando consulta:
+SELECT
+    E.ESTRUCTURAORGANIZACIONAL CELULA
+    ,E.PROVEEDOR
+    ,E.NOMBRE RECURSO
+    ,TFS_DIAS_LABORABLES(MIN(EC.FECHAHORAINICIO),MAX(EC.FECHAHORAFIN))*9 HTAREAS
+    ,NVL(N.HORAS_HABILES,0) HNOVEDA...
+2025-09-17 12:17:30,921 - INFO - Archivo generado exitosamente: D:\OneDrive\Documentos\cronoimport\reporte_horas.csv
+2025-09-17 12:17:30,922 - INFO - Registros exportados: 17
+2025-09-17 12:17:30,922 - INFO - 
+------------ Procesando consulta 3/4 -------------
+2025-09-17 12:17:30,923 - INFO - Ejecutando consulta:
+SELECT
+    T.PROVEEDOR,
+    T.CELULA,
+    T.ASIGNADO_TAREA,
+    T.CODPROYECTO,
+    T.PROYECTO,
+    T.CODTAREAPADRE,
+    T.ENTREGABLE,
+    df_fn_cleanstring(T.ENTREGABLE) ENTREGABLE_CLEAR,
+    I.PEP,
+ ...
+2025-09-17 12:17:35,518 - INFO - Archivo generado exitosamente: D:\OneDrive\Documentos\cronoimport\entregables_hoy.csv
+2025-09-17 12:17:35,518 - INFO - Registros exportados: 33
+2025-09-17 12:17:35,519 - INFO - 
+------------ Procesando consulta 4/4 -------------
+2025-09-17 12:17:35,519 - INFO - Ejecutando consulta:
+
+SELECT 
+    ID,
+    NOMBRE,
+    df_fn_cleanstring(NOMBRE) ENTREGABLE_CLEAR,
+    PEP,
+    CODPROYECTO,
+    CODGERENTE,
+    FECHACREACION,
+    FECHAMODIFICACION,
+    EVIDENCIA,
+    LIDER_INICIATIVA
+FRO...
+2025-09-17 12:17:35,789 - INFO - Archivo generado exitosamente: D:\OneDrive\Documentos\cronoimport\df_iniciativa.csv
+2025-09-17 12:17:35,790 - INFO - Registros exportados: 3366
+2025-09-17 12:17:35,805 - INFO - Conexión Oracle cerrada correctamente
+2025-09-17 12:17:35,806 - INFO - 
+==================================================
+2025-09-17 12:17:35,806 - INFO -                EJECUCIÓN FINALIZADA               
+2025-09-17 12:17:35,806 - INFO - ==================================================
+2025-09-17 12:17:35,809 - INFO - 
+Tiempo total de ejecución: 0:00:14.929304
+2025-09-17 12:17:35,809 - INFO - Estado final: ÉXITO

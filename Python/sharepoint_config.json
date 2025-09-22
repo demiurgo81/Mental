@@ -1,0 +1,8 @@
+{
+  "tenant": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+  "client_id": "yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy",
+  "client_secret": "ZZZZZZZZZZZZZZZZZZZZZZ",
+  "site_url": "https://claromovilco.sharepoint.com/sites/coordinacion_lideresdeaplicaciones",
+  "server_relative_url": "/sites/coordinacion_lideresdeaplicaciones/Shared Documents/<carpetas>/nombre.xlsx",
+  "sheet_name": "Facturacion"
+}
