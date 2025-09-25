@@ -19,6 +19,8 @@ from urllib.parse import quote
 
 import pandas as pd
 import requests
+import html
+import unicodedata
 import tkinter as tk
 from tkinter import filedialog, messagebox, ttk
 
@@ -569,6 +571,7 @@ def obtener_resultados(
             datos = filas_rel
 
     df = pd.DataFrame(datos)
+    df = limpiar_dataframe(df)
     return df
 
 
@@ -602,6 +605,32 @@ def extraer_identificadores(work_items: Sequence[Dict[str, object]], relations: 
 
     return ids
 
+
+def limpiar_texto(valor: object) -> object:
+    if valor is None:
+        return None
+    if isinstance(valor, float) and pd.isna(valor):
+        return valor
+    if not isinstance(valor, str):
+        return valor
+    texto = html.unescape(valor)
+    texto = re.sub(r"<\s*br\s*/?>", " ", texto, flags=re.IGNORECASE)
+    texto = re.sub(r"<\s*/?p\s*>", " ", texto, flags=re.IGNORECASE)
+    texto = re.sub(r"<\s*/?li\s*>", " ", texto, flags=re.IGNORECASE)
+    texto = re.sub(r"<\s*/?div\s*>", " ", texto, flags=re.IGNORECASE)
+    texto = re.sub(r"<[^>]+>", " ", texto)
+    texto = texto.replace("\r", " ").replace("\n", " ")
+    texto = unicodedata.normalize("NFKD", texto).encode("ascii", "ignore").decode("ascii")
+    texto = re.sub(r"\s+", " ", texto)
+    return texto.strip()
+
+
+def limpiar_dataframe(df: pd.DataFrame) -> pd.DataFrame:
+    if df.empty:
+        return df
+    for columna in df.columns:
+        df[columna] = df[columna].apply(limpiar_texto)
+    return df
 def preparar_columnas(columns: Sequence[Dict[str, object]]) -> tuple[List[str], Dict[str, str]]:
     orden: List[str] = []
     encabezados: Dict[str, str] = {}
