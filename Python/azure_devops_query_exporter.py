@@ -32,7 +32,7 @@ LOG_MAX_LINES = 400
 PREVIEW_MAX_DISPLAY = 200
 
 DEFAULT_ORGANIZATION = "OrgClaroColombia"
-DEFAULT_PROJECT = "Value Stream Modelo de Atencion B2B"
+DEFAULT_PROJECT = ""
 DEFAULT_TEAM_PATH = ""
 DEFAULT_CSV_SEPARATOR = ";"
 DEFAULT_PREVIEW_ROWS = "20"
@@ -45,7 +45,7 @@ class AzureQueryError(RuntimeError):
 @dataclass
 class QueryContext:
     organization: str
-    project: str
+    project: str | None
     team_segments: Sequence[str]
     query_id: str
 
@@ -115,7 +115,7 @@ class AzureDevOpsQueryApp:
         self.entry_org.grid(row=0, column=1, sticky="ew", padx=5, pady=5)
 
         # Fila 1 - Proyecto
-        ttk.Label(main, text="Proyecto:").grid(row=1, column=0, sticky="w", padx=5, pady=5)
+        ttk.Label(main, text="Proyecto (opcional):").grid(row=1, column=0, sticky="w", padx=5, pady=5)
         self.entry_project = ttk.Entry(main, textvariable=self.project_var)
         self.entry_project.grid(row=1, column=1, sticky="ew", padx=5, pady=5)
 
@@ -287,8 +287,9 @@ class AzureDevOpsQueryApp:
         if not organization:
             messagebox.showerror(APP_NAME, "Ingresa la organizacion.")
             return None
-        if not project:
-            messagebox.showerror(APP_NAME, "Ingresa el proyecto.")
+        project_value = project or None
+        if project_value is None and team_text:
+            messagebox.showerror(APP_NAME, "Si dejas el proyecto vacio, la ruta de equipo tambien debe estar vacia.")
             return None
         if not query_id:
             messagebox.showerror(APP_NAME, "Ingresa el Query ID.")
@@ -332,7 +333,7 @@ class AzureDevOpsQueryApp:
         team_segments = [segment.strip() for segment in team_text.split("/") if segment.strip()]
         context = QueryContext(
             organization=organization,
-            project=project,
+            project=project_value,
             team_segments=team_segments,
             query_id=query_id,
         )
@@ -503,22 +504,24 @@ def obtener_resultados(
     validar_respuesta(wiql_resp, "No fue posible recuperar la definicion del query")
     wiql_data = cargar_json(wiql_resp, "No fue posible interpretar la definicion del query")
 
-    work_items = wiql_data.get("workItems", [])
-    if not work_items:
-        if progress_cb:
-            progress_cb(0, 0)
-        return pd.DataFrame()
+    work_items = wiql_data.get("workItems", []) or []
+    relations = wiql_data.get("workItemRelations", []) or []
 
     columns = wiql_data.get("columns", [])
     field_order, header_map = preparar_columnas(columns)
 
-    ids = [item.get("id") for item in work_items if item.get("id") is not None]
+    ids = extraer_identificadores(work_items, relations)
+    if not ids:
+        if progress_cb:
+            progress_cb(0, 0)
+        return pd.DataFrame()
     registros = recolectar_work_items(session, ctx, ids, field_order, progress_cb)
 
     if not registros:
         return pd.DataFrame()
 
     datos: List[Dict[str, object]] = []
+    index_por_id: Dict[int, Dict[str, object]] = {}
     for registro in registros:
         fila: Dict[str, object] = {}
         for ref in field_order:
@@ -526,10 +529,78 @@ def obtener_resultados(
             valor = normalizar_valor(recuperar_valor_campo(ref, registro))
             fila[clave] = valor
         datos.append(fila)
+        try:
+            reg_id = int(recuperar_valor_campo("System.Id", registro) or registro.get("id"))
+        except (TypeError, ValueError):
+            reg_id = None
+        if reg_id is not None and reg_id not in index_por_id:
+            index_por_id[reg_id] = fila
+
+    if relations:
+        filas_rel: List[Dict[str, object]] = []
+        for relacion in relations:
+            if not isinstance(relacion, dict):
+                continue
+            target = relacion.get("target")
+            if not isinstance(target, dict):
+                continue
+            target_id = target.get("id")
+            if target_id is None:
+                continue
+            try:
+                target_id_int = int(target_id)
+            except (TypeError, ValueError):
+                continue
+            fila_base = index_por_id.get(target_id_int)
+            if fila_base is None:
+                continue
+            fila_copia = dict(fila_base)
+            atributos = relacion.get("attributes") or {}
+            if "recurseLevel" in atributos:
+                fila_copia.setdefault("TreeLevel", atributos.get("recurseLevel"))
+            source = relacion.get("source")
+            if isinstance(source, dict) and source.get("id") is not None:
+                fila_copia.setdefault("ParentId", source.get("id"))
+            rel_type = relacion.get("rel")
+            if rel_type:
+                fila_copia.setdefault("LinkType", rel_type)
+            filas_rel.append(fila_copia)
+        if filas_rel:
+            datos = filas_rel
 
     df = pd.DataFrame(datos)
     return df
 
+
+def extraer_identificadores(work_items: Sequence[Dict[str, object]], relations: Sequence[Dict[str, object]]) -> List[int]:
+    ids: List[int] = []
+    vistos: set[int] = set()
+
+    def registrar(valor: object) -> None:
+        if valor is None:
+            return
+        try:
+            wid = int(valor)
+        except (TypeError, ValueError):
+            return
+        if wid not in vistos:
+            vistos.add(wid)
+            ids.append(wid)
+
+    for item in work_items:
+        if isinstance(item, dict):
+            registrar(item.get("id"))
+    for relacion in relations:
+        if not isinstance(relacion, dict):
+            continue
+        target = relacion.get("target")
+        if isinstance(target, dict):
+            registrar(target.get("id"))
+        source = relacion.get("source")
+        if isinstance(source, dict):
+            registrar(source.get("id"))
+
+    return ids
 
 def preparar_columnas(columns: Sequence[Dict[str, object]]) -> tuple[List[str], Dict[str, str]]:
     orden: List[str] = []
@@ -688,3 +759,5 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+
