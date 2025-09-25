@@ -21,6 +21,8 @@ import pandas as pd
 import requests
 import html
 import unicodedata
+from pandas import CategoricalDtype, DatetimeTZDtype
+from pandas.api.types import is_datetime64_any_dtype, is_object_dtype, is_string_dtype
 import tkinter as tk
 from tkinter import filedialog, messagebox, ttk
 
@@ -606,6 +608,90 @@ def extraer_identificadores(work_items: Sequence[Dict[str, object]], relations: 
     return ids
 
 
+def formatear_fechas(df: pd.DataFrame) -> None:
+    patrones_fecha = re.compile(r"(date|fecha)$", re.IGNORECASE)
+    patrones_datetime = re.compile(r"(datetime|timestamp|hora|time)$", re.IGNORECASE)
+    iso_z_pattern = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$")
+    iso_basic_pattern = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+    iso_datetime_pattern = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$")
+
+    for columna in df.columns:
+        serie = df[columna]
+        if not isinstance(serie, pd.Series):
+            continue
+
+        original = serie.copy()
+        nombre = str(columna)
+
+        es_datetime = is_datetime64_any_dtype(serie) or isinstance(serie.dtype, DatetimeTZDtype)
+        es_textual = is_object_dtype(serie) or is_string_dtype(serie) or isinstance(serie.dtype, CategoricalDtype)
+        forzar_por_nombre = bool(patrones_fecha.search(nombre) or patrones_datetime.search(nombre))
+
+        if not (es_datetime or es_textual or forzar_por_nombre):
+            continue
+
+        formato = None
+        usar_utc = True
+        if es_textual or forzar_por_nombre:
+            valores_no_nulos = serie.dropna().astype(str)
+            if not valores_no_nulos.empty:
+                if valores_no_nulos.map(iso_z_pattern.match).dropna().all():
+                    formato = "%Y-%m-%dT%H:%M:%SZ"
+                    usar_utc = True
+                elif valores_no_nulos.map(iso_datetime_pattern.match).dropna().all():
+                    formato = "%Y-%m-%dT%H:%M:%S"
+                    usar_utc = False
+                elif valores_no_nulos.map(iso_basic_pattern.match).dropna().all():
+                    formato = "%Y-%m-%d"
+                    usar_utc = False
+
+        try:
+            if formato:
+                convertido = pd.to_datetime(serie, errors="coerce", utc=usar_utc, format=formato)
+            else:
+                convertido = pd.to_datetime(serie, errors="coerce", utc=True)
+                usar_utc = True
+        except (TypeError, ValueError):
+            try:
+                convertido = pd.to_datetime(serie, errors="coerce")
+                usar_utc = False
+            except Exception:
+                continue
+
+        if convertido.notna().sum() == 0:
+            continue
+
+        if usar_utc:
+            try:
+                convertido = convertido.dt.tz_convert(None)
+            except (AttributeError, TypeError):
+                pass
+        elif getattr(convertido.dtype, "tz", None) is not None:
+            convertido = convertido.dt.tz_convert(None)
+
+        validos = convertido.dropna()
+        has_time = (
+            (validos.dt.hour != 0)
+            | (validos.dt.minute != 0)
+            | (validos.dt.second != 0)
+        ).any()
+
+        if patrones_datetime.search(nombre):
+            tipo = "datetime"
+        elif patrones_fecha.search(nombre):
+            tipo = "datetime" if has_time else "date"
+        else:
+            tipo = "datetime" if has_time else "date"
+
+        mask = convertido.notna()
+        formatted = serie.astype("object")
+
+        if tipo == "datetime":
+            formatted.loc[mask] = convertido.loc[mask].dt.strftime("%Y-%m-%d %H:%M")
+        else:
+            formatted.loc[mask] = convertido.loc[mask].dt.strftime("%Y-%m-%d")
+        df[columna] = formatted
+
 def limpiar_texto(valor: object) -> object:
     if valor is None:
         return None
@@ -624,13 +710,14 @@ def limpiar_texto(valor: object) -> object:
     texto = re.sub(r"\s+", " ", texto)
     return texto.strip()
 
-
 def limpiar_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     if df.empty:
         return df
     for columna in df.columns:
         df[columna] = df[columna].apply(limpiar_texto)
+    formatear_fechas(df)
     return df
+
 def preparar_columnas(columns: Sequence[Dict[str, object]]) -> tuple[List[str], Dict[str, str]]:
     orden: List[str] = []
     encabezados: Dict[str, str] = {}

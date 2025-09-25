@@ -127,6 +127,31 @@ def _normalize_req_line(s: str) -> str:
     s = s.strip().split(";", 1)[0].strip()
     return re.sub(r"\s+", "", s)
 
+def _dep_matches_package(dep: str, package: str) -> bool:
+    dep = dep.strip().lower()
+    package = package.lower()
+    if dep == package:
+        return True
+    if not dep.startswith(package):
+        return False
+    suffix = dep[len(package):len(package)+1]
+    return suffix in ("[", "=", "<", ">", "!", "~")
+
+def _ensure_runtime_dependencies(deps: List[str], logger: Optional[GuiLogger] = None, sort_result: bool = False) -> List[str]:
+    result = list(deps)
+    extras: List[str] = []
+    if any(_dep_matches_package(dep, "pandas") for dep in result):
+        extras.append("openpyxl")
+    existing = {dep.lower() for dep in result}
+    for extra in extras:
+        if extra.lower() not in existing:
+            result.append(extra)
+            existing.add(extra.lower())
+            if logger:
+                logger.log(f"Dependencia agregada automaticamente: {extra} (requerida en runtime).")
+    if sort_result:
+        result.sort(key=lambda s: s.lower())
+    return result
 def _parse_pyproject_toml(pyproject: Path) -> List[str]:
     try:
         try: import tomllib as toml
@@ -180,12 +205,18 @@ def _read_requirements_txt(req: Path) -> List[str]:
 def resolve_dependencies(script: Path, logger) -> List[str]:
     proj=script.parent; pyproject=proj/"pyproject.toml"; rq=proj/"requirements.txt"
     if pyproject.exists():
-        logger.log("Usando pyproject.toml como fuente de verdad de dependencias."); return _parse_pyproject_toml(pyproject)
+        logger.log("Usando pyproject.toml como fuente de verdad de dependencias.")
+        deps=_parse_pyproject_toml(pyproject)
+        return _ensure_runtime_dependencies(deps, logger, sort_result=True)
     if rq.exists():
-        logger.log("Usando requirements.txt como fuente de verdad de dependencias."); return _read_requirements_txt(rq)
-    logger.log("No se encontró pyproject.toml ni requirements.txt: detectando imports por AST.")
-    imports=analyze_imports(script); logger.log(f"Imports detectados (no stdlib): {', '.join(sorted(imports)) or '(ninguno)'}")
-    return sorted(imports)
+        logger.log("Usando requirements.txt como fuente de verdad de dependencias.")
+        deps=_read_requirements_txt(rq)
+        return _ensure_runtime_dependencies(deps, logger)
+    logger.log("No se encontro pyproject.toml ni requirements.txt: detectando imports por AST.")
+    imports=analyze_imports(script)
+    logger.log(f"Imports detectados (no stdlib): {', '.join(sorted(imports)) or '(ninguno)'}")
+    deps=sorted(imports)
+    return _ensure_runtime_dependencies(deps, logger, sort_result=True)
 
 def run_cmd(cmd: List[str], env=None, cwd=None, cancel_event: Optional[threading.Event]=None, logger: Optional[GuiLogger]=None, label: str="cmd"):
     p=subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, env=env, cwd=cwd, text=True)
@@ -695,3 +726,5 @@ def main():
 
 if __name__=="__main__":
     main()
+
+
