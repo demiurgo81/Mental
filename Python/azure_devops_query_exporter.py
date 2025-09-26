@@ -611,9 +611,9 @@ def extraer_identificadores(work_items: Sequence[Dict[str, object]], relations: 
 def formatear_fechas(df: pd.DataFrame) -> None:
     patrones_fecha = re.compile(r"(date|fecha)$", re.IGNORECASE)
     patrones_datetime = re.compile(r"(datetime|timestamp|hora|time)$", re.IGNORECASE)
-    iso_z_pattern = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$")
+    iso_z_pattern = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z$")
+    iso_datetime_pattern = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?$")
     iso_basic_pattern = re.compile(r"^\d{4}-\d{2}-\d{2}$")
-    iso_datetime_pattern = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$")
 
     for columna in df.columns:
         serie = df[columna]
@@ -636,10 +636,16 @@ def formatear_fechas(df: pd.DataFrame) -> None:
             valores_no_nulos = serie.dropna().astype(str)
             if not valores_no_nulos.empty:
                 if valores_no_nulos.map(iso_z_pattern.match).dropna().all():
-                    formato = "%Y-%m-%dT%H:%M:%SZ"
+                    if valores_no_nulos.str.contains(r"\.").any():
+                        formato = "%Y-%m-%dT%H:%M:%S.%fZ"
+                    else:
+                        formato = "%Y-%m-%dT%H:%M:%SZ"
                     usar_utc = True
                 elif valores_no_nulos.map(iso_datetime_pattern.match).dropna().all():
-                    formato = "%Y-%m-%dT%H:%M:%S"
+                    if valores_no_nulos.str.contains(r"\.").any():
+                        formato = "%Y-%m-%dT%H:%M:%S.%f"
+                    else:
+                        formato = "%Y-%m-%dT%H:%M:%S"
                     usar_utc = False
                 elif valores_no_nulos.map(iso_basic_pattern.match).dropna().all():
                     formato = "%Y-%m-%d"
@@ -669,28 +675,35 @@ def formatear_fechas(df: pd.DataFrame) -> None:
         elif getattr(convertido.dtype, "tz", None) is not None:
             convertido = convertido.dt.tz_convert(None)
 
-        validos = convertido.dropna()
-        has_time = (
-            (validos.dt.hour != 0)
-            | (validos.dt.minute != 0)
-            | (validos.dt.second != 0)
-        ).any()
-
-        if patrones_datetime.search(nombre):
-            tipo = "datetime"
-        elif patrones_fecha.search(nombre):
-            tipo = "datetime" if has_time else "date"
-        else:
-            tipo = "datetime" if has_time else "date"
-
         mask = convertido.notna()
-        formatted = serie.astype("object")
+        if not mask.any():
+            continue
 
-        if tipo == "datetime":
-            formatted.loc[mask] = convertido.loc[mask].dt.strftime("%Y-%m-%d %H:%M")
-        else:
-            formatted.loc[mask] = convertido.loc[mask].dt.strftime("%Y-%m-%d")
+        formatted = serie.astype("object")
+        formatted.loc[mask] = convertido.loc[mask].dt.strftime("%Y-%m-%d")
         df[columna] = formatted
+
+
+ISO_Z_REGEX = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z$")
+
+
+def normalizar_iso_fecha(valor: object) -> object:
+    if not isinstance(valor, str):
+        return valor
+    dato = valor.strip()
+    if not ISO_Z_REGEX.match(dato):
+        return valor
+    try:
+        convertido = pd.to_datetime(dato, utc=True, errors="coerce")
+    except Exception:
+        return valor
+    if pd.isna(convertido):
+        return valor
+    try:
+        convertido = convertido.tz_convert(None)
+    except (AttributeError, TypeError):
+        pass
+    return convertido.strftime("%Y-%m-%d")
 
 def limpiar_texto(valor: object) -> object:
     if valor is None:
@@ -710,14 +723,17 @@ def limpiar_texto(valor: object) -> object:
     texto = re.sub(r"\s+", " ", texto)
     return texto.strip()
 
-def limpiar_dataframe(df: pd.DataFrame) -> pd.DataFrame:
-    if df.empty:
-        return df
-    for columna in df.columns:
-        df[columna] = df[columna].apply(limpiar_texto)
-    formatear_fechas(df)
-    return df
-
+def limpiar_dataframe(df: pd.DataFrame) -> pd.DataFrame:
+    if df.empty:
+        return df
+    for columna in df.columns:
+        df[columna] = df[columna].apply(limpiar_texto)
+    formatear_fechas(df)
+    for columna in df.columns:
+        df[columna] = df[columna].apply(normalizar_iso_fecha)
+    return df
+
+
 def preparar_columnas(columns: Sequence[Dict[str, object]]) -> tuple[List[str], Dict[str, str]]:
     orden: List[str] = []
     encabezados: Dict[str, str] = {}
@@ -875,5 +891,6 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
 
 
