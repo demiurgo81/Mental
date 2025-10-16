@@ -1,187 +1,339 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="es">
 <head>
-    <title>Ejercicios de Números Enteros</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 20px;
-            background-color: #f9f9f9;
-        }
-        .contenedor {
-            max-width: 800px;
-            margin: 0 auto;
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            color: #2c3e50;
-            text-align: center;
-        }
-        h2 {
-            color: #34495e;
-            border-bottom: 2px solid #bdc3c7;
-            padding-bottom: 5px;
-        }
-        .problema {
-            background-color: #f8f9fa;
-            padding: 15px;
-            margin: 10px 0;
-            border-left: 4px solid #2c3e50;
-            border-radius: 5px;
-        }
-        .operacion {
-            font-family: "Courier New", monospace;
-            font-size: 1.1em;
-            white-space: nowrap; /* Evita que las operaciones se rompan en líneas */
-        }
-        .instruccion {
-            font-weight: bold;
-            color: #27ae60;
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Evaluación Avanzada: Fracciones (3–4 términos), Decimales y Problemas</title>
+
+<!-- Polyfill + MathJax (igual que tus evaluaciones previas) -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<style>
+  :root{--ok:#2e7d32;--bad:#c62828;--ink:#111827;--muted:#6b7280;--card:#f9fafb;--border:#e5e7eb;--accent:#0ea5e9;--chip:#eef2ff}
+  *{box-sizing:border-box}
+  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;line-height:1.35;color:var(--ink);margin:0;background:#fff}
+  header{background:#0f766e;color:#fff;padding:1rem 1.25rem}
+  header h1{margin:0 0 .25rem 0;font-size:1.25rem}
+  header p{margin:.15rem 0 .2rem 0;font-size:.9rem;opacity:.95}
+  main{padding:1rem;max-width:1100px;margin:auto}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1rem}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:.8rem;padding:1rem}
+  .q{margin:.3rem 0 .7rem 0}
+  .q h3{margin:.1rem 0 .6rem 0;font-size:1rem}
+  .q p{margin:.25rem 0}
+  .pill{display:inline-block;border:1px solid var(--border);border-radius:999px;padding:.2rem .5rem;font-size:.75rem;color:#374151;background:#fff;margin-left:.4rem}
+  .btns{display:flex;flex-wrap:wrap;gap:.5rem;margin:.75rem 0 0 0}
+  button{padding:.6rem .8rem;border-radius:.6rem;border:1px solid #d1d5db;background:#fff;cursor:pointer}
+  button.primary{background:#0ea5e9;border-color:#0284c7;color:#fff}
+  button.print{background:#f59e0b;border-color:#d97706;color:#111}
+  input[type="number"], input[type="text"]{width:130px;padding:.45rem .6rem;border:1px solid #c7cbd1;border-radius:.55rem;font-size:1rem}
+  .ok{color:var(--ok);font-weight:600}
+  .bad{color:var(--bad);font-weight:600}
+  .result{margin-top:.75rem}
+  .status{font-size:.92rem;margin-top:.25rem}
+  .topic{font-size:12px;background:var(--chip);padding:4px 8px;border-radius:999px;border:1px solid #c7d2fe;color:#3730a3}
+  details{border:1px dashed #cbd5e1;border-radius:.6rem;padding:.6rem;background:#f8fafc}
+  details[open] summary{margin-bottom:.4rem}
+  summary{cursor:pointer;font-weight:600}
+  .topic-report table{width:100%;border-collapse:collapse}
+  .topic-report th,.topic-report td{border:1px solid #e5e7eb;padding:.45rem;text-align:left}
+  .answer-line{font-size:13px;margin-top:.35rem;color:#334155}
+  .hidden{display:none}
+  .section-title{margin:1rem 0 .4rem 0}
+</style>
 </head>
+
 <body>
-    <div class="contenedor">
-        <h1>Ejercicios de Números Enteros</h1>
+<header>
+  <h1>Evaluación Avanzada</h1>
+  <p>Fracciones con 3–4 términos (con signos, paréntesis, llaves y corchetes; incluye √ y potencias), 5 ejercicios con decimales y 5 problemas de aplicación. Escribe fracciones en su forma irreducible (numerador/denominador) o decimales exactos.</p>
+</header>
 
-        <div class="problema">
-            <h2>1. Operaciones combinadas con potenciación</h2>
-            <p>Resuelve:  
-               <span class="operacion">
-                  {[(−25)² ÷ 5] + [3 × (−45)]} − √144 + [(−12) × 15] + 230 − (−50)
-               </span>
-            </p>
-        </div>
-
-        <div class="problema">
-            <h2>2. Simplificación con radicación</h2>
-            <p>Resuelve:  
-               <span class="operacion">
-                  √196 + [(−3)³ × (−15)] − {[(−2)⁴ ÷ 4] × (−3)} + 120 − (−80)
-               </span>
-            </p>
-        </div>
-
-        <div class="problema">
-            <h2>3. Operaciones con múltiples signos de agrupación</h2>
-            <p>Resuelve:  
-               <span class="operacion">
-                  {[(−450) ÷ (−15)] × 3} + [(−2)³ × 12] − √169 + 150 − (−70)
-               </span>
-            </p>
-        </div>
-
-        <div class="problema">
-            <h2>4. Combinación de operaciones avanzadas</h2>
-            <p>Resuelve:  
-               <span class="operacion">
-                  [(−3)² × 250] ÷ {[(−5)³ + 125] × 2} + √225 − 100 + 300
-               </span>
-            </p>
-        </div>
-
-        <div class="problema">
-            <h2>5. Ejercicio con corchetes y llaves</h2>
-            <p>Resuelve:  
-               <span class="operacion">
-                  {[(−4)³ ÷ (−8)] × 15} − [(−3)² × (−10)] + √400 − 200 + 150
-               </span>
-            </p>
-        </div>
-
-        <div class="problema">
-            <h2>6. Operaciones complejas con radicación</h2>
-            <p>Resuelve:  
-               <span class="operacion">
-                  {[(−2)⁴ × 3²] ÷ 6} + [(−5)² × (−3)] − √625 + 250 − (−100)
-               </span>
-            </p>
-        </div>
-
-        <div class="problema">
-            <h2>7. Simplificación de múltiples operaciones</h2>
-            <p>Resuelve:  
-               <span class="operacion">
-                  [(−3)³ × (−12)] ÷ {[(−2)² + 4] × 3} + √81 − 120 + 200
-               </span>
-            </p>
-        </div>
-
-        <div class="problema">
-            <h2>8. Ejercicio con múltiples niveles de agrupación</h2>
-            <p>Resuelve:  
-               <span class="operacion">
-                  {[(−5)² × 12] ÷ (−6)} + [(−2)³ × (−15)] − √196 + 180 − (−50)
-               </span>
-            </p>
-        </div>
-
-        <div class="problema">
-            <h2>9. Potenciación y división combinadas</h2>
-            <p>Resuelve:  
-               <span class="operacion">
-                  [(−2)⁵ ÷ (−4)] + {[(−3)² × 15] ÷ 5} − √289 + 220 − (−30)
-               </span>
-            </p>
-        </div>
-
-        <div class="problema">
-            <h2>10. Ejercicio con múltiples operaciones</h2>
-            <p>Resuelve:  
-               <span class="operacion">
-                  {[(−3)² × (−4)] ÷ 6} + [(−2)⁴ × 5] − √361 + 100 − (−80)
-               </span>
-            </p>
-        </div>
-
-        <div class="problema">
-            <h2>11. Operaciones con números grandes</h2>
-            <p>Resuelve:  
-               <span class="operacion">
-                  [(−15)² ÷ (−5)] + {[(−2)³ × 125] ÷ 10} − √441 + 300 − (−50)
-               </span>
-            </p>
-        </div>
-
-        <div class="problema">
-            <h2>12. Simplificación con potenciación y radicación</h2>
-            <p>Resuelve:  
-               <span class="operacion">
-                  {[(−4)³ ÷ (−8)] × 12} + [(−3)² × (−15)] − √529 + 250 − (−100)
-               </span>
-            </p>
-        </div>
-
-        <div class="problema">
-            <h2>13. Ejercicio avanzado con múltiples operaciones</h2>
-            <p>Resuelve:  
-               <span class="operacion">
-                  [(−2)⁴ × (−3)²] ÷ {[(−5)² + 25] × 2} + √676 − 150 + 200
-               </span>
-            </p>
-        </div>
-
-        <div class="problema">
-            <h2>14. Combinación de operaciones complejas</h2>
-            <p>Resuelve:  
-               <span class="operacion">
-                  {[(−3)³ × 12] ÷ (−6)} + [(−2)² × (−15)] − √729 + 180 − (−50)
-               </span>
-            </p>
-        </div>
-
-        <div class="problema">
-            <h2>15. Ejercicio desafiante con múltiples niveles</h2>
-            <p>Resuelve:  
-               <span class="operacion">
-                  {[(−5)² × (−3)] ÷ 15} + [(−2)³ × (−12)] − √900 + 200 − (−50)
-               </span>
-            </p>
-        </div>
+<main>
+  <section class="card">
+    <div style="display:flex;gap:.75rem;flex-wrap:wrap">
+      <label>Nombre del estudiante:<br><input id="alumno" type="text" placeholder="Nombre y apellido"></label>
+      <label>Curso / Grupo:<br><input id="grupo" type="text" placeholder="11-1, 10-B, etc."></label>
+      <label>Fecha:<br><input id="fecha" type="text" placeholder="AAAA-MM-DD"></label>
     </div>
+    <div class="btns">
+      <button class="primary" id="btnCalificar">Calificar</button>
+      <button id="btnVer" class="">Mostrar/Ocultar respuestas</button>
+      <button id="btnCSV">Descargar respuestas (CSV)</button>
+      <button class="print" onclick="window.print()">Imprimir | PDF</button>
+    </div>
+    <p class="pill">Si ves \( a/b \) sin formatear, espera a que cargue MathJax.</p>
+  </section>
+
+  <h2 class="section-title">A) Fracciones 3–4 términos, signos, agrupadores, √ y potencias (20)</h2>
+  <section class="grid" id="secA"></section>
+
+  <h2 class="section-title">B) Decimales (5)</h2>
+  <section class="grid" id="secB"></section>
+
+  <h2 class="section-title">C) Problemas con fracciones (5)</h2>
+  <section class="grid" id="secC"></section>
+
+  <section class="card">
+    <h3>Informe de resultados</h3>
+    <div id="resumen" class="result">Aún no calificado.</div>
+    <div id="detalle-temas" class="topic-report"></div>
+  </section>
+
+  <section class="card">
+    <details>
+      <summary>Respuestas (mostrar/ocultar)</summary>
+      <div id="clave"></div>
+    </details>
+  </section>
+</main>
+
+<script>
+/* ========= Banco de ejercicios ========= */
+const A = [
+  {t:'A1', latex:`\\big[\\tfrac{1}{2}-\\tfrac{3}{4}\\big]+\\{ -\\tfrac{2}{3}+\\tfrac{5}{6}\\}=`, ans:[-1,12]},
+  {t:'A2', latex:`-\\Big[\\tfrac{3}{5}-\\big(\\tfrac{2}{5}-\\tfrac{1}{2}\\big)\\Big]+\\tfrac{1}{3}=`, ans:[-11,30]},
+  {t:'A3', latex:`\\{(-\\tfrac{3}{4})\\,[\\tfrac{2}{3}-(-\\tfrac{1}{6})]\\}-\\tfrac{1}{8}=`, ans:[-3,4]},
+  {t:'A4', latex:`\\big[\\tfrac{5}{9}\\div\\{(-\\tfrac{10}{3})(-\\tfrac{3}{5})\\}\\big]+\\tfrac{1}{9}=`, ans:[7,18]},
+  {t:'A5', latex:`-\\big([\\tfrac{7}{12}+(-\\tfrac{1}{3})+\\tfrac{1}{4}]\\big)=`, ans:[-1,2]},
+  {t:'A6', latex:`\\{(\\tfrac{3}{7})^{2}-[(\\tfrac{1}{7})(-\\tfrac{14}{3})]\\}=`, ans:[125,147]},
+  {t:'A7', latex:`[\\sqrt{16}\\cdot(-\\tfrac{3}{8})]+\\{(\\tfrac{5}{6})^{2}-\\tfrac{1}{12}\\}=`, ans:[-8,9]},
+  {t:'A8', latex:`-\\{[(-\\tfrac{2}{5})^{2}+\\tfrac{3}{10}]-\\tfrac{1}{2}\\}=`, ans:[1,25]},
+  {t:'A9', latex:`[(-\\tfrac{9}{4})\\div(\\tfrac{3}{8})]-\\{\\tfrac{1}{2}-\\tfrac{1}{3}+\\tfrac{1}{6}\\}=`, ans:[-19,3]},
+  {t:'A10', latex:`\\{([\\tfrac{5}{8}+\\tfrac{7}{12}]\\cdot-\\tfrac{4}{7})\\}+(\\tfrac{3}{2})^{2}=`, ans:[131,84]},
+  {t:'A11', latex:`[\\tfrac{\\sqrt{81}}{9}]-\\{(-\\tfrac{1}{2})+(-\\tfrac{1}{3})+(-\\tfrac{1}{6})\\}=`, ans:[2,1]},
+  {t:'A12', latex:`\\{(-\\tfrac{5}{6})^{2}+[\\tfrac{2}{3}-\\sqrt{\\tfrac{1}{9}}]\\}=`, ans:[37,36]},
+  {t:'A13', latex:`-\\big(\\tfrac{1}{2}\\cdot\\{\\tfrac{4}{3}-(-\\tfrac{2}{3})+\\tfrac{1}{6}\\}\\big)=`, ans:[-13,12]},
+  {t:'A14', latex:`\\{\\tfrac{7}{9}\\div[-\\tfrac{14}{27}]\\}+(-\\tfrac{1}{3})=`, ans:[-11,6]},
+  {t:'A15', latex:`[(-\\tfrac{3}{5})+\\tfrac{2}{15}-\\tfrac{4}{25}]\\div(-\\tfrac{1}{5})=`, ans:[47,15]},
+  {t:'A16', latex:`\\{(\\tfrac{1}{2})^{3}-[(\\tfrac{1}{4})(-8)]\\}+(-\\tfrac{5}{8})=`, ans:[3,2]},
+  {t:'A17', latex:`-\\{[(-\\tfrac{1}{3})+\\tfrac{1}{2}]^{2}-\\tfrac{1}{6}\\}=`, ans:[5,36]},
+  {t:'A18', latex:`[\\tfrac{3}{4}-\\{(-\\tfrac{2}{3})(-\\tfrac{9}{8})\\}]+\\tfrac{\\sqrt{4}}{5}=`, ans:[2,5]},
+  {t:'A19', latex:`\\{(-\\tfrac{7}{10})-[(-\\tfrac{3}{5})-\\tfrac{1}{2}+\\tfrac{1}{4}]\\}\\cdot(-\\tfrac{5}{7})=`, ans:[-3,28]},
+  {t:'A20', latex:`[(\\tfrac{2}{5})^{-1}+(-\\tfrac{1}{4})]-\\{\\tfrac{3}{10}\\div(-\\tfrac{3}{5})\\}=`, ans:[11,4]},
+];
+
+const B = [
+  {t:'B1', latex:`0.75+0.20-0.05=`, ans:0.9},
+  {t:'B2', latex:`(1.2\\times0.5)+0.3=`, ans:0.9},
+  {t:'B3', latex:`2.5-(1.75+0.25)=`, ans:0.5},
+  {t:'B4', latex:`(0.8\\div0.4)-1.2=`, ans:0.8},
+  {t:'B5', latex:`[1.25+0.125]\\times0.4=`, ans:0.55},
+];
+
+const C = [
+  {t:'C1', texto:`Receta: se usan \\(\\tfrac{1}{2}\\) taza de azúcar, luego \\(\\tfrac{1}{3}\\) y se retiran \\(\\tfrac{1}{6}\\). ¿Cuánto queda?`, ans:[2,3]},
+  {t:'C2', texto:`Tanque: inicialmente \\(\\tfrac{3}{4}\\) lleno. Se usa \\(\\tfrac{2}{5}\\) del contenido y luego se agrega \\(\\tfrac{1}{10}\\) del tanque. ¿Nivel final?`, ans:[11,20]},
+  {t:'C3', texto:`Ruta: avanza \\(\\tfrac{1}{3}\\), luego \\(\\tfrac{1}{4}\\), y retrocede \\(\\tfrac{1}{6}\\). ¿Avance neto?`, ans:[5,12]},
+  {t:'C4', texto:`Mezcla: jugo A \\(\\tfrac{2}{3}\\) L, jugo B \\(\\tfrac{3}{5}\\) L y se evapora \\(\\tfrac{1}{6}\\) L. ¿Volumen final?`, ans:[11,10]},
+  {t:'C5', texto:`Trabajo: tres personas completan \\(\\tfrac{1}{4}\\), \\(\\tfrac{2}{5}\\) y \\(\\tfrac{1}{10}\\) de una tarea. ¿Qué fracción falta?`, ans:[1,4]},
+];
+
+/* ========= Utilidades ========= */
+function mcd(a,b){a=Math.abs(a);b=Math.abs(b);while(b){[a,b]=[b,a%b]}return a||1}
+function normFrac(n,d){ if(!Number.isFinite(n)||!Number.isFinite(d)) return {n:NaN,d:NaN};
+  if(d===0) return {n:NaN,d:NaN}; if(d<0){n=-n;d=-d;} const g=mcd(n,d); return {n:n/g,d:d/g}; }
+function sameFrac(n1,d1,n2,d2){ const A=normFrac(n1,d1), B=normFrac(n2,d2); return A.n===B.n && A.d===B.d; }
+function clock(ms){const s=Math.floor(ms/1000),m=Math.floor(s/60),r=s%60;return `${String(m).padStart(2,'0')}:${String(r).padStart(2,'0')} min`;}
+
+/* ========= Render ========= */
+function renderSection(){
+  const secA=document.getElementById('secA');
+  A.forEach((q,i)=>{
+    secA.insertAdjacentHTML('beforeend',`
+      <article class="card q" data-topic="Fracciones (agrupadores, √, potencias)" data-type="frac" data-n="${q.ans[0]}" data-d="${q.ans[1]}">
+        <div class="qhead"><h3>${i+1}) \\(${q.latex}\\)</h3><span class="topic">A</span></div>
+        <div>Respuesta: <input type="number" placeholder="numerador"> / <input type="number" placeholder="denominador"><span class="pill">irreducible</span></div>
+        <div class="answer-line hidden" data-rev></div>
+      </article>`);
+  });
+
+  const secB=document.getElementById('secB');
+  B.forEach((q,i)=>{
+    secB.insertAdjacentHTML('beforeend',`
+      <article class="card q" data-topic="Decimales" data-type="dec" data-val="${q.ans}">
+        <div class="qhead"><h3>D${i+1}) \\(${q.latex}\\)</h3><span class="topic">B</span></div>
+        <div>Respuesta: <input type="text" placeholder="usa punto (.)"><span class="pill">decimal exacto</span></div>
+        <div class="answer-line hidden" data-rev></div>
+      </article>`);
+  });
+
+  const secC=document.getElementById('secC');
+  C.forEach((q,i)=>{
+    secC.insertAdjacentHTML('beforeend',`
+      <article class="card q" data-topic="Problemas con fracciones" data-type="frac" data-n="${q.ans[0]}" data-d="${q.ans[1]}">
+        <div class="qhead"><h3>P${i+1}) ${q.texto}</h3><span class="topic">C</span></div>
+        <div>Respuesta: <input type="number" placeholder="numerador"> / <input type="number" placeholder="denominador"><span class="pill">irreducible</span></div>
+        <div class="answer-line hidden" data-rev></div>
+      </article>`);
+  });
+}
+renderSection();
+
+/* ========= Calificación y reporte ========= */
+const TEST_ID='fracciones_avanzadas_estilo_v1';
+const LS_KEY_PROGRESS = TEST_ID+'_progress';
+const LS_KEY_ATTEMPTS = TEST_ID+'_attempts';
+const startTime = Date.now();
+
+function getAllItems(){ return Array.from(document.querySelectorAll('.q')); }
+function getAnswers(){
+  const out=[];
+  getAllItems().forEach((q,idx)=>{
+    const type=q.dataset.type;
+    if(type==='frac'){
+      const ins=q.querySelectorAll('input[type="number"]');
+      out.push({i:idx+1, type, n:ins[0].value, d:ins[1].value});
+    }else{
+      const v=q.querySelector('input[type="text"]').value;
+      out.push({i:idx+1, type, v});
+    }
+  });
+  return out;
+}
+function setAnswers(arr){
+  const qs=getAllItems();
+  (arr||[]).forEach((a,idx)=>{
+    const q=qs[idx]; if(!q) return;
+    if(a.type==='frac'){
+      const ins=q.querySelectorAll('input[type="number"]');
+      ins[0].value=a.n||''; ins[1].value=a.d||'';
+    }else{
+      q.querySelector('input[type="text"]').value=a.v||'';
+    }
+  });
+}
+
+function evaluate(){
+  let ok=0,total=0;
+  const detail=[];
+  getAllItems().forEach((q,idx)=>{
+    total++;
+    const topic=q.dataset.topic||'otros';
+    const rev=q.querySelector('[data-rev]');
+    if(q.dataset.type==='frac'){
+      const ins=q.querySelectorAll('input[type="number"]');
+      const n=parseInt(ins[0].value,10); const d=parseInt(ins[1].value,10);
+      const en=parseInt(q.dataset.n,10), ed=parseInt(q.dataset.d,10);
+      const got=normFrac(n,d);
+      const good = Number.isFinite(got.n)&&Number.isFinite(got.d)&&sameFrac(got.n,got.d,en,ed);
+      ins.forEach(el=>{ el.style.borderColor = good?'var(--ok)':'var(--bad)'; el.style.background = good?'#ecfdf5':'#fff1f2'; });
+      rev.textContent = `Tu: ${Number.isFinite(got.n)?got.n:'—'}/${Number.isFinite(got.d)?got.d:'—'} | Correcta: ${en}/${ed}`;
+      if(good) ok++;
+      detail.push({idx:idx+1, ok:good, topic, expected:`${en}/${ed}`, got:`${Number.isFinite(got.n)?got.n:'—'}/${Number.isFinite(got.d)?got.d:'—'}`});
+    }else{
+      const inp=q.querySelector('input[type="text"]');
+      const v=parseFloat((inp.value||'').replace(',','.'));
+      const exp=parseFloat(q.dataset.val);
+      const good = Number.isFinite(v) && Math.abs(v-exp)<1e-9;
+      inp.style.borderColor = good?'var(--ok)':'var(--bad)';
+      inp.style.background = good?'#ecfdf5':'#fff1f2';
+      rev.textContent = `Tu: ${Number.isFinite(v)?v:'—'} | Correcta: ${exp}`;
+      if(good) ok++;
+      detail.push({idx:idx+1, ok:good, topic, expected:`${exp}`, got:`${Number.isFinite(v)?v:'—'}`});
+    }
+  });
+  const pct=Math.round(100*ok/Math.max(total,1));
+  document.getElementById('resumen').innerHTML=`<div class="status"><span class="${pct>=60?'ok':'bad'}">Puntaje: ${pct}%</span> <span class="pill">Aciertos: ${ok}/${total}</span> <span class="pill">Tiempo: ${clock(Date.now()-startTime)}</span></div>`;
+
+  // Breakdown por tema
+  const agg={};
+  detail.forEach(r=>{ (agg[r.topic]??=([])).push(r); });
+  let html='<div class="topic-report"><table><thead><tr><th>Tema</th><th>Correctas</th><th>Totales</th><th>%</th></tr></thead><tbody>';
+  Object.entries(agg).forEach(([k,arr])=>{
+    const tot=arr.length, corr=arr.filter(x=>x.ok).length, p=Math.round(100*corr/tot);
+    html+=`<tr><td>${k}</td><td>${corr}</td><td>${tot}</td><td>${p}%</td></tr>`;
+  });
+  html+='</tbody></table></div>';
+  document.getElementById('detalle-temas').innerHTML=html;
+
+  // Guardar intento
+  const attempts = loadAttempts();
+  attempts.push({ts:new Date().toISOString(), pct, ok, total, time:Date.now()-startTime, answers:getAnswers()});
+  localStorage.setItem(LS_KEY_ATTEMPTS, JSON.stringify(attempts));
+
+  return detail;
+}
+
+/* ========= Respuestas ========= */
+function buildClave(){
+  const out=[];
+  A.forEach((q,i)=>out.push(`${i+1}) ${q.ans[0]}/${q.ans[1]}`));
+  B.forEach((q,i)=>out.push(`D${i+1}) ${q.ans}`));
+  C.forEach((q,i)=>out.push(`P${i+1}) ${q.ans[0]}/${q.ans[1]}`));
+  document.getElementById('clave').innerHTML='<ol><li>'+out.join('</li><li>')+'</li></ol>';
+}
+
+/* ========= Persistencia ========= */
+function saveProgress(){
+  const data = {ts:Date.now(), alumno:document.getElementById('alumno').value||'', grupo:document.getElementById('grupo').value||'', fecha:document.getElementById('fecha').value||'', answers:getAnswers()};
+  localStorage.setItem(LS_KEY_PROGRESS, JSON.stringify(data));
+}
+function loadProgress(){
+  try{ return JSON.parse(localStorage.getItem(LS_KEY_PROGRESS)||'null'); }catch{return null}
+}
+function loadAttempts(){
+  try{ return JSON.parse(localStorage.getItem(LS_KEY_ATTEMPTS)||'[]'); }catch{return []}
+}
+function downloadCSV(){
+  const alumno=(document.getElementById('alumno').value||'').replace(/,/g,' ');
+  const grupo=(document.getElementById('grupo').value||'').replace(/,/g,' ');
+  const fecha=(document.getElementById('fecha').value||'').replace(/,/g,' ');
+  const attempts = loadAttempts();
+  if(!attempts.length){ alert('Primero califica al menos una vez.'); return; }
+  const last = attempts[attempts.length-1];
+  const header=['alumno','grupo','fecha','pregunta','esperado','obtenido','correcta','tema'];
+  const rows=[header.join(',')];
+  const allQs=[...document.querySelectorAll('.q')];
+  last.answers.forEach((a,idx)=>{
+    const q=allQs[idx];
+    const topic=q.dataset.topic||'otros';
+    let exp=''; let got=''; let ok=false;
+    if(q.dataset.type==='frac'){
+      const en=q.dataset.n, ed=q.dataset.d;
+      exp=`${en}/${ed}`;
+      const N=parseInt(a.n,10), D=parseInt(a.d,10);
+      if(Number.isFinite(N) && Number.isFinite(D)){
+        const g = (function(n,d){if(d===0)return{n:NaN,d:NaN}; if(d<0){n=-n;d=-d;} const m=function(a,b){a=Math.abs(a);b=Math.abs(b);while(b){[a,b]=[b,a%b]}return a||1}(n,d); return {n:n/m,d:d/m};})(N,D);
+        got = `${Number.isFinite(g.n)?g.n:'—'}/${Number.isFinite(g.d)?g.d:'—'}`;
+        ok = (parseInt(en,10)*g.d === parseInt(ed,10)*g.n);
+      }else{
+        got='—/—';
+      }
+    }else{
+      const expV=parseFloat(q.dataset.val);
+      const v=parseFloat((a.v||'').toString().replace(',','.'));
+      exp=`${expV}`; got=Number.isFinite(v)?`${v}`:'—'; ok=Number.isFinite(v)&&Math.abs(v-expV)<1e-9;
+    }
+    rows.push([alumno,grupo,fecha,idx+1,exp,got,ok?'SI':'NO',topic].join(','));
+  });
+  const blob=new Blob([rows.join('\n')],{type:'text/csv;charset=utf-8;'});
+  const url=URL.createObjectURL(blob);
+  const link=document.createElement('a'); link.href=url; link.download='respuestas_avanzadas.csv'; document.body.appendChild(link); link.click();
+  setTimeout(()=>{ URL.revokeObjectURL(url); link.remove(); }, 800);
+}
+
+/* ========= Eventos ========= */
+document.getElementById('btnCalificar').addEventListener('click', ()=>{
+  evaluate();
+  document.querySelectorAll('[data-rev]').forEach(el=>el.classList.remove('hidden'));
+  saveProgress();
+  buildClave();
+});
+document.getElementById('btnVer').addEventListener('click', ()=>{
+  document.querySelectorAll('[data-rev]').forEach(el=>el.classList.toggle('hidden'));
+});
+document.getElementById('btnCSV').addEventListener('click', downloadCSV);
+document.querySelector('main').addEventListener('input', saveProgress);
+
+// Cargar progreso guardado
+(function init(){
+  const data=loadProgress();
+  if(data){ document.getElementById('alumno').value=data.alumno||''; document.getElementById('grupo').value=data.grupo||''; document.getElementById('fecha').value=data.fecha||''; setAnswers(data.answers); }
+  buildClave(); // la clave también aparece en el <details>
+})();
+</script>
 </body>
 </html>
