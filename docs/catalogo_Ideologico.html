@@ -1,18 +1,26 @@
 <!doctype html>
-<html>
+<html lang="es">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-<title>Markmap</title>
+<title>Mapa mental</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/markmap-toolbar@0.18.12/dist/style.css">
 <style>
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
-html {
-  font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
-    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+html, body {
+  width: 100%;
+  height: 100%;
+}
+body {
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #f8fafc;
+  color: #0f172a;
+  overflow: hidden;
 }
 #mindmap {
   display: block;
@@ -31,6 +39,7 @@ html {
   color: #fff;
   font-size: 14px;
   font-weight: 600;
+  letter-spacing: 0.01em;
   cursor: pointer;
   box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
   transition: transform 150ms ease, box-shadow 150ms ease;
@@ -50,7 +59,7 @@ html {
   align-items: center;
   justify-content: center;
   padding: 32px 16px;
-  background: rgba(24, 24, 27, 0.72);
+  background: rgba(15, 23, 42, 0.72);
   backdrop-filter: blur(4px);
   z-index: 1500;
 }
@@ -63,8 +72,8 @@ html {
   overflow: hidden;
   border-radius: 18px;
   background: #ffffff;
-  color: #111827;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+  color: #0f172a;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.35);
   display: flex;
   flex-direction: column;
 }
@@ -74,7 +83,7 @@ html {
   justify-content: space-between;
   padding: 20px 24px;
   border-bottom: 1px solid rgba(148, 163, 184, 0.35);
-  background: rgba(59, 130, 246, 0.08);
+  background: rgba(37, 99, 235, 0.08);
 }
 .markdown-modal__title {
   font-size: 18px;
@@ -101,395 +110,122 @@ html {
   padding: 24px;
   overflow-y: auto;
   flex: 1 1 auto;
-}
-.markdown-modal__body h1,
-.markdown-modal__body h2,
-.markdown-modal__body h3 {
-  margin-top: 1.5rem;
-  margin-bottom: 0.75rem;
-  line-height: 1.25;
-}
-.markdown-modal__body p,
-.markdown-modal__body ul,
-.markdown-modal__body ol {
-  margin-bottom: 1rem;
+  font-size: 15px;
   line-height: 1.6;
 }
-.markdown-modal__body ul {
-  padding-left: 1.2rem;
-}
-.markdown-modal__body code {
-  background: rgba(148, 163, 184, 0.18);
-  padding: 0.2em 0.45em;
-  border-radius: 6px;
-  font-size: 0.95em;
-}
 .markdown-modal__body pre {
-  background: #0f172a;
-  color: #e2e8f0;
-  padding: 16px;
-  border-radius: 12px;
-  overflow-x: auto;
-}
-.markdown-modal__actions {
-  padding: 18px 24px;
-  border-top: 1px solid rgba(148, 163, 184, 0.35);
-  display: flex;
-  justify-content: flex-end;
-  gap: 12px;
-}
-.markdown-modal__button {
-  padding: 10px 18px;
-  border-radius: 9999px;
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: "Fira Code", "Cascadia Code", "Consolas", monospace;
   font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  border: none;
-  transition: transform 120ms ease, box-shadow 160ms ease;
+  line-height: 1.5;
+  color: inherit;
+  background: rgba(15, 23, 42, 0.06);
+  padding: 18px;
+  border-radius: 12px;
 }
-.markdown-modal__button--download {
-  background: #2563eb;
-  color: #ffffff;
-  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.25);
+.markmap-toolbar {
+  background: rgba(15, 23, 42, 0.72);
+  border-radius: 9999px;
+  backdrop-filter: blur(6px);
+  padding: 6px 10px;
 }
-.markdown-modal__button--download:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 14px 32px rgba(37, 99, 235, 0.35);
+.markmap-toolbar button {
+  color: #f8fafc;
 }
-.markdown-modal__button--download:active {
-  transform: translateY(0);
-  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.35);
+@media (max-width: 640px) {
+  #showMarkdownBtn {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  #showMarkdownBtn:hover {
+    transform: translate(-50%, -1px);
+  }
 }
-.markmap-dark .markdown-modal__dialog {
-  background: #18181b;
-  color: #e5e7eb;
-}
-.markmap-dark .markdown-modal__header {
-  border-bottom-color: rgba(63, 63, 70, 0.7);
-  background: rgba(59, 130, 246, 0.1);
-}
-.markmap-dark .markdown-modal__actions {
-  border-top-color: rgba(63, 63, 70, 0.7);
-}
-.markmap-dark #showMarkdownBtn {
-  background: #3b82f6;
-  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.35);
-}
-.markmap-dark #showMarkdownBtn:hover {
-  box-shadow: 0 12px 28px rgba(59, 130, 246, 0.45);
-}
-.markmap-dark {
-  background: #27272a;
-  color: white;
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #020617;
+    color: #e2e8f0;
+  }
+  #showMarkdownBtn {
+    background: #1d4ed8;
+    box-shadow: 0 12px 28px rgba(30, 64, 175, 0.35);
+  }
+  .markdown-modal__dialog {
+    background: #0f172a;
+    color: #e2e8f0;
+  }
+  .markdown-modal__header {
+    background: rgba(37, 99, 235, 0.18);
+    border-bottom-color: rgba(71, 85, 105, 0.35);
+  }
+  .markdown-modal__body pre {
+    background: rgba(15, 23, 42, 0.35);
+  }
 }
 </style>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/markmap-toolbar@0.18.12/dist/style.css">
 </head>
 <body>
-<button id="showMarkdownBtn" type="button">MarkDown Source</button>
-<svg id="mindmap"></svg>
-<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script><script src="https://cdn.jsdelivr.net/npm/markmap-view@0.18.12/dist/browser/index.js"></script><script src="https://cdn.jsdelivr.net/npm/markmap-toolbar@0.18.12/dist/index.js"></script><script>(()=>{setTimeout(()=>{const{markmap:S,mm:Q}=window,$=new S.Toolbar;$.attach(Q);const I=$.render();I.setAttribute("style","position:absolute;bottom:20px;right:20px"),document.body.append(I)})})()</script><script>((l,U,M,R)=>{const N=l();window.mm=N.Markmap.create("svg#mindmap",(U||N.deriveOptions)(R),M),window.matchMedia("(prefers-color-scheme: dark)").matches&&document.documentElement.classList.add("markmap-dark")})(()=>window.markmap,null,{"content":"Cat&#xe1;logo Ideol&#xf3;gico","children":[{"content":"&#xbf;Qu&#xe9; crees que mueve la historia?","children":[{"content":"Condiciones materiales (trabajo, econom&#xed;a, tecnolog&#xed;a, gen&#xe9;tica)","children":[{"content":"<strong><mark>Materialista</mark></strong>","children":[],"payload":{"tag":"li","lines":"9,10"}}],"payload":{"tag":"li","lines":"8,10"}},{"content":"Ideas y raz&#xf3;n (principios que gu&#xed;an a la humanidad)","children":[{"content":"<strong><mark>Idealista</mark></strong>","children":[],"payload":{"tag":"li","lines":"11,12"}}],"payload":{"tag":"li","lines":"10,12"}},{"content":"Lo material y lo ideal se condicionan mutuamente (la cultura puede transformar el poder econ&#xf3;mico)","children":[{"content":"<strong><mark>Historicista</mark></strong>","children":[],"payload":{"tag":"li","lines":"13,14"}}],"payload":{"tag":"li","lines":"12,14"}}],"payload":{"tag":"h2","lines":"7,8"}},{"content":"&#xbf;C&#xf3;mo entiendes la din&#xe1;mica del cambio?","children":[{"content":"Todo est&#xe1; en movimiento por contradicciones internas (genera riqueza y desigualdad que empuja al cambio)","children":[{"content":"<strong><mark>Dial&#xe9;ctico</mark></strong>","children":[],"payload":{"tag":"li","lines":"16,17"}}],"payload":{"tag":"li","lines":"15,17"}},{"content":"La realidad es estable y existen verdades eternas (esencias inmutables, instituciones que apenas cambian)","children":[{"content":"<strong><mark>Metaf&#xed;sico</mark></strong>","children":[],"payload":{"tag":"li","lines":"18,19"}}],"payload":{"tag":"li","lines":"17,19"}},{"content":"Funciona como una m&#xe1;quina de causa y efecto (explicaci&#xf3;n lineal)","children":[{"content":"<strong><mark>Mecanicista</mark></strong>","children":[],"payload":{"tag":"li","lines":"20,21"}}],"payload":{"tag":"li","lines":"19,21"}},{"content":"La historia tiene un rumbo marcado e inevitable (destino fijo)","children":[{"content":"<strong><mark>Determinista</mark></strong>","children":[],"payload":{"tag":"li","lines":"22,23"}}],"payload":{"tag":"li","lines":"21,23"}},{"content":"Depende de accidentes, luchas o azares (resultado de una cadena de decisiones y casualidades)","children":[{"content":"<strong><mark>Contingentista</mark></strong>","children":[],"payload":{"tag":"li","lines":"24,25"}}],"payload":{"tag":"li","lines":"23,25"}}],"payload":{"tag":"h2","lines":"14,15"}},{"content":"&#xbf;De d&#xf3;nde nace el cambio?","children":[{"content":"Nace de imaginar futuros mejores y luchar por hacerlos realidad (los ideales mueven la historia)","children":[{"content":"<strong><mark>Ut&#xf3;pico</mark></strong>","children":[],"payload":{"tag":"li","lines":"27,28"}}],"payload":{"tag":"li","lines":"26,28"}},{"content":"Nace de entender las contradicciones materiales que empujan al cambio (no basta con imaginar)","children":[{"content":"<strong><mark>Cient&#xed;fico</mark></strong>","children":[],"payload":{"tag":"li","lines":"29,30"}}],"payload":{"tag":"li","lines":"28,30"}},{"content":"Depende de la voluntad y la acci&#xf3;n humana (las revoluciones se hac&#xed;an, no se esperaban)","children":[{"content":"<strong><mark>Voluntarista</mark></strong>","children":[],"payload":{"tag":"li","lines":"31,32"}}],"payload":{"tag":"li","lines":"30,32"}},{"content":"No hay grandes relatos universales, solo cambios locales fragmentados (cuestiona utop&#xed;as y determinismos)","children":[{"content":"<strong><mark>Esc&#xe9;ptico</mark></strong>","children":[],"payload":{"tag":"li","lines":"33,35"}}],"payload":{"tag":"li","lines":"32,35"}}],"payload":{"tag":"h2","lines":"25,26"}},{"content":"Q1 &#xbf;Aceptas el capitalismo como sistema?","children":[{"content":"El mercado y la competencia son la mejor manera de organizar la sociedad, es un sistema insuperable","children":[{"content":"<strong><mark>Capitalista</mark></strong>","children":[],"payload":{"tag":"li","lines":"37,38"}}],"payload":{"tag":"li","lines":"36,38"}},{"content":"Funciona, pero necesita l&#xed;mites y regulaciones (el Estado debe intervenir para frenar excesos)","children":[{"content":"<strong><mark>Reformista</mark></strong>","children":[],"payload":{"tag":"li","lines":"39,40"}}],"payload":{"tag":"li","lines":"38,40"}},{"content":"Es un sistema de explotaci&#xf3;n que debe abolirse incluso desmantelarse (es la esencia misma del sistema)","children":[{"content":"<strong><mark>Anticapitalista</mark></strong>","children":[],"payload":{"tag":"li","lines":"41,42"}}],"payload":{"tag":"li","lines":"40,42"}},{"content":"Ha servido para avanzar a la humanidad, pero que ya debe dar paso a un nuevo sistema","children":[{"content":"<strong><mark>Postcapitalista</mark></strong>","children":[],"payload":{"tag":"li","lines":"43,45"}}],"payload":{"tag":"li","lines":"42,45"}}],"payload":{"tag":"h2","lines":"35,36"}},{"content":"Q2 &#xbf;Qui&#xe9;n debe tener la propiedad de los medios de producci&#xf3;n?","children":[{"content":"Deben estar siempre en manos de particulares o de empresas (propiedad privada es un derecho natural)","children":[{"content":"<strong><mark>Privatista</mark></strong>","children":[],"payload":{"tag":"li","lines":"47,48"}}],"payload":{"tag":"li","lines":"46,48"}},{"content":"Deben ser comunes, gestionados por los trabajadores o la comunidad (socializaci&#xf3;n de los medios)","children":[{"content":"<strong><mark>Colectivista</mark></strong>","children":[],"payload":{"tag":"li","lines":"49,50"}}],"payload":{"tag":"li","lines":"48,50"}},{"content":"Deben convivir distintos tipos de propiedad (privada, p&#xfa;blica y cooperativa)","children":[{"content":"<strong><mark>Pluralista</mark></strong>","children":[],"payload":{"tag":"li","lines":"51,52"}}],"payload":{"tag":"li","lines":"50,52"}},{"content":"Propiedad privada, pero bajo control estricto del Estado (tarifas fijadas por ley para evitar abusos)","children":[{"content":"<strong><mark>Regulacionista</mark></strong>","children":[],"payload":{"tag":"li","lines":"53,55"}}],"payload":{"tag":"li","lines":"52,55"}}],"payload":{"tag":"h2","lines":"45,46"}},{"content":"Q3 &#xbf;Qu&#xe9; papel debe tener el Estado?","children":[{"content":"Un estado fuerte y centralizado que organice la vida social (El Leviat&#xe1;n, planificar la econom&#xed;a)","children":[{"content":"<strong><mark>Estatista</mark></strong>","children":[],"payload":{"tag":"li","lines":"57,58"}}],"payload":{"tag":"li","lines":"56,58"}},{"content":"Debe desaparecer porque es un instrumento de dominaci&#xf3;n","children":[{"content":"<strong><mark>Antiestatista</mark></strong>","children":[],"payload":{"tag":"li","lines":"59,60"}}],"payload":{"tag":"li","lines":"58,60"}},{"content":"Debe existir para regular y redistribuir, sin eliminar el mercado (garantizar servicios p&#xfa;blicos)","children":[{"content":"<strong><mark>Social</mark></strong>","children":[],"payload":{"tag":"li","lines":"61,62"}}],"payload":{"tag":"li","lines":"60,62"}},{"content":"Un estado d&#xe9;bil y descentralizado (decisiones cerca de la gente, federaci&#xf3;n de municipios)","children":[{"content":"<strong><mark>Descentralista</mark></strong>","children":[],"payload":{"tag":"li","lines":"63,64"}}],"payload":{"tag":"li","lines":"62,64"}},{"content":"Debe reducirse a funciones b&#xe1;sicas (proteger la propiedad, orden, contratos)","children":[{"content":"<strong><mark>Miniarquista</mark></strong>","children":[],"payload":{"tag":"li","lines":"65,67"}}],"payload":{"tag":"li","lines":"64,67"}}],"payload":{"tag":"h2","lines":"55,56"}},{"content":"Q4 &#xbf;Qui&#xe9;n debe garantizar sanidad y educaci&#xf3;n?","children":[{"content":"Deben ser garantizados por el Estado para todos (derechos universales, no son mercanc&#xed;as)","children":[{"content":"<strong><mark>Universalista</mark></strong>","children":[],"payload":{"tag":"li","lines":"69,70"}}],"payload":{"tag":"li","lines":"68,70"}},{"content":"Bienes privados que cada persona compra seg&#xfa;n sus posibilidades (la competencia ofrece m&#xe1;s eficiencia)","children":[{"content":"<strong><mark>Privatista</mark></strong>","children":[],"payload":{"tag":"li","lines":"71,72"}}],"payload":{"tag":"li","lines":"70,72"}},{"content":"Sistema b&#xe1;sico p&#xfa;blico complementado con opciones privadas (enfoque mixto)","children":[{"content":"<strong><mark>Complementarista</mark></strong>","children":[],"payload":{"tag":"li","lines":"73,74"}}],"payload":{"tag":"li","lines":"72,74"}},{"content":"Gestionados desde las propias comunidades (ayuda mutua, escuelas autogestionadas)","children":[{"content":"<strong><mark>Comunitario</mark></strong>","children":[],"payload":{"tag":"li","lines":"75,77"}}],"payload":{"tag":"li","lines":"74,77"}}],"payload":{"tag":"h2","lines":"67,68"}},{"content":"Q5 &#xbf;Prefieres orden o libertad?","children":[{"content":"Orden por encima de todo, aunque limite libertades (la autoridad fuerte evita el caos)","children":[{"content":"<strong><mark>Autoritario</mark></strong>","children":[],"payload":{"tag":"li","lines":"79,80"}}],"payload":{"tag":"li","lines":"78,80"}},{"content":"Priorizar la libertad individual aunque pueda suponer caos (valor supremo, sin interferencias)","children":[{"content":"<strong><mark>Libertario</mark></strong>","children":[],"payload":{"tag":"li","lines":"81,82"}}],"payload":{"tag":"li","lines":"80,82"}},{"content":"Equilibrio entre orden y libertad (libertad central con normas b&#xe1;sicas contra el da&#xf1;o a terceros)","children":[{"content":"<strong><mark>Equilibrado</mark></strong>","children":[],"payload":{"tag":"li","lines":"83,84"}}],"payload":{"tag":"li","lines":"82,84"}},{"content":"Valorar especialmente el orden social, con cierto margen de libertades b&#xe1;sicas (priorizar estabilidad sobre autonom&#xed;a individual)","children":[{"content":"<strong><mark>Conservador del Orden</mark></strong>","children":[],"payload":{"tag":"li","lines":"85,87"}}],"payload":{"tag":"li","lines":"84,87"}}],"payload":{"tag":"h2","lines":"77,78"}},{"content":"Q6 &#xbf;Qui&#xe9;n debe gobernar?","children":[{"content":"Debe gobernar el pueblo soberano (voto, asambleas, refer&#xe9;ndum)","children":[{"content":"<strong><mark>Democr&#xe1;tico</mark></strong>","children":[],"payload":{"tag":"li","lines":"89,90"}}],"payload":{"tag":"li","lines":"88,90"}},{"content":"Debe gobernar un l&#xed;der fuerte que concentre el poder (garantizar estabilidad y direcci&#xf3;n)","children":[{"content":"<strong><mark>Caudillista o Personalista</mark></strong>","children":[],"payload":{"tag":"li","lines":"91,92"}}],"payload":{"tag":"li","lines":"90,92"}},{"content":"Deben gobernar los expertos (economistas, cient&#xed;ficos, ingenieros)","children":[{"content":"<strong><mark>Tecnocr&#xe1;tico</mark></strong>","children":[],"payload":{"tag":"li","lines":"93,94"}}],"payload":{"tag":"li","lines":"92,94"}},{"content":"Debe gobernar el Estado central como representante de la sociedad (el Partido-Estado asume el poder)","children":[{"content":"<strong><mark>Estatista</mark></strong>","children":[],"payload":{"tag":"li","lines":"95,96"}}],"payload":{"tag":"li","lines":"94,96"}},{"content":"Nadie debe gobernar sobre nadie, decisiones colectivas en asambleas (b&#xfa;squeda de consensos)","children":[{"content":"<strong><mark>Asamblearista</mark></strong>","children":[],"payload":{"tag":"li","lines":"97,99"}}],"payload":{"tag":"li","lines":"96,99"}}],"payload":{"tag":"h2","lines":"87,88"}},{"content":"Q7 &#xbf;Existen las clases sociales o solo individuos?","children":[{"content":"La sociedad est&#xe1; dividida en clases con intereses en conflicto (la historia es lucha de clases)","children":[{"content":"<strong><mark>Clasista (Marxista)</mark></strong>","children":[],"payload":{"tag":"li","lines":"101,102"}}],"payload":{"tag":"li","lines":"100,102"}},{"content":"Solo individuos que ascienden o caen seg&#xfa;n su m&#xe9;rito (la desigualdad refleja talento y esfuerzo)","children":[{"content":"<strong><mark>Individualista</mark></strong>","children":[],"payload":{"tag":"li","lines":"103,104"}}],"payload":{"tag":"li","lines":"102,104"}},{"content":"Barreras estructurales que pueden mitigarse con pol&#xed;ticas p&#xfa;blicas (becas, impuestos progresivos)","children":[{"content":"<strong><mark>Reformista Social</mark></strong>","children":[],"payload":{"tag":"li","lines":"105,106"}}],"payload":{"tag":"li","lines":"104,106"}},{"content":"La clase se entrecruza con g&#xe9;nero, raza o migraci&#xf3;n (opresiones combinadas)","children":[{"content":"<strong><mark>Interseccional</mark></strong>","children":[],"payload":{"tag":"li","lines":"107,109"}}],"payload":{"tag":"li","lines":"106,109"}}],"payload":{"tag":"h2","lines":"99,100"}},{"content":"Q8 &#xbf;C&#xf3;mo ves la inmigraci&#xf3;n?","children":[{"content":"Es una amenaza que debe limitarse (proteger fronteras, identidad y cohesi&#xf3;n nacional)","children":[{"content":"<strong><mark>Restrictivo</mark></strong>","children":[],"payload":{"tag":"li","lines":"111,112"}}],"payload":{"tag":"li","lines":"110,112"}},{"content":"Enriquece a la sociedad y debe facilitarse (derecho humano, ciudadan&#xed;a del mundo)","children":[{"content":"<strong><mark>Aperturista (Cosmopolita)</mark></strong>","children":[],"payload":{"tag":"li","lines":"113,114"}}],"payload":{"tag":"li","lines":"112,114"}},{"content":"Debe haber inmigraci&#xf3;n pero regulada (gesti&#xf3;n ordenada para proteger a locales y migrantes)","children":[{"content":"<strong><mark>Regulacionista</mark></strong>","children":[],"payload":{"tag":"li","lines":"115,116"}}],"payload":{"tag":"li","lines":"114,116"}},{"content":"Consecuencia de desigualdades globales (resultado de una econom&#xed;a global desigual, Sistema Mundo)","children":[{"content":"<strong><mark>Estructuralista (Postcolonial)</mark></strong>","children":[],"payload":{"tag":"li","lines":"117,119"}}],"payload":{"tag":"li","lines":"116,119"}}],"payload":{"tag":"h2","lines":"109,110"}},{"content":"Q9 &#xbf;C&#xf3;mo entiendes la identidad de g&#xe9;nero?","children":[{"content":"Identidades trans deben ser reconocidas y respetadas plenamente (libertad de autodeterminaci&#xf3;n)","children":[{"content":"<strong><mark>Transincluyente</mark></strong>","children":[],"payload":{"tag":"li","lines":"121,122"}}],"payload":{"tag":"li","lines":"120,122"}},{"content":"El g&#xe9;nero en s&#xed; mismo es una categor&#xed;a opresiva que deber&#xed;a abolirse (no m&#xe1;s casillas de g&#xe9;nero ni expectativas culturales)","children":[{"content":"<strong><mark>Abolicionista del G&#xe9;nero</mark></strong>","children":[],"payload":{"tag":"li","lines":"123,124"}}],"payload":{"tag":"li","lines":"122,124"}},{"content":"Priorizar la diferencia biol&#xf3;gica frente a la identidad de g&#xe9;nero (el sexo es una realidad material, pol&#xed;ticas basadas en el sexo biol&#xf3;gico)","children":[{"content":"<strong><mark>Biologicista</mark></strong>","children":[],"payload":{"tag":"li","lines":"125,126"}}],"payload":{"tag":"li","lines":"124,126"}},{"content":"Asunto privado y el Estado no debe intervenir (prioridad en la libertad de elecci&#xf3;n individual)","children":[{"content":"<strong><mark>Liberal en G&#xe9;nero</mark></strong>","children":[],"payload":{"tag":"li","lines":"127,129"}}],"payload":{"tag":"li","lines":"126,129"}}],"payload":{"tag":"h2","lines":"119,120"}},{"content":"Q10 &#xbf;Cu&#xe1;l es tu postura ante el feminismo?","children":[{"content":"Hombres y mujeres deben tener las mismas oportunidades dentro del marco social actual (igualdad salarial, reparto de cuidados)","children":[{"content":"<strong><mark>Igualitarista</mark></strong>","children":[],"payload":{"tag":"li","lines":"131,132"}}],"payload":{"tag":"li","lines":"130,132"}},{"content":"Rechazar el feminismo (lo ve como un exceso, amenaza al orden social o &quot;ideolog&#xed;a de g&#xe9;nero&quot;)","children":[{"content":"<strong><mark>Antifeminista</mark></strong>","children":[],"payload":{"tag":"li","lines":"133,134"}}],"payload":{"tag":"li","lines":"132,134"}},{"content":"El patriarcado es una estructura profunda que atraviesa todas las relaciones sociales (desmontar las estructuras desde la ra&#xed;z)","children":[{"content":"<strong><mark>Feminista Radical</mark></strong>","children":[],"payload":{"tag":"li","lines":"135,136"}}],"payload":{"tag":"li","lines":"134,136"}},{"content":"Debe cruzarse con clase, raza, sexualidad o migraci&#xf3;n (opresiones combinadas)","children":[{"content":"<strong><mark>Feminista Interseccional</mark></strong>","children":[],"payload":{"tag":"li","lines":"137,138"}}],"payload":{"tag":"li","lines":"136,138"}},{"content":"La opresi&#xf3;n de g&#xe9;nero es inseparable de la explotaci&#xf3;n econ&#xf3;mica y del capitalismo","children":[{"content":"<strong><mark>Feminista Socialista o Materialista (Anticapitalista)</mark></strong>","children":[],"payload":{"tag":"li","lines":"139,141"}}],"payload":{"tag":"li","lines":"138,141"}}],"payload":{"tag":"h2","lines":"129,130"}},{"content":"Q11 &#xbf;Qu&#xe9; lugar debe tener la religi&#xf3;n en la pol&#xed;tica?","children":[{"content":"Debe guiar o controlar el poder pol&#xed;tico (leyes religiosas por encima de las civiles)","children":[{"content":"<strong><mark>Teocr&#xe1;tico</mark></strong>","children":[],"payload":{"tag":"li","lines":"143,144"}}],"payload":{"tag":"li","lines":"142,144"}},{"content":"Separaci&#xf3;n total entre religi&#xf3;n y pol&#xed;tica (sin s&#xed;mbolos ni financiaci&#xf3;n a templos)","children":[{"content":"<strong><mark>Laicista</mark></strong>","children":[],"payload":{"tag":"li","lines":"145,146"}}],"payload":{"tag":"li","lines":"144,146"}},{"content":"El Estado debe ser neutral y respetar todas las religiones sin identificarse con ninguna (garantizar la libertad religiosa)","children":[{"content":"<strong><mark>Secular</mark></strong>","children":[],"payload":{"tag":"li","lines":"147,148"}}],"payload":{"tag":"li","lines":"146,148"}},{"content":"El Estado debe ser laico pero con un reconocimiento especial para la religi&#xf3;n mayoritaria (privilegios hist&#xf3;ricos)","children":[{"content":"<strong><mark>Confesional</mark></strong>","children":[],"payload":{"tag":"li","lines":"149,151"}}],"payload":{"tag":"li","lines":"148,151"}}],"payload":{"tag":"h2","lines":"141,142"}},{"content":"Q12 &#xbf;Qu&#xe9; piensas de las naciones y fronteras?","children":[{"content":"La naci&#xf3;n es lo primero (comunidad m&#xe1;s importante con su propio Estado)","children":[{"content":"<strong><mark>Nacionalista</mark></strong>","children":[],"payload":{"tag":"li","lines":"153,154"}}],"payload":{"tag":"li","lines":"152,154"}},{"content":"Lo importante es sentirse parte de la humanidad entera (fronteras como barreras artificiales)","children":[{"content":"<strong><mark>Cosmopolita</mark></strong>","children":[],"payload":{"tag":"li","lines":"155,156"}}],"payload":{"tag":"li","lines":"154,156"}},{"content":"Naciones deben cooperar en igualdad sin dominaci&#xf3;n (solidaridad entre estados)","children":[{"content":"<strong><mark>Internacionalista</mark></strong>","children":[],"payload":{"tag":"li","lines":"157,158"}}],"payload":{"tag":"li","lines":"156,158"}},{"content":"Cada pueblo tiene derecho a decidir su propio destino (autodeterminaci&#xf3;n)","children":[{"content":"<strong><mark>Soberanista</mark></strong>","children":[],"payload":{"tag":"li","lines":"159,160"}}],"payload":{"tag":"li","lines":"158,160"}},{"content":"Una naci&#xf3;n tiene derecho a expandirse y dominar a otras (intervenir para asegurar recursos o influencia)","children":[{"content":"<strong><mark>Imperialista</mark></strong>","children":[],"payload":{"tag":"li","lines":"161,162"}}],"payload":{"tag":"li","lines":"160,162"}},{"content":"Pueblos colonizados deben liberarse (la colonizaci&#xf3;n deshumaniza)","children":[{"content":"<strong><mark>Anticolonialista</mark></strong>","children":[],"payload":{"tag":"li","lines":"163,164"}}],"payload":{"tag":"li","lines":"162,164"}},{"content":"Persisten estructuras coloniales en la econom&#xed;a, cultura o conocimiento despu&#xe9;s de la independencia","children":[{"content":"<strong><mark>Decolonial</mark></strong>","children":[],"payload":{"tag":"li","lines":"165,167"}}],"payload":{"tag":"li","lines":"164,167"}}],"payload":{"tag":"h2","lines":"151,152"}},{"content":"Q13 &#xbf;C&#xf3;mo organizar el territorio?","children":[{"content":"El poder debe estar en un centro fuerte y unificado (soberan&#xed;a indivisible)","children":[{"content":"<strong><mark>Centralista (Jacobino)</mark></strong>","children":[],"payload":{"tag":"li","lines":"169,170"}}],"payload":{"tag":"li","lines":"168,170"}},{"content":"El poder debe repartirse entre distintos estados o regiones dentro de una federaci&#xf3;n","children":[{"content":"<strong><mark>Federalista</mark></strong>","children":[],"payload":{"tag":"li","lines":"171,172"}}],"payload":{"tag":"li","lines":"170,172"}},{"content":"Uni&#xf3;n muy flexible donde las comunidades son pr&#xe1;cticamente independientes (cooperan sin un gobierno central)","children":[{"content":"<strong><mark>Confederalista</mark></strong>","children":[],"payload":{"tag":"li","lines":"173,174"}}],"payload":{"tag":"li","lines":"172,174"}},{"content":"El poder debe residir sobre todo en municipios o comunidades locales","children":[{"content":"<strong><mark>Comunitarista (Municipalismo Libertario)</mark></strong>","children":[],"payload":{"tag":"li","lines":"175,177"}}],"payload":{"tag":"li","lines":"174,177"}}],"payload":{"tag":"h2","lines":"167,168"}},{"content":"Q14 &#xbf;Debe existir la propiedad intelectual y con qu&#xe9; l&#xed;mites?","children":[{"content":"Las ideas deben ser propiedad privada protegida (copyright y patentes incentivan la innovaci&#xf3;n)","children":[{"content":"<strong><mark>Propietarista</mark></strong>","children":[],"payload":{"tag":"li","lines":"179,180"}}],"payload":{"tag":"li","lines":"178,180"}},{"content":"El conocimiento debe ser compartido libremente (las ideas son un bien com&#xfa;n, sin barreras)","children":[{"content":"<strong><mark>Comunalista del Saber</mark></strong>","children":[],"payload":{"tag":"li","lines":"181,182"}}],"payload":{"tag":"li","lines":"180,182"}},{"content":"Un equilibrio, cierta protecci&#xf3;n, pero con l&#xed;mites (regularla con flexibilidad, como el copy left)","children":[{"content":"<strong><mark>Pragm&#xe1;tico</mark></strong>","children":[],"payload":{"tag":"li","lines":"183,185"}}],"payload":{"tag":"li","lines":"182,185"}}],"payload":{"tag":"h2","lines":"177,178"}},{"content":"Q15 &#xbf;C&#xf3;mo debe funcionar la justicia penal?","children":[{"content":"Debe castigar de forma proporcional al delito (la pena es un deber moral, mano dura)","children":[{"content":"<strong><mark>Retributivista o Punitivo</mark></strong>","children":[],"payload":{"tag":"li","lines":"187,188"}}],"payload":{"tag":"li","lines":"186,188"}},{"content":"El objetivo debe ser reinsertar al delincuente (rehabilitaci&#xf3;n, educaci&#xf3;n, reintegraci&#xf3;n social)","children":[{"content":"<strong><mark>Rehabilitador</mark></strong>","children":[],"payload":{"tag":"li","lines":"189,190"}}],"payload":{"tag":"li","lines":"188,190"}},{"content":"Lo importante es reparar el da&#xf1;o a la v&#xed;ctima y a la comunidad (di&#xe1;logo, asunci&#xf3;n de responsabilidades)","children":[{"content":"<strong><mark>Restaurativo</mark></strong>","children":[],"payload":{"tag":"li","lines":"191,192"}}],"payload":{"tag":"li","lines":"190,192"}},{"content":"Debe servir sobre todo para disuadir y prevenir futuros delitos (vigilancia, penas ejemplares)","children":[{"content":"<strong><mark>Preventivista</mark></strong>","children":[],"payload":{"tag":"li","lines":"193,195"}}],"payload":{"tag":"li","lines":"192,195"}}],"payload":{"tag":"h2","lines":"185,186"}},{"content":"Q16 &#xbf;C&#xf3;mo afrontar la crisis ecol&#xf3;gica?","children":[{"content":"La naturaleza est&#xe1; para explotarla y dominarla (el progreso justifica el uso intensivo de recursos)","children":[{"content":"<strong><mark>Productivista</mark></strong>","children":[],"payload":{"tag":"li","lines":"197,198"}}],"payload":{"tag":"li","lines":"196,198"}},{"content":"Debemos reducir dr&#xe1;sticamente el consumo y la producci&#xf3;n (crecimiento infinito incompatible)","children":[{"content":"<strong><mark>Decrecentista</mark></strong>","children":[],"payload":{"tag":"li","lines":"199,200"}}],"payload":{"tag":"li","lines":"198,200"}},{"content":"Es posible compatibilizar crecimiento econ&#xf3;mico y sostenibilidad (tecnolog&#xed;a y energ&#xed;as renovables)","children":[{"content":"<strong><mark>Verde o Ecocapitalista</mark></strong>","children":[],"payload":{"tag":"li","lines":"201,202"}}],"payload":{"tag":"li","lines":"200,202"}},{"content":"La crisis ecol&#xf3;gica solo puede resolverse transformando el sistema econ&#xf3;mico (capitalismo y ecolog&#xed;a incompatibles)","children":[{"content":"<strong><mark>Ecosocialista</mark></strong>","children":[],"payload":{"tag":"li","lines":"203,204"}}],"payload":{"tag":"li","lines":"202,204"}},{"content":"Defender la ecolog&#xed;a con medios autoritarios y excluyentes (nacionalismo y xenofobia)","children":[{"content":"<strong><mark>Ecofascista</mark></strong>","children":[],"payload":{"tag":"li","lines":"205,206"}}],"payload":{"tag":"li","lines":"204,206"}},{"content":"Negar que exista una crisis ecol&#xf3;gica o que el cambio clim&#xe1;tico sea un invento pol&#xed;tico","children":[{"content":"<strong><mark>Negacionista</mark></strong>","children":[],"payload":{"tag":"li","lines":"207,209"}}],"payload":{"tag":"li","lines":"206,209"}}],"payload":{"tag":"h2","lines":"195,196"}},{"content":"Q17 &#xbf;C&#xf3;mo entiendes la guerra y la paz?","children":[{"content":"Rechazar la guerra bajo cualquier forma (la violencia nunca es una soluci&#xf3;n justa, desarme)","children":[{"content":"<strong><mark>Pacifista</mark></strong>","children":[],"payload":{"tag":"li","lines":"211,212"}}],"payload":{"tag":"li","lines":"210,212"}},{"content":"Creer en la fuerza militar como motor pol&#xed;tico (la guerra es la continuaci&#xf3;n de la pol&#xed;tica, aumentar el gasto militar)","children":[{"content":"<strong><mark>Militarista</mark></strong>","children":[],"payload":{"tag":"li","lines":"213,214"}}],"payload":{"tag":"li","lines":"212,214"}},{"content":"Aceptar que la guerra forma parte inevitable de las relaciones internacionales (los estados buscan poder y seguridad)","children":[{"content":"<strong><mark>Realista</mark></strong>","children":[],"payload":{"tag":"li","lines":"215,216"}}],"payload":{"tag":"li","lines":"214,216"}},{"content":"La violencia puede ser necesaria para acabar con la opresi&#xf3;n (medio contra un sistema injusto, liberaci&#xf3;n)","children":[{"content":"<strong><mark>Revolucionario</mark></strong>","children":[],"payload":{"tag":"li","lines":"217,219"}}],"payload":{"tag":"li","lines":"216,219"}}],"payload":{"tag":"h2","lines":"209,210"}},{"content":"Q18 &#xbf;Crees en un gobierno global?","children":[{"content":"Cada estado debe mantener su independencia absoluta (soberan&#xed;a es el n&#xfa;cleo de la pol&#xed;tica)","children":[{"content":"<strong><mark>Soberanista</mark></strong>","children":[],"payload":{"tag":"li","lines":"221,222"}}],"payload":{"tag":"li","lines":"220,222"}},{"content":"La humanidad deber&#xed;a organizarse como una federaci&#xf3;n global (solo un gobierno mundial podr&#xed;a garantizar la paz)","children":[{"content":"<strong><mark>Federalista Mundial</mark></strong>","children":[],"payload":{"tag":"li","lines":"223,224"}}],"payload":{"tag":"li","lines":"222,224"}},{"content":"Defender la cooperaci&#xf3;n entre estados a trav&#xe9;s de organismos internacionales (coordinar a los pa&#xed;ses en igualdad)","children":[{"content":"<strong><mark>Multilateralista</mark></strong>","children":[],"payload":{"tag":"li","lines":"225,226"}}],"payload":{"tag":"li","lines":"224,226"}},{"content":"Creer en un orden mundial basado en la paz perpetua (ciudadan&#xed;a global con derechos compartidos)","children":[{"content":"<strong><mark>Cosmopolita Cantiano</mark></strong>","children":[],"payload":{"tag":"li","lines":"227,229"}}],"payload":{"tag":"li","lines":"226,229"}}],"payload":{"tag":"h2","lines":"219,220"}},{"content":"Q19 &#xbf;Crees que la historia avanza hacia el progreso?","children":[{"content":"Confiar en que la humanidad avanza hacia algo mejor (m&#xe1;s derechos, menos pobreza, m&#xe1;s conocimiento)","children":[{"content":"<strong><mark>Optimista</mark></strong>","children":[],"payload":{"tag":"li","lines":"231,232"}}],"payload":{"tag":"li","lines":"230,232"}},{"content":"Creer que la humanidad va hacia el desastre (decadencia, colapso global)","children":[{"content":"<strong><mark>Pesimista</mark></strong>","children":[],"payload":{"tag":"li","lines":"233,234"}}],"payload":{"tag":"li","lines":"232,234"}},{"content":"Entender la historia como tr&#xe1;gica (sucesi&#xf3;n de luchas y p&#xe9;rdidas sin garant&#xed;a de avance)","children":[{"content":"<strong><mark>Tr&#xe1;gico</mark></strong>","children":[],"payload":{"tag":"li","lines":"235,236"}}],"payload":{"tag":"li","lines":"234,236"}},{"content":"La historia carece de sentido o de direcci&#xf3;n (las narrativas de progreso son ilusiones)","children":[{"content":"<strong><mark>Niilista</mark></strong>","children":[],"payload":{"tag":"li","lines":"237,239"}}],"payload":{"tag":"li","lines":"236,239"}}],"payload":{"tag":"h2","lines":"229,230"}},{"content":"Q20 &#xbf;Crees que la sociedad debe avanzar o conservar lo existente?","children":[{"content":"Creer que la sociedad debe avanzar hacia nuevos valores y formas de vida (ampliar derechos, el futuro puede ser mejor)","children":[{"content":"<strong><mark>Progresista</mark></strong>","children":[],"payload":{"tag":"li","lines":"241,242"}}],"payload":{"tag":"li","lines":"240,242"}},{"content":"Creer que hay cosas esenciales que deben preservarse para no caer en el caos (evoluci&#xf3;n gradual, no destruir tradiciones)","children":[{"content":"<strong><mark>Conservador</mark></strong>","children":[],"payload":{"tag":"li","lines":"243,244"}}],"payload":{"tag":"li","lines":"242,244"}},{"content":"Pensar que la sociedad debe volver a un orden anterior (el presente es decadencia, restaurar valores tradicionales)","children":[{"content":"<strong><mark>Reaccionario</mark></strong>","children":[],"payload":{"tag":"li","lines":"245,246"}}],"payload":{"tag":"li","lines":"244,246"}},{"content":"Analizar cada cambio seg&#xfa;n su contexto sin alinearse con progreso o retroceso (el valor de una reforma depende de sus resultados)","children":[{"content":"<strong><mark>Contextualista o Pragm&#xe1;tico</mark></strong>","children":[],"payload":{"tag":"li","lines":"247,248"}}],"payload":{"tag":"li","lines":"246,248"}}],"payload":{"tag":"h2","lines":"239,240"}}],"payload":{"tag":"h1","lines":"5,6"}},{"initialExpandLevel":1,"color":["#2980b9"]})</script>
+<button id="showMarkdownBtn" type="button">Ver Markdown</button>
+<svg id="mindmap" role="img" aria-label="Mapa mental generado"></svg>
 <div id="markdownModal" class="markdown-modal" role="dialog" aria-modal="true" aria-labelledby="markdownModalTitle">
   <div class="markdown-modal__dialog">
     <div class="markdown-modal__header">
-      <h2 id="markdownModalTitle" class="markdown-modal__title">Documento ideológico ampliado</h2>
-      <button id="closeMarkdownBtn" class="markdown-modal__close" type="button" aria-label="Cerrar documento">&times;</button>
+      <h2 id="markdownModalTitle" class="markdown-modal__title">Markdown original</h2>
+      <button id="closeMarkdownBtn" class="markdown-modal__close" type="button" aria-label="Cerrar ventana">&times;</button>
     </div>
-    <div id="markdownViewer" class="markdown-modal__body" tabindex="0"></div>
-    <div class="markdown-modal__actions">
-      <button id="downloadMarkdownBtn" class="markdown-modal__button markdown-modal__button--download" type="button">Descargar como Markdown</button>
+    <div class="markdown-modal__body">
+      <pre id="markdownViewer"></pre>
     </div>
   </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/marked@11.1.1/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/markmap-view@0.18.12/dist/browser/index.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/markmap-toolbar@0.18.12/dist/index.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/markmap-lib@0.18.12/dist/browser/index.iife.js"></script>
 <script>
-(function () {
-  const markdownText = `---
-markmap:
-  initialExpandLevel: 1
-  color: "#2980b9"
----
-# Catálogo Ideológico
+(() => {
+  const markdownText = "---\nmarkmap:\n  initialExpandLevel: 1\n  color: \"#2980b9\"\n---\n# Cat\u00e1logo Ideol\u00f3gico\n\n## \u00bfQu\u00e9 crees que mueve la historia?\n- Condiciones materiales (trabajo, econom\u00eda, tecnolog\u00eda, gen\u00e9tica)\n\t- **==Materialista==**\n- Ideas y raz\u00f3n (principios que gu\u00edan a la humanidad)\n\t- **==Idealista==**\n- Lo material y lo ideal se condicionan mutuamente (la cultura puede transformar el poder econ\u00f3mico)\n\t- **==Historicista==**\n## \u00bfC\u00f3mo entiendes la din\u00e1mica del cambio?\n- Todo est\u00e1 en movimiento por contradicciones internas (genera riqueza y desigualdad que empuja al cambio)\n\t- **==Dial\u00e9ctico==**\n- La realidad es estable y existen verdades eternas (esencias inmutables, instituciones que apenas cambian)\n\t- **==Metaf\u00edsico==**\n- Funciona como una m\u00e1quina de causa y efecto (explicaci\u00f3n lineal)\n\t- **==Mecanicista==**\n- La historia tiene un rumbo marcado e inevitable (destino fijo)\n\t- **==Determinista==**\n- Depende de accidentes, luchas o azares (resultado de una cadena de decisiones y casualidades)\n\t- **==Contingentista==**\n## \u00bfDe d\u00f3nde nace el cambio?\n- Nace de imaginar futuros mejores y luchar por hacerlos realidad (los ideales mueven la historia)\n\t- **==Ut\u00f3pico==**\n- Nace de entender las contradicciones materiales que empujan al cambio (no basta con imaginar)\n\t- **==Cient\u00edfico==**\n- Depende de la voluntad y la acci\u00f3n humana (las revoluciones se hac\u00edan, no se esperaban)\n\t- **==Voluntarista==**\n-   No hay grandes relatos universales, solo cambios locales fragmentados (cuestiona utop\u00edas y determinismos)\n\t- **==Esc\u00e9ptico==**\n\t\n## Q1 \u00bfAceptas el capitalismo como sistema?\n- El mercado y la competencia son la mejor manera de organizar la sociedad, es un sistema insuperable\n  - **==Capitalista==**\n- Funciona, pero necesita l\u00edmites y regulaciones (el Estado debe intervenir para frenar excesos)\n  - **==Reformista==**\n- Es un sistema de explotaci\u00f3n que debe abolirse incluso desmantelarse (es la esencia misma del sistema)\n  - **==Anticapitalista==**\n- Ha servido para avanzar a la humanidad, pero que ya debe dar paso a un nuevo sistema\n  - **==Postcapitalista==**\n\n## Q2 \u00bfQui\u00e9n debe tener la propiedad de los medios de producci\u00f3n?\n- Deben estar siempre en manos de particulares o de empresas (propiedad privada es un derecho natural)\n  - **==Privatista==**\n- Deben ser comunes, gestionados por los trabajadores o la comunidad (socializaci\u00f3n de los medios)\n  - **==Colectivista==**\n- Deben convivir distintos tipos de propiedad (privada, p\u00fablica y cooperativa)\n  - **==Pluralista==**\n- Propiedad privada, pero bajo control estricto del Estado (tarifas fijadas por ley para evitar abusos)\n  - **==Regulacionista==**\n\n## Q3 \u00bfQu\u00e9 papel debe tener el Estado?\n- Un estado fuerte y centralizado que organice la vida social (El Leviat\u00e1n, planificar la econom\u00eda)\n  - **==Estatista==**\n- Debe desaparecer porque es un instrumento de dominaci\u00f3n\n  - **==Antiestatista==**\n- Debe existir para regular y redistribuir, sin eliminar el mercado (garantizar servicios p\u00fablicos)\n  - **==Social==**\n- Un estado d\u00e9bil y descentralizado (decisiones cerca de la gente, federaci\u00f3n de municipios)\n  - **==Descentralista==**\n- Debe reducirse a funciones b\u00e1sicas (proteger la propiedad, orden, contratos)\n  - **==Miniarquista==**\n\n## Q4 \u00bfQui\u00e9n debe garantizar sanidad y educaci\u00f3n?\n- Deben ser garantizados por el Estado para todos (derechos universales, no son mercanc\u00edas)\n  - **==Universalista==**\n- Bienes privados que cada persona compra seg\u00fan sus posibilidades (la competencia ofrece m\u00e1s eficiencia)\n  - **==Privatista==**\n- Sistema b\u00e1sico p\u00fablico complementado con opciones privadas (enfoque mixto)\n  - **==Complementarista==**\n- Gestionados desde las propias comunidades (ayuda mutua, escuelas autogestionadas)\n  - **==Comunitario==**\n\n## Q5 \u00bfPrefieres orden o libertad?\n- Orden por encima de todo, aunque limite libertades (la autoridad fuerte evita el caos)\n  - **==Autoritario==**\n- Priorizar la libertad individual aunque pueda suponer caos (valor supremo, sin interferencias)\n  - **==Libertario==**\n- Equilibrio entre orden y libertad (libertad central con normas b\u00e1sicas contra el da\u00f1o a terceros)\n  - **==Equilibrado==**\n- Valorar especialmente el orden social, con cierto margen de libertades b\u00e1sicas (priorizar estabilidad sobre autonom\u00eda individual)\n  - **==Conservador del Orden==**\n\n## Q6 \u00bfQui\u00e9n debe gobernar?\n- Debe gobernar el pueblo soberano (voto, asambleas, refer\u00e9ndum)\n  - **==Democr\u00e1tico==**\n- Debe gobernar un l\u00edder fuerte que concentre el poder (garantizar estabilidad y direcci\u00f3n)\n  - **==Caudillista o Personalista==**\n- Deben gobernar los expertos (economistas, cient\u00edficos, ingenieros)\n  - **==Tecnocr\u00e1tico==**\n- Debe gobernar el Estado central como representante de la sociedad (el Partido-Estado asume el poder)\n  - **==Estatista==**\n- Nadie debe gobernar sobre nadie, decisiones colectivas en asambleas (b\u00fasqueda de consensos)\n  - **==Asamblearista==**\n\n## Q7 \u00bfExisten las clases sociales o solo individuos?\n- La sociedad est\u00e1 dividida en clases con intereses en conflicto (la historia es lucha de clases)\n  - **==Clasista (Marxista)==**\n- Solo individuos que ascienden o caen seg\u00fan su m\u00e9rito (la desigualdad refleja talento y esfuerzo)\n  - **==Individualista==**\n- Barreras estructurales que pueden mitigarse con pol\u00edticas p\u00fablicas (becas, impuestos progresivos)\n  - **==Reformista Social==**\n- La clase se entrecruza con g\u00e9nero, raza o migraci\u00f3n (opresiones combinadas)\n  - **==Interseccional==**\n\n## Q8 \u00bfC\u00f3mo ves la inmigraci\u00f3n?\n- Es una amenaza que debe limitarse (proteger fronteras, identidad y cohesi\u00f3n nacional)\n  - **==Restrictivo==**\n- Enriquece a la sociedad y debe facilitarse (derecho humano, ciudadan\u00eda del mundo)\n  - **==Aperturista (Cosmopolita)==**\n- Debe haber inmigraci\u00f3n pero regulada (gesti\u00f3n ordenada para proteger a locales y migrantes)\n  - **==Regulacionista==**\n- Consecuencia de desigualdades globales (resultado de una econom\u00eda global desigual, Sistema Mundo)\n  - **==Estructuralista (Postcolonial)==**\n\n## Q9 \u00bfC\u00f3mo entiendes la identidad de g\u00e9nero?\n- Identidades trans deben ser reconocidas y respetadas plenamente (libertad de autodeterminaci\u00f3n)\n  - **==Transincluyente==**\n- El g\u00e9nero en s\u00ed mismo es una categor\u00eda opresiva que deber\u00eda abolirse (no m\u00e1s casillas de g\u00e9nero ni expectativas culturales)\n  - **==Abolicionista del G\u00e9nero==**\n- Priorizar la diferencia biol\u00f3gica frente a la identidad de g\u00e9nero (el sexo es una realidad material, pol\u00edticas basadas en el sexo biol\u00f3gico)\n  - **==Biologicista==**\n- Asunto privado y el Estado no debe intervenir (prioridad en la libertad de elecci\u00f3n individual)\n  - **==Liberal en G\u00e9nero==**\n\n## Q10 \u00bfCu\u00e1l es tu postura ante el feminismo?\n- Hombres y mujeres deben tener las mismas oportunidades dentro del marco social actual (igualdad salarial, reparto de cuidados)\n  - **==Igualitarista==**\n- Rechazar el feminismo (lo ve como un exceso, amenaza al orden social o \"ideolog\u00eda de g\u00e9nero\")\n  - **==Antifeminista==**\n- El patriarcado es una estructura profunda que atraviesa todas las relaciones sociales (desmontar las estructuras desde la ra\u00edz)\n  - **==Feminista Radical==**\n- Debe cruzarse con clase, raza, sexualidad o migraci\u00f3n (opresiones combinadas)\n  - **==Feminista Interseccional==**\n- La opresi\u00f3n de g\u00e9nero es inseparable de la explotaci\u00f3n econ\u00f3mica y del capitalismo\n  - **==Feminista Socialista o Materialista (Anticapitalista)==**\n\n## Q11 \u00bfQu\u00e9 lugar debe tener la religi\u00f3n en la pol\u00edtica?\n- Debe guiar o controlar el poder pol\u00edtico (leyes religiosas por encima de las civiles)\n  - **==Teocr\u00e1tico==**\n- Separaci\u00f3n total entre religi\u00f3n y pol\u00edtica (sin s\u00edmbolos ni financiaci\u00f3n a templos)\n  - **==Laicista==**\n- El Estado debe ser neutral y respetar todas las religiones sin identificarse con ninguna (garantizar la libertad religiosa)\n  - **==Secular==**\n- El Estado debe ser laico pero con un reconocimiento especial para la religi\u00f3n mayoritaria (privilegios hist\u00f3ricos)\n  - **==Confesional==**\n\n## Q12 \u00bfQu\u00e9 piensas de las naciones y fronteras?\n- La naci\u00f3n es lo primero (comunidad m\u00e1s importante con su propio Estado)\n  - **==Nacionalista==**\n- Lo importante es sentirse parte de la humanidad entera (fronteras como barreras artificiales)\n  - **==Cosmopolita==**\n- Naciones deben cooperar en igualdad sin dominaci\u00f3n (solidaridad entre estados)\n  - **==Internacionalista==**\n- Cada pueblo tiene derecho a decidir su propio destino (autodeterminaci\u00f3n)\n  - **==Soberanista==**\n- Una naci\u00f3n tiene derecho a expandirse y dominar a otras (intervenir para asegurar recursos o influencia)\n  - **==Imperialista==**\n- Pueblos colonizados deben liberarse (la colonizaci\u00f3n deshumaniza)\n  - **==Anticolonialista==**\n- Persisten estructuras coloniales en la econom\u00eda, cultura o conocimiento despu\u00e9s de la independencia\n  - **==Decolonial==**\n\n## Q13 \u00bfC\u00f3mo organizar el territorio?\n- El poder debe estar en un centro fuerte y unificado (soberan\u00eda indivisible)\n  - **==Centralista (Jacobino)==**\n- El poder debe repartirse entre distintos estados o regiones dentro de una federaci\u00f3n\n  - **==Federalista==**\n- Uni\u00f3n muy flexible donde las comunidades son pr\u00e1cticamente independientes (cooperan sin un gobierno central)\n  - **==Confederalista==**\n- El poder debe residir sobre todo en municipios o comunidades locales\n  - **==Comunitarista (Municipalismo Libertario)==**\n\n## Q14 \u00bfDebe existir la propiedad intelectual y con qu\u00e9 l\u00edmites?\n- Las ideas deben ser propiedad privada protegida (copyright y patentes incentivan la innovaci\u00f3n)\n  - **==Propietarista==**\n- El conocimiento debe ser compartido libremente (las ideas son un bien com\u00fan, sin barreras)\n  - **==Comunalista del Saber==**\n- Un equilibrio, cierta protecci\u00f3n, pero con l\u00edmites (regularla con flexibilidad, como el copy left)\n  - **==Pragm\u00e1tico==**\n\n## Q15 \u00bfC\u00f3mo debe funcionar la justicia penal?\n- Debe castigar de forma proporcional al delito (la pena es un deber moral, mano dura)\n  - **==Retributivista o Punitivo==**\n- El objetivo debe ser reinsertar al delincuente (rehabilitaci\u00f3n, educaci\u00f3n, reintegraci\u00f3n social)\n  - **==Rehabilitador==**\n- Lo importante es reparar el da\u00f1o a la v\u00edctima y a la comunidad (di\u00e1logo, asunci\u00f3n de responsabilidades)\n  - **==Restaurativo==**\n- Debe servir sobre todo para disuadir y prevenir futuros delitos (vigilancia, penas ejemplares)\n  - **==Preventivista==**\n\n## Q16 \u00bfC\u00f3mo afrontar la crisis ecol\u00f3gica?\n- La naturaleza est\u00e1 para explotarla y dominarla (el progreso justifica el uso intensivo de recursos)\n  - **==Productivista==**\n- Debemos reducir dr\u00e1sticamente el consumo y la producci\u00f3n (crecimiento infinito incompatible)\n  - **==Decrecentista==**\n- Es posible compatibilizar crecimiento econ\u00f3mico y sostenibilidad (tecnolog\u00eda y energ\u00edas renovables)\n  - **==Verde o Ecocapitalista==**\n- La crisis ecol\u00f3gica solo puede resolverse transformando el sistema econ\u00f3mico (capitalismo y ecolog\u00eda incompatibles)\n  - **==Ecosocialista==**\n- Defender la ecolog\u00eda con medios autoritarios y excluyentes (nacionalismo y xenofobia)\n  - **==Ecofascista==**\n- Negar que exista una crisis ecol\u00f3gica o que el cambio clim\u00e1tico sea un invento pol\u00edtico\n  - **==Negacionista==**\n\n## Q17 \u00bfC\u00f3mo entiendes la guerra y la paz?\n- Rechazar la guerra bajo cualquier forma (la violencia nunca es una soluci\u00f3n justa, desarme)\n  - **==Pacifista==**\n- Creer en la fuerza militar como motor pol\u00edtico (la guerra es la continuaci\u00f3n de la pol\u00edtica, aumentar el gasto militar)\n  - **==Militarista==**\n- Aceptar que la guerra forma parte inevitable de las relaciones internacionales (los estados buscan poder y seguridad)\n  - **==Realista==**\n- La violencia puede ser necesaria para acabar con la opresi\u00f3n (medio contra un sistema injusto, liberaci\u00f3n)\n  - **==Revolucionario==**\n\n## Q18 \u00bfCrees en un gobierno global?\n- Cada estado debe mantener su independencia absoluta (soberan\u00eda es el n\u00facleo de la pol\u00edtica)\n  - **==Soberanista==**\n- La humanidad deber\u00eda organizarse como una federaci\u00f3n global (solo un gobierno mundial podr\u00eda garantizar la paz)\n  - **==Federalista Mundial==**\n- Defender la cooperaci\u00f3n entre estados a trav\u00e9s de organismos internacionales (coordinar a los pa\u00edses en igualdad)\n  - **==Multilateralista==**\n- Creer en un orden mundial basado en la paz perpetua (ciudadan\u00eda global con derechos compartidos)\n  - **==Cosmopolita Cantiano==**\n\n## Q19 \u00bfCrees que la historia avanza hacia el progreso?\n- Confiar en que la humanidad avanza hacia algo mejor (m\u00e1s derechos, menos pobreza, m\u00e1s conocimiento)\n  - **==Optimista==**\n- Creer que la humanidad va hacia el desastre (decadencia, colapso global)\n  - **==Pesimista==**\n- Entender la historia como tr\u00e1gica (sucesi\u00f3n de luchas y p\u00e9rdidas sin garant\u00eda de avance)\n  - **==Tr\u00e1gico==**\n- La historia carece de sentido o de direcci\u00f3n (las narrativas de progreso son ilusiones)\n  - **==Niilista==**\n\n## Q20 \u00bfCrees que la sociedad debe avanzar o conservar lo existente?\n- Creer que la sociedad debe avanzar hacia nuevos valores y formas de vida (ampliar derechos, el futuro puede ser mejor)\n  - **==Progresista==**\n- Creer que hay cosas esenciales que deben preservarse para no caer en el caos (evoluci\u00f3n gradual, no destruir tradiciones)\n  - **==Conservador==**\n- Pensar que la sociedad debe volver a un orden anterior (el presente es decadencia, restaurar valores tradicionales)\n  - **==Reaccionario==**\n- Analizar cada cambio seg\u00fan su contexto sin alinearse con progreso o retroceso (el valor de una reforma depende de sus resultados)\n  - **==Contextualista o Pragm\u00e1tico==**";
+  const rootElement = document.getElementById("mindmap");
+  if (!rootElement) return;
 
-## ¿Qué crees que mueve la historia?
-- Condiciones materiales (trabajo, economía, tecnología, genética)
-	- **==Materialista==**
-- Ideas y razón (principios que guían a la humanidad)
-	- **==Idealista==**
-- Lo material y lo ideal se condicionan mutuamente (la cultura puede transformar el poder económico)
-	- **==Historicista==**
-## ¿Cómo entiendes la dinámica del cambio?
-- Todo está en movimiento por contradicciones internas (genera riqueza y desigualdad que empuja al cambio)
-	- **==Dialéctico==**
-- La realidad es estable y existen verdades eternas (esencias inmutables, instituciones que apenas cambian)
-	- **==Metafísico==**
-- Funciona como una máquina de causa y efecto (explicación lineal)
-	- **==Mecanicista==**
-- La historia tiene un rumbo marcado e inevitable (destino fijo)
-	- **==Determinista==**
-- Depende de accidentes, luchas o azares (resultado de una cadena de decisiones y casualidades)
-	- **==Contingentista==**
-## ¿De dónde nace el cambio?
-- Nace de imaginar futuros mejores y luchar por hacerlos realidad (los ideales mueven la historia)
-	- **==Utópico==**
-- Nace de entender las contradicciones materiales que empujan al cambio (no basta con imaginar)
-	- **==Científico==**
-- Depende de la voluntad y la acción humana (las revoluciones se hacían, no se esperaban)
-	- **==Voluntarista==**
--   No hay grandes relatos universales, solo cambios locales fragmentados (cuestiona utopías y determinismos)
-	- **==Escéptico==**
-	
-## Q1 ¿Aceptas el capitalismo como sistema?
-- El mercado y la competencia son la mejor manera de organizar la sociedad, es un sistema insuperable
-  - **==Capitalista==**
-- Funciona, pero necesita límites y regulaciones (el Estado debe intervenir para frenar excesos)
-  - **==Reformista==**
-- Es un sistema de explotación que debe abolirse incluso desmantelarse (es la esencia misma del sistema)
-  - **==Anticapitalista==**
-- Ha servido para avanzar a la humanidad, pero que ya debe dar paso a un nuevo sistema
-  - **==Postcapitalista==**
+  const markmapGlobal = window.markmap || {};
+  const { Markmap, Toolbar, Transformer, deriveOptions } = markmapGlobal;
+  if (!Markmap || !Toolbar || !Transformer) {
+    console.error("No se pudieron cargar las bibliotecas de Markmap.");
+    return;
+  }
 
-## Q2 ¿Quién debe tener la propiedad de los medios de producción?
-- Deben estar siempre en manos de particulares o de empresas (propiedad privada es un derecho natural)
-  - **==Privatista==**
-- Deben ser comunes, gestionados por los trabajadores o la comunidad (socialización de los medios)
-  - **==Colectivista==**
-- Deben convivir distintos tipos de propiedad (privada, pública y cooperativa)
-  - **==Pluralista==**
-- Propiedad privada, pero bajo control estricto del Estado (tarifas fijadas por ley para evitar abusos)
-  - **==Regulacionista==**
+  const transformer = new Transformer();
+  const { root, frontmatter } = transformer.transform(markdownText);
+  const fmOptions = (frontmatter && frontmatter.markmap) || {};
+  const options = typeof deriveOptions === "function" ? deriveOptions(fmOptions) : fmOptions;
+  const mm = Markmap.create("svg#mindmap", options || {}, root);
+  mm.fit();
 
-## Q3 ¿Qué papel debe tener el Estado?
-- Un estado fuerte y centralizado que organice la vida social (El Leviatán, planificar la economía)
-  - **==Estatista==**
-- Debe desaparecer porque es un instrumento de dominación
-  - **==Antiestatista==**
-- Debe existir para regular y redistribuir, sin eliminar el mercado (garantizar servicios públicos)
-  - **==Social==**
-- Un estado débil y descentralizado (decisiones cerca de la gente, federación de municipios)
-  - **==Descentralista==**
-- Debe reducirse a funciones básicas (proteger la propiedad, orden, contratos)
-  - **==Miniarquista==**
-
-## Q4 ¿Quién debe garantizar sanidad y educación?
-- Deben ser garantizados por el Estado para todos (derechos universales, no son mercancías)
-  - **==Universalista==**
-- Bienes privados que cada persona compra según sus posibilidades (la competencia ofrece más eficiencia)
-  - **==Privatista==**
-- Sistema básico público complementado con opciones privadas (enfoque mixto)
-  - **==Complementarista==**
-- Gestionados desde las propias comunidades (ayuda mutua, escuelas autogestionadas)
-  - **==Comunitario==**
-
-## Q5 ¿Prefieres orden o libertad?
-- Orden por encima de todo, aunque limite libertades (la autoridad fuerte evita el caos)
-  - **==Autoritario==**
-- Priorizar la libertad individual aunque pueda suponer caos (valor supremo, sin interferencias)
-  - **==Libertario==**
-- Equilibrio entre orden y libertad (libertad central con normas básicas contra el daño a terceros)
-  - **==Equilibrado==**
-- Valorar especialmente el orden social, con cierto margen de libertades básicas (priorizar estabilidad sobre autonomía individual)
-  - **==Conservador del Orden==**
-
-## Q6 ¿Quién debe gobernar?
-- Debe gobernar el pueblo soberano (voto, asambleas, referéndum)
-  - **==Democrático==**
-- Debe gobernar un líder fuerte que concentre el poder (garantizar estabilidad y dirección)
-  - **==Caudillista o Personalista==**
-- Deben gobernar los expertos (economistas, científicos, ingenieros)
-  - **==Tecnocrático==**
-- Debe gobernar el Estado central como representante de la sociedad (el Partido-Estado asume el poder)
-  - **==Estatista==**
-- Nadie debe gobernar sobre nadie, decisiones colectivas en asambleas (búsqueda de consensos)
-  - **==Asamblearista==**
-
-## Q7 ¿Existen las clases sociales o solo individuos?
-- La sociedad está dividida en clases con intereses en conflicto (la historia es lucha de clases)
-  - **==Clasista (Marxista)==**
-- Solo individuos que ascienden o caen según su mérito (la desigualdad refleja talento y esfuerzo)
-  - **==Individualista==**
-- Barreras estructurales que pueden mitigarse con políticas públicas (becas, impuestos progresivos)
-  - **==Reformista Social==**
-- La clase se entrecruza con género, raza o migración (opresiones combinadas)
-  - **==Interseccional==**
-
-## Q8 ¿Cómo ves la inmigración?
-- Es una amenaza que debe limitarse (proteger fronteras, identidad y cohesión nacional)
-  - **==Restrictivo==**
-- Enriquece a la sociedad y debe facilitarse (derecho humano, ciudadanía del mundo)
-  - **==Aperturista (Cosmopolita)==**
-- Debe haber inmigración pero regulada (gestión ordenada para proteger a locales y migrantes)
-  - **==Regulacionista==**
-- Consecuencia de desigualdades globales (resultado de una economía global desigual, Sistema Mundo)
-  - **==Estructuralista (Postcolonial)==**
-
-## Q9 ¿Cómo entiendes la identidad de género?
-- Identidades trans deben ser reconocidas y respetadas plenamente (libertad de autodeterminación)
-  - **==Transincluyente==**
-- El género en sí mismo es una categoría opresiva que debería abolirse (no más casillas de género ni expectativas culturales)
-  - **==Abolicionista del Género==**
-- Priorizar la diferencia biológica frente a la identidad de género (el sexo es una realidad material, políticas basadas en el sexo biológico)
-  - **==Biologicista==**
-- Asunto privado y el Estado no debe intervenir (prioridad en la libertad de elección individual)
-  - **==Liberal en Género==**
-
-## Q10 ¿Cuál es tu postura ante el feminismo?
-- Hombres y mujeres deben tener las mismas oportunidades dentro del marco social actual (igualdad salarial, reparto de cuidados)
-  - **==Igualitarista==**
-- Rechazar el feminismo (lo ve como un exceso, amenaza al orden social o "ideología de género")
-  - **==Antifeminista==**
-- El patriarcado es una estructura profunda que atraviesa todas las relaciones sociales (desmontar las estructuras desde la raíz)
-  - **==Feminista Radical==**
-- Debe cruzarse con clase, raza, sexualidad o migración (opresiones combinadas)
-  - **==Feminista Interseccional==**
-- La opresión de género es inseparable de la explotación económica y del capitalismo
-  - **==Feminista Socialista o Materialista (Anticapitalista)==**
-
-## Q11 ¿Qué lugar debe tener la religión en la política?
-- Debe guiar o controlar el poder político (leyes religiosas por encima de las civiles)
-  - **==Teocrático==**
-- Separación total entre religión y política (sin símbolos ni financiación a templos)
-  - **==Laicista==**
-- El Estado debe ser neutral y respetar todas las religiones sin identificarse con ninguna (garantizar la libertad religiosa)
-  - **==Secular==**
-- El Estado debe ser laico pero con un reconocimiento especial para la religión mayoritaria (privilegios históricos)
-  - **==Confesional==**
-
-## Q12 ¿Qué piensas de las naciones y fronteras?
-- La nación es lo primero (comunidad más importante con su propio Estado)
-  - **==Nacionalista==**
-- Lo importante es sentirse parte de la humanidad entera (fronteras como barreras artificiales)
-  - **==Cosmopolita==**
-- Naciones deben cooperar en igualdad sin dominación (solidaridad entre estados)
-  - **==Internacionalista==**
-- Cada pueblo tiene derecho a decidir su propio destino (autodeterminación)
-  - **==Soberanista==**
-- Una nación tiene derecho a expandirse y dominar a otras (intervenir para asegurar recursos o influencia)
-  - **==Imperialista==**
-- Pueblos colonizados deben liberarse (la colonización deshumaniza)
-  - **==Anticolonialista==**
-- Persisten estructuras coloniales en la economía, cultura o conocimiento después de la independencia
-  - **==Decolonial==**
-
-## Q13 ¿Cómo organizar el territorio?
-- El poder debe estar en un centro fuerte y unificado (soberanía indivisible)
-  - **==Centralista (Jacobino)==**
-- El poder debe repartirse entre distintos estados o regiones dentro de una federación
-  - **==Federalista==**
-- Unión muy flexible donde las comunidades son prácticamente independientes (cooperan sin un gobierno central)
-  - **==Confederalista==**
-- El poder debe residir sobre todo en municipios o comunidades locales
-  - **==Comunitarista (Municipalismo Libertario)==**
-
-## Q14 ¿Debe existir la propiedad intelectual y con qué límites?
-- Las ideas deben ser propiedad privada protegida (copyright y patentes incentivan la innovación)
-  - **==Propietarista==**
-- El conocimiento debe ser compartido libremente (las ideas son un bien común, sin barreras)
-  - **==Comunalista del Saber==**
-- Un equilibrio, cierta protección, pero con límites (regularla con flexibilidad, como el copy left)
-  - **==Pragmático==**
-
-## Q15 ¿Cómo debe funcionar la justicia penal?
-- Debe castigar de forma proporcional al delito (la pena es un deber moral, mano dura)
-  - **==Retributivista o Punitivo==**
-- El objetivo debe ser reinsertar al delincuente (rehabilitación, educación, reintegración social)
-  - **==Rehabilitador==**
-- Lo importante es reparar el daño a la víctima y a la comunidad (diálogo, asunción de responsabilidades)
-  - **==Restaurativo==**
-- Debe servir sobre todo para disuadir y prevenir futuros delitos (vigilancia, penas ejemplares)
-  - **==Preventivista==**
-
-## Q16 ¿Cómo afrontar la crisis ecológica?
-- La naturaleza está para explotarla y dominarla (el progreso justifica el uso intensivo de recursos)
-  - **==Productivista==**
-- Debemos reducir drásticamente el consumo y la producción (crecimiento infinito incompatible)
-  - **==Decrecentista==**
-- Es posible compatibilizar crecimiento económico y sostenibilidad (tecnología y energías renovables)
-  - **==Verde o Ecocapitalista==**
-- La crisis ecológica solo puede resolverse transformando el sistema económico (capitalismo y ecología incompatibles)
-  - **==Ecosocialista==**
-- Defender la ecología con medios autoritarios y excluyentes (nacionalismo y xenofobia)
-  - **==Ecofascista==**
-- Negar que exista una crisis ecológica o que el cambio climático sea un invento político
-  - **==Negacionista==**
-
-## Q17 ¿Cómo entiendes la guerra y la paz?
-- Rechazar la guerra bajo cualquier forma (la violencia nunca es una solución justa, desarme)
-  - **==Pacifista==**
-- Creer en la fuerza militar como motor político (la guerra es la continuación de la política, aumentar el gasto militar)
-  - **==Militarista==**
-- Aceptar que la guerra forma parte inevitable de las relaciones internacionales (los estados buscan poder y seguridad)
-  - **==Realista==**
-- La violencia puede ser necesaria para acabar con la opresión (medio contra un sistema injusto, liberación)
-  - **==Revolucionario==**
-
-## Q18 ¿Crees en un gobierno global?
-- Cada estado debe mantener su independencia absoluta (soberanía es el núcleo de la política)
-  - **==Soberanista==**
-- La humanidad debería organizarse como una federación global (solo un gobierno mundial podría garantizar la paz)
-  - **==Federalista Mundial==**
-- Defender la cooperación entre estados a través de organismos internacionales (coordinar a los países en igualdad)
-  - **==Multilateralista==**
-- Creer en un orden mundial basado en la paz perpetua (ciudadanía global con derechos compartidos)
-  - **==Cosmopolita Cantiano==**
-
-## Q19 ¿Crees que la historia avanza hacia el progreso?
-- Confiar en que la humanidad avanza hacia algo mejor (más derechos, menos pobreza, más conocimiento)
-  - **==Optimista==**
-- Creer que la humanidad va hacia el desastre (decadencia, colapso global)
-  - **==Pesimista==**
-- Entender la historia como trágica (sucesión de luchas y pérdidas sin garantía de avance)
-  - **==Trágico==**
-- La historia carece de sentido o de dirección (las narrativas de progreso son ilusiones)
-  - **==Niilista==**
-
-## Q20 ¿Crees que la sociedad debe avanzar o conservar lo existente?
-- Creer que la sociedad debe avanzar hacia nuevos valores y formas de vida (ampliar derechos, el futuro puede ser mejor)
-  - **==Progresista==**
-- Creer que hay cosas esenciales que deben preservarse para no caer en el caos (evolución gradual, no destruir tradiciones)
-  - **==Conservador==**
-- Pensar que la sociedad debe volver a un orden anterior (el presente es decadencia, restaurar valores tradicionales)
-  - **==Reaccionario==**
-- Analizar cada cambio según su contexto sin alinearse con progreso o retroceso (el valor de una reforma depende de sus resultados)
-  - **==Contextualista o Pragmático==**
-`;
+  const toolbar = new Toolbar();
+  const toolbarNode = toolbar.render();
+  toolbarNode.style.position = "absolute";
+  toolbarNode.style.bottom = "20px";
+  toolbarNode.style.right = "20px";
+  document.body.append(toolbarNode);
+  toolbar.attach(mm);
 
   const showMarkdownBtn = document.getElementById("showMarkdownBtn");
   const markdownModal = document.getElementById("markdownModal");
   const markdownViewer = document.getElementById("markdownViewer");
   const closeMarkdownBtn = document.getElementById("closeMarkdownBtn");
-  const downloadMarkdownBtn = document.getElementById("downloadMarkdownBtn");
-
-  const renderMarkdown = () => {
-    if (markdownViewer.dataset.rendered === "true") return;
-    if (window.marked) {
-      markdownViewer.innerHTML = window.marked.parse(markdownText);
-    } else {
-      markdownViewer.textContent = markdownText;
-    }
-    markdownViewer.dataset.rendered = "true";
-  };
 
   const openModal = () => {
-    renderMarkdown();
+    if (markdownViewer) {
+      markdownViewer.textContent = markdownText;
+    }
     markdownModal.classList.add("visible");
-    markdownViewer.focus();
   };
 
   const closeModal = () => {
     markdownModal.classList.remove("visible");
-  };
-
-  const downloadMarkdown = () => {
-    const blob = new Blob([markdownText], { type: "text/markdown;charset=utf-8" });
-    const url = URL.createObjectURL(blob);
-    const anchor = document.createElement("a");
-    anchor.href = url;
-    anchor.download = "catalogo-ideologico-ampliado.md";
-    document.body.appendChild(anchor);
-    anchor.click();
-    document.body.removeChild(anchor);
-    URL.revokeObjectURL(url);
   };
 
   showMarkdownBtn?.addEventListener("click", openModal);
@@ -499,12 +235,12 @@ markmap:
       closeModal();
     }
   });
-  downloadMarkdownBtn?.addEventListener("click", downloadMarkdown);
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && markdownModal.classList.contains("visible")) {
       closeModal();
     }
   });
 })();
-</script></body>
+</script>
+</body>
 </html>
