@@ -268,38 +268,25 @@ function fetchTelegramUpdates() {
 
   const chatFilter = props.getProperty('TG_CHAT_ID'); // opcional
   let offset = parseInt(props.getProperty('TG_OFFSET') || '0', 10);
+  if (isNaN(offset)) offset = 0;
 
-  const url = getTelegramUrl_(token, 'getUpdates');
-  const payload = {
-    method: 'post',
-    contentType: 'application/json',
-    payload: JSON.stringify({
-      offset: offset ? offset + 1 : undefined,
-      timeout: 0
-    }),
-    muteHttpExceptions: true
-  };
+  const telegramResult = telegramGetUpdates_(token, offset);
+  if (!telegramResult.ok) return;
 
-  const resp = UrlFetchApp.fetch(url, payload);
-  const data = JSON.parse(resp.getContentText());
-
-  if (!data.ok) {
-    Logger.log('Telegram getUpdates NO ok: ' + resp.getContentText());
+  const updates = telegramResult.updates;
+  if (!updates.length) {
+    props.setProperty('TG_OFFSET', String(telegramResult.newOffset));
     return;
   }
 
-  const updates = data.result || [];
-  if (!updates.length) return;
-
-  updates.forEach(upd => {
+  updates.forEach(function(upd) {
     try {
-      const updateId = upd.update_id;
-      offset = Math.max(offset, updateId);
+      processButtonControlUpdate_(token, upd, TG_CHAT_COM, props);
 
-      // Mensajes estándar
+      // Mensajes estandar
       if (upd.message && upd.message.text) {
         const chatId = upd.message.chat && upd.message.chat.id ? String(upd.message.chat.id) : '';
-        if (chatFilter && chatFilter !== chatId) return; // filtra por chat si se configuró
+        if (chatFilter && chatFilter !== chatId) return; // filtra por chat si se configuro
 
         const text = upd.message.text.trim();
         const parsed = parseStructuredMessage_(text);
@@ -318,7 +305,7 @@ function fetchTelegramUpdates() {
         const cq = upd.callback_query;
         const chatId = cq.message && cq.message.chat && cq.message.chat.id ? String(cq.message.chat.id) : '';
         if (chatFilter && chatFilter !== chatId) return;
-        // Aquí podrías parsear cq.data si decides armar “botones‑formulario”
+        // Aqui podrias parsear cq.data si decides armar botones tipo formulario
       }
 
     } catch (e) {
@@ -327,18 +314,18 @@ function fetchTelegramUpdates() {
   });
 
   // guarda offset para no re-procesar
-  props.setProperty('TG_OFFSET', String(offset));
+  props.setProperty('TG_OFFSET', String(telegramResult.newOffset));
 }
 
 /**
- * Intenta parsear un mensaje con formato estructurado "tipo formulario".
- * Acepta cualquiera de estos formatos (sin importar el orden de campos):
+ * Intenta interpretar un mensaje con estructura tipo formulario.
+ * Soporta variantes como:
  *
- *   FECHA=2025-08-24|ITEM=Útiles escolares|COSTO=12345
+ *   FECHA=2025-08-24|ITEM=Utiles escolares|COSTO=12345
  *   FECHA=24/08/2025 | ITEM=Transporte | VALOR=18.000
  *   ITEM=Comida\nCOSTO=12,500\nFECHA=2025-08-23
  *
- * Claves admitidas (insensibles a mayúsculas):
+ * Claves admitidas (sin distincion de mayusculas):
  *   FECHA / DATE
  *   ITEM / CONCEPTO / DESCRIPCION
  *   COSTO / VALOR / MONTO
@@ -483,6 +470,165 @@ function sendMessage_(token, chatId, text, extra) {
   return json;
 }
 
+function telegramGetUpdates_(token, offset) {
+  const safeOffset = typeof offset === 'number' && !isNaN(offset) ? offset : 0;
+  const url = getTelegramUrl_(token, 'getUpdates');
+  const payload = {
+    method: 'post',
+    contentType: 'application/json',
+    payload: JSON.stringify({
+      offset: safeOffset ? safeOffset + 1 : undefined,
+      timeout: 0
+    }),
+    muteHttpExceptions: true
+  };
+
+  try {
+    const resp = UrlFetchApp.fetch(url, payload);
+    const data = JSON.parse(resp.getContentText() || '{}');
+    if (!data.ok) {
+      Logger.log('telegramGetUpdates_ error: ' + resp.getContentText());
+      return { ok: false, updates: [], newOffset: safeOffset };
+    }
+
+    const updates = data.result || [];
+    let newOffset = safeOffset;
+    updates.forEach(function(upd) {
+      if (typeof upd.update_id === 'number') {
+        newOffset = Math.max(newOffset, upd.update_id);
+      }
+    });
+
+    return { ok: true, updates: updates, newOffset: newOffset };
+  } catch (err) {
+    Logger.log('telegramGetUpdates_ exception: ' + err.message);
+    return { ok: false, updates: [], newOffset: safeOffset };
+  }
+}
+
+function isExactKeyword_(text, keyword) {
+  if (!text || !keyword) return false;
+  return text.trim().toUpperCase() === keyword.trim().toUpperCase();
+}
+
+function buildInlineKeyboard_(options, callbackPrefix) {
+  if (!Array.isArray(options) || !options.length) return null;
+  const row = options.map(function(opt) {
+    if (opt === null || opt === undefined) return null;
+    if (typeof opt === 'string') {
+      const label = opt.trim();
+      if (!label) return null;
+      const prefix = callbackPrefix || '';
+      const data = prefix ? prefix + label : label;
+      return {
+        text: label,
+        callback_data: data
+      };
+    }
+    if (typeof opt === 'object') {
+      const label = String(opt.text || opt.label || '').trim();
+      const data = opt.callback_data || opt.data;
+      if (!label || !data) return null;
+      return {
+        text: label,
+        callback_data: String(data)
+      };
+    }
+    return null;
+  }).filter(Boolean);
+
+  if (!row.length) return null;
+  return { inline_keyboard: [row] };
+}
+
+function sendInlineKeyboardMessage_(token, chatId, text, options, callbackPrefix) {
+  const replyMarkup = buildInlineKeyboard_(options, callbackPrefix);
+  if (!replyMarkup) return null;
+  return sendMessage_(token, chatId, text, { reply_markup: replyMarkup });
+}
+
+function answerCallbackQuery_(token, callbackQueryId, text, showAlert) {
+  if (!callbackQueryId) return null;
+  const url = getTelegramUrl_(token, 'answerCallbackQuery');
+  const payload = {
+    callback_query_id: callbackQueryId,
+    text: text || '',
+    show_alert: Boolean(showAlert)
+  };
+
+  const resp = UrlFetchApp.fetch(url, {
+    method: 'post',
+    contentType: 'application/json',
+    payload: JSON.stringify(payload),
+    muteHttpExceptions: true
+  });
+
+  const json = JSON.parse(resp.getContentText() || '{}');
+  if (!json.ok) Logger.log('answerCallbackQuery_ error: ' + resp.getContentText());
+  return json;
+}
+
+function isTargetChat_(chat, targetChatId) {
+  if (!chat || typeof chat.id === 'undefined' || chat.id === null) return false;
+  return String(chat.id) === String(targetChatId);
+}
+
+function extractCallbackOption_(data, prefix) {
+  if (!data && data !== 0) return '';
+  const raw = String(data);
+  const pref = prefix || '';
+  if (!pref) return raw;
+  return raw.indexOf(pref) === 0 ? raw.slice(pref.length) : '';
+}
+
+function processButtonControlUpdate_(token, update, targetChatId, props) {
+  if (!update) return false;
+  const chatTarget = targetChatId != null ? String(targetChatId) : String(TG_CHAT_COM);
+  const scriptProps = props || PropertiesService.getScriptProperties();
+  const lastKey = TG_BUTTON_LAST_UPDATE_KEY;
+
+  const updateId = typeof update.update_id === 'number' ? update.update_id : null;
+  if (updateId !== null) {
+    const lastRaw = scriptProps.getProperty(lastKey);
+    const lastId = lastRaw ? parseInt(lastRaw, 10) : null;
+    if (lastId !== null && !isNaN(lastId) && updateId <= lastId) {
+      return false; // ya gestionado
+    }
+  }
+
+  let handled = false;
+
+  if (update.message && update.message.text && isTargetChat_(update.message.chat, chatTarget)) {
+    if (isExactKeyword_((update.message.text || ''), TG_BUTTON_TRIGGER_KEYWORD)) {
+      const prompt = 'Selecciona una opcion:';
+      const sent = sendInlineKeyboardMessage_(token, update.message.chat.id, prompt, TG_BUTTON_OPTIONS, TG_BUTTON_CALLBACK_PREFIX);
+      if (!sent || !sent.ok) {
+        Logger.log('processButtonControlUpdate_ no pudo enviar los botones');
+      }
+      handled = true;
+    }
+  }
+
+  if (update.callback_query && update.callback_query.message && isTargetChat_(update.callback_query.message.chat, chatTarget)) {
+    const cq = update.callback_query;
+    const option = extractCallbackOption_(cq.data, TG_BUTTON_CALLBACK_PREFIX);
+    if (option) {
+      const responseText = 'usted digito ' + option;
+      sendMessage_(token, cq.message.chat.id, responseText);
+      answerCallbackQuery_(token, cq.id, 'Recibido: ' + option, false);
+      handled = true;
+    } else {
+      answerCallbackQuery_(token, cq.id, '', false);
+    }
+  }
+
+  if (handled && updateId !== null) {
+    scriptProps.setProperty(lastKey, String(updateId));
+  }
+
+  return handled;
+}
+
 function getSheet_() {
   const props = PropertiesService.getScriptProperties();
   const ssId = props.getProperty('SS_ID');
@@ -560,3 +706,4 @@ function debugLastChatId_() {
   const last = (data.result || []).reverse().find(x => x.message && x.message.chat);
   if (last) Logger.log('Último chat_id: ' + last.message.chat.id);
 }
+
