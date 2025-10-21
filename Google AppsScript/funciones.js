@@ -1,3 +1,89 @@
+const FORMA1_SPREADSHEET_ID = '1S3qYQGNMIOEnpHlBpku9x9CJgaLKqMH22fn_Rg08MKU';
+const FORMA1_SHEET_NAME = 'forma1';
+const FORMA1_HEADER = ['FECHA', 'USUARIO', 'NUMERO', 'FECHAHORA'];
+
+function submitForma1Entry(formData) {
+  if (!formData) {
+    throw new Error('No se recibieron datos del formulario.');
+  }
+
+  const rawDate = formData.fecha;
+  const rawUsuario = formData.usuario;
+  const rawNumero = formData.numero;
+
+  if (!rawDate) {
+    throw new Error('La fecha es obligatoria.');
+  }
+  const usuario = (rawUsuario || '').trim();
+  if (!usuario) {
+    throw new Error('El usuario es obligatorio.');
+  }
+
+  const numero = parseInt(rawNumero, 10);
+  if (isNaN(numero) || numero < 1 || numero > 5) {
+    throw new Error('El numero debe estar entre 1 y 5.');
+  }
+
+  const dateParts = String(rawDate).split('-');
+  if (dateParts.length !== 3) {
+    throw new Error('La fecha proporcionada no es valida.');
+  }
+
+  const year = Number(dateParts[0]);
+  const month = Number(dateParts[1]);
+  const day = Number(dateParts[2]);
+
+  if ([year, month, day].some(function(value) { return isNaN(value); })) {
+    throw new Error('La fecha proporcionada no es valida.');
+  }
+
+  if (month < 1 || month > 12 || day < 1 || day > 31) {
+    throw new Error('La fecha proporcionada no es valida.');
+  }
+
+  const fecha = new Date(year, month - 1, day);
+  if (fecha.getFullYear() !== year || (fecha.getMonth() + 1) !== month || fecha.getDate() !== day) {
+    throw new Error('La fecha proporcionada no es valida.');
+  }
+
+  const ss = SpreadsheetApp.openById(FORMA1_SPREADSHEET_ID);
+  let sheet = ss.getSheetByName(FORMA1_SHEET_NAME);
+  if (!sheet) {
+    sheet = ss.insertSheet(FORMA1_SHEET_NAME);
+  }
+
+  ensureForma1Header_(sheet);
+
+  sheet.appendRow([fecha, usuario, numero, new Date()]);
+  return 'Registro almacenado correctamente.';
+}
+
+function ensureForma1Header_(sheet) {
+  if (!sheet) {
+    return;
+  }
+
+  const expected = FORMA1_HEADER;
+  const lastRow = sheet.getLastRow();
+
+  if (lastRow === 0) {
+    sheet.getRange(1, 1, 1, expected.length).setValues([expected]);
+    sheet.getRange(1, 1, 1, expected.length).setFontWeight('bold');
+    return;
+  }
+
+  const headerValues = sheet.getRange(1, 1, 1, expected.length).getValues()[0];
+  const matches = expected.every(function(value, index) {
+    return (headerValues[index] || '') === value;
+  });
+
+  if (!matches) {
+    sheet.insertRowBefore(1);
+    sheet.getRange(1, 1, 1, expected.length).setValues([expected]);
+    sheet.getRange(1, 1, 1, expected.length).setFontWeight('bold');
+  }
+}
+
 /** /INSERTA UN ARREGLO BIDIMENSIONAL EN UNA HOJA DE CALCULO /**/
 function insertarTablaEnHoja(libroId,nombreHoja,tablaAr, fila = 0, columna = 0,rangoUbicacion="A1:J200"){
     var log = Logger.log;
