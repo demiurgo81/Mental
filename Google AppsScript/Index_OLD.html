@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        color: #333;
+      }
+      form {
+        max-width: 400px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      label {
+        font-weight: bold;
+      }
+      input,
+      select,
+      button {
+        padding: 8px;
+        font-size: 14px;
+      }
+      button {
+        cursor: pointer;
+        background-color: #4285f4;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+      }
+      button:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+      #statusMessage {
+        margin-top: 16px;
+        padding: 10px;
+        border-radius: 4px;
+        display: none;
+      }
+      #statusMessage.success {
+        display: block;
+        background-color: #e6f4ea;
+        border: 1px solid #34a853;
+        color: #0b8043;
+      }
+      #statusMessage.error {
+        display: block;
+        background-color: #fce8e6;
+        border: 1px solid #ea4335;
+        color: #a50e0e;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="file-card">
+        <h3>🧠 Mapas Mentales Juan Pablo</h3>
+        <p><a href="?page=catalogo_Ideologico" target="_self">Ideologias</a></p>
+        <p><a href="?page=pagina1" target="_self">Pagina 1</a></p>
+    </div>
+    <form id="entryForm">
+      <div>
+        <label for="fecha">Fecha</label>
+        <input type="date" id="fecha" name="fecha" required>
+      </div>
+      <div>
+        <label for="usuario">Usuario</label>
+        <input type="text" id="usuario" name="usuario" maxlength="100" required>
+      </div>
+      <div>
+        <label for="numero">Numero</label>
+        <select id="numero" name="numero" required>
+          <option value="" disabled selected>Selecciona una opcion</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </div>
+      <button type="submit" id="submitButton">Enviar</button>
+    </form>
+
+    <div id="statusMessage"></div>
+
+    <script>
+      (function() {
+        var form = document.getElementById('entryForm');
+        var statusMessage = document.getElementById('statusMessage');
+        var submitButton = document.getElementById('submitButton');
+
+        form.addEventListener('submit', function(event) {
+          event.preventDefault();
+          clearStatus();
+
+          var formData = {
+            fecha: document.getElementById('fecha').value,
+            usuario: document.getElementById('usuario').value.trim(),
+            numero: document.getElementById('numero').value
+          };
+
+          if (!isFormValid(formData)) {
+            return;
+          }
+
+          setLoading(true);
+
+          google.script.run
+            .withSuccessHandler(function(message) {
+              showStatus(message || 'Registro almacenado correctamente.', 'success');
+              alert('Registro enviado con exito');
+              form.reset();
+              setLoading(false);
+            })
+            .withFailureHandler(function(error) {
+              var text = (error && error.message) ? error.message : 'Ocurrio un error al enviar el formulario.';
+              showStatus(text, 'error');
+              alert(text);
+              setLoading(false);
+            })
+            .submitForma1Entry(formData);
+        });
+
+        function isFormValid(data) {
+          if (!data.fecha) {
+            showStatus('Selecciona una fecha valida.', 'error');
+            return false;
+          }
+          if (!data.usuario) {
+            showStatus('Ingresa un usuario.', 'error');
+            return false;
+          }
+          if (!data.numero) {
+            showStatus('Selecciona un numero entre 1 y 5.', 'error');
+            return false;
+          }
+          return true;
+        }
+
+        function showStatus(message, type) {
+          statusMessage.textContent = message;
+          statusMessage.className = type === 'success' ? 'success' : 'error';
+          statusMessage.style.display = 'block';
+        }
+
+        function clearStatus() {
+          statusMessage.textContent = '';
+          statusMessage.className = '';
+          statusMessage.style.display = 'none';
+        }
+
+        function setLoading(isLoading) {
+          submitButton.disabled = isLoading;
+          submitButton.textContent = isLoading ? 'Enviando...' : 'Enviar';
+          if (!isLoading && statusMessage.textContent) {
+            statusMessage.style.display = 'block';
+          }
+        }
+      })();
+    </script>
+  </body>
+</html>

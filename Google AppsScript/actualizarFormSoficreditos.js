@@ -1,5 +1,5 @@
 function probarFunciones() {
-  logDeArray(SPREADSHEET_ID);
+  monitorButtonControl();
   //setInitialProps_();
   //sendQuickKeyboard_();
   //debugLastChatId_();

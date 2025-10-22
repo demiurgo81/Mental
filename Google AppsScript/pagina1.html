@@ -1,0 +1,45 @@
+<div>
+  <h1>Página 1: Registro</h1>
+  <p>Por favor, complete el siguiente formulario.</p>
+
+  <style>
+    #statusMessage.success {
+      color: green;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    #statusMessage.error {
+      color: red;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+  </style>
+
+  <form id="entryForm">
+    <div>
+      <label for="fecha">Fecha</label>
+      <input type="date" id="fecha" name="fecha" required>
+    </div>
+    <br>
+    <div>
+      <label for="usuario">Usuario</label>
+      <input type="text" id="usuario" name="usuario" maxlength="100" required>
+    </div>
+    <br>
+    <div>
+      <label for="numero">Numero</label>
+      <select id="numero" name="numero" required>
+        <option value="" disabled selected>Selecciona una opcion</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+    </div>
+    <br>
+    <button type="submit" id="submitButton">Enviar</button>
+  </form>
+
+  <div id="statusMessage" style="display: none;"></div>
+</div>

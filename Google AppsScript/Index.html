@@ -5,86 +5,138 @@
     <style>
       body {
         font-family: Arial, sans-serif;
-        margin: 20px;
-        color: #333;
+        margin: 0;
+        display: grid;
+        grid-template-columns: 200px 1fr;
+        min-height: 100vh;
       }
-      form {
-        max-width: 400px;
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
+      nav {
+        background-color: #f4f4f4;
+        padding: 20px;
+        border-right: 1px solid #ddd;
       }
-      label {
+      nav ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      nav li {
+        margin-bottom: 10px;
+      }
+      nav a {
+        text-decoration: none;
+        color: #007BFF;
+        cursor: pointer;
         font-weight: bold;
       }
-      input,
-      select,
-      button {
-        padding: 8px;
-        font-size: 14px;
+      nav a:hover {
+        text-decoration: underline;
       }
-      button {
-        cursor: pointer;
-        background-color: #4285f4;
-        color: #fff;
-        border: none;
-        border-radius: 4px;
+      main {
+        padding: 20px;
       }
-      button:disabled {
-        opacity: 0.6;
-        cursor: not-allowed;
-      }
-      #statusMessage {
-        margin-top: 16px;
-        padding: 10px;
-        border-radius: 4px;
-        display: none;
-      }
-      #statusMessage.success {
-        display: block;
-        background-color: #e6f4ea;
-        border: 1px solid #34a853;
-        color: #0b8043;
-      }
-      #statusMessage.error {
-        display: block;
-        background-color: #fce8e6;
-        border: 1px solid #ea4335;
-        color: #a50e0e;
+      #loader {
+        display: none; /* Oculto por defecto */
+        font-style: italic;
       }
     </style>
   </head>
   <body>
-    <form id="entryForm">
-      <div>
-        <label for="fecha">Fecha</label>
-        <input type="date" id="fecha" name="fecha" required>
-      </div>
-      <div>
-        <label for="usuario">Usuario</label>
-        <input type="text" id="usuario" name="usuario" maxlength="100" required>
-      </div>
-      <div>
-        <label for="numero">Numero</label>
-        <select id="numero" name="numero" required>
-          <option value="" disabled selected>Selecciona una opcion</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select>
-      </div>
-      <button type="submit" id="submitButton">Enviar</button>
-    </form>
 
-    <div id="statusMessage"></div>
+    <nav>
+      <h3>Navegación</h3>
+      <ul>
+        <li><a onclick="cargarPagina('inicio')">Inicio</a></li>
+        <li><a onclick="cargarPagina('pagina1')">Ir a Página 1</a></li>
+        <li><a onclick="cargarPagina('pagina2')">Ir a Página 2</a></li>
+      </ul>
+    </nav>
+
+    <main id="contenido">
+      <h2>Bienvenido a la Página Principal</h2>
+      <p>Seleccione una opción del menú de la izquierda para cargar contenido.</p>
+    </main>
+
+    <div id="loader">Cargando...</div>
 
     <script>
-      (function() {
+    
+      // --- SECCIÓN 1: LÓGICA DE NAVEGACIÓN ---
+
+      /**
+       * Inicia la carga de contenido llamando al servidor (Code.gs).
+       * @param {string} nombrePagina - El nombre del archivo HTML a cargar (ej. 'pagina1').
+       */
+      function cargarPagina(nombrePagina) {
+        if (nombrePagina === 'inicio') {
+          document.getElementById('contenido').innerHTML = 
+            '<h2>Bienvenido a la Página Principal</h2><p>Seleccione una opción del menú de la izquierda para cargar contenido.</p>';
+          return;
+        }
+
+        mostrarLoader(true);
+        google.script.run
+          // MODIFICADO: Usar función anónima para pasar nombrePagina al handler
+          .withSuccessHandler(function(html) {
+            mostrarContenido(html, nombrePagina);
+          })
+          .withFailureHandler(mostrarError)
+          .obtenerContenidoHtml(nombrePagina);
+      }
+
+      /**
+       * (Success Handler) Inserta el HTML recibido y llama a inicializadores específicos.
+       * @param {string} html - El contenido HTML devuelto por el servidor.
+       * @param {string} nombrePagina - El nombre de la página que se cargó.
+       */
+      function mostrarContenido(html, nombrePagina) {
+        mostrarLoader(false);
+        document.getElementById('contenido').innerHTML = html;
+        
+        // --- ESTA ES LA CLAVE ---
+        // Después de cargar el HTML, ejecutar el JS correspondiente.
+        if (nombrePagina === 'pagina1') {
+          inicializarFormPagina1();
+        }
+        // else if (nombrePagina === 'paginaX') {
+        //   inicializarOtraPagina();
+        // }
+      }
+
+      /**
+       * (Failure Handler) Muestra un error si la llamada a google.script.run falla.
+       */
+      function mostrarError(error) {
+        mostrarLoader(false);
+        document.getElementById('contenido').innerHTML = 
+          '<p style="color: red;">Error al cargar: ' + error.message + '</p>';
+        console.error('Error en google.script.run:', error);
+      }
+
+      /**
+       * Muestra u oculta un indicador visual de carga.
+       */
+      function mostrarLoader(mostrar) {
+        document.getElementById('loader').style.display = mostrar ? 'block' : 'none';
+      }
+
+      
+      // --- SECCIÓN 2: LÓGICA DEL FORMULARIO DE PÁGINA 1 ---
+      // (Este código se movió desde pagina1.html)
+
+      /**
+       * Esta función se llama DESPUÉS de que pagina1.html se carga.
+       */
+      function inicializarFormPagina1() {
+        // Elementos del DOM (ahora podemos encontrarlos)
         var form = document.getElementById('entryForm');
         var statusMessage = document.getElementById('statusMessage');
         var submitButton = document.getElementById('submitButton');
+
+        // Evitar doble binding si el usuario navega rápido
+        if (form.dataset.initialized) {
+          return;
+        }
+        form.dataset.initialized = 'true';
 
         form.addEventListener('submit', function(event) {
           event.preventDefault();
@@ -117,43 +169,52 @@
             })
             .submitForma1Entry(formData);
         });
+      }
 
-        function isFormValid(data) {
-          if (!data.fecha) {
-            showStatus('Selecciona una fecha valida.', 'error');
-            return false;
-          }
-          if (!data.usuario) {
-            showStatus('Ingresa un usuario.', 'error');
-            return false;
-          }
-          if (!data.numero) {
-            showStatus('Selecciona un numero entre 1 y 5.', 'error');
-            return false;
-          }
-          return true;
-        }
+      // --- Funciones auxiliares para el formulario (movidas aquí) ---
 
-        function showStatus(message, type) {
-          statusMessage.textContent = message;
-          statusMessage.className = type === 'success' ? 'success' : 'error';
-          statusMessage.style.display = 'block';
+      function isFormValid(data) {
+        if (!data.fecha) {
+          showStatus('Selecciona una fecha valida.', 'error');
+          return false;
         }
+        if (!data.usuario) {
+          showStatus('Ingresa un usuario.', 'error');
+          return false;
+        }
+        if (!data.numero) {
+          showStatus('Selecciona un numero entre 1 y 5.', 'error');
+          return false;
+        }
+        return true;
+      }
 
-        function clearStatus() {
-          statusMessage.textContent = '';
-          statusMessage.className = '';
-          statusMessage.style.display = 'none';
-        }
+      function showStatus(message, type) {
+        var statusMessage = document.getElementById('statusMessage');
+        if (!statusMessage) return; // Seguridad por si el DOM cambia
+        statusMessage.textContent = message;
+        statusMessage.className = type === 'success' ? 'success' : 'error';
+        statusMessage.style.display = 'block';
+      }
 
-        function setLoading(isLoading) {
-          submitButton.disabled = isLoading;
-          submitButton.textContent = isLoading ? 'Enviando...' : 'Enviar';
-          if (!isLoading && statusMessage.textContent) {
-            statusMessage.style.display = 'block';
-          }
-        }
-      })();
+      function clearStatus() {
+        var statusMessage = document.getElementById('statusMessage');
+        if (!statusMessage) return;
+        statusMessage.textContent = '';
+        statusMessage.className = '';
+        statusMessage.style.display = 'none';
+      }
+
+      function setLoading(isLoading) {
+        var submitButton = document.getElementById('submitButton');
+        if (!submitButton) return;
+        
+        submitButton.disabled = isLoading;
+        submitButton.textContent = isLoading ? 'Enviando...' : 'Enviar';
+        
+        // Corrección: No mostrar el status al terminar la carga, 
+        // los handlers (showStatus) se encargan de eso.
+      }
     </script>
   </body>
 </html>

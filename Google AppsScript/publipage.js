@@ -1,5 +1,9 @@
-function doGet() {
-  return HtmlService.createHtmlOutputFromFile('Index')
+function doGet(e) {
+  var allowedPages = ['Index', 'catalogo_Ideologico', 'pagina1'];
+  var requestedPage = (e && e.parameter && e.parameter.page) || 'Index';
+  var page = allowedPages.indexOf(requestedPage) !== -1 ? requestedPage : 'Index';
+
+  return HtmlService.createHtmlOutputFromFile(page)
       .setTitle('resumen')
       .setSandboxMode(HtmlService.SandboxMode.IFRAME);
 }

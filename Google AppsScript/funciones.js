@@ -792,4 +792,3 @@ function debugLastChatId_() {
   const last = (data.result || []).reverse().find(x => x.message && x.message.chat);
   if (last) Logger.log('Último chat_id: ' + last.message.chat.id);
 }
-
