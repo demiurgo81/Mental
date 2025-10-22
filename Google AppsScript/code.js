@@ -2,12 +2,7 @@
  * Configuración global para facilitar el mantenimiento.
  */
 const CONFIG = {
-  PAGINA_INICIAL: 'Index',
-  // --- AÑADIR ESTO ---
-  // Reemplace con el ID de su Hoja de Cálculo
-  ID_SHEET_DATOS: 'ID_DE_SU_HOJA_DE_CALCULO', 
-  // Nombre de la hoja (pestaña) donde se guardarán los datos
-  NOMBRE_HOJA_DATOS: 'Respuestas' 
+  PAGINA_INICIAL: 'Index'
 };
 
 /**
@@ -41,38 +36,4 @@ function obtenerContenidoHtml(nombreArchivo) {
   }
 }
 
-// --- FUNCIÓN NUEVA ---
-/**
- * Recibe los datos del formulario de pagina1.html y los guarda en un Sheet.
- * @param {object} formData - El objeto de datos enviado desde el cliente.
- * @returns {string} Un mensaje de éxito.
- * @throws {Error} Si no se puede escribir en el Sheet.
- */
-function submitForma1Entry(formData) {
-  try {
-    const sheet = SpreadsheetApp.openById(CONFIG.ID_SHEET_DATOS)
-                      .getSheetByName(CONFIG.NOMBRE_HOJA_DATOS);
-    
-    if (!sheet) {
-      throw new Error(`No se encontró la hoja: ${CONFIG.NOMBRE_HOJA_DATOS}`);
-    }
 
-    // Asegurarse que las cabeceras coincidan con el orden del formulario
-    // (Ej: Fecha, Usuario, Numero)
-    const fila = [
-      formData.fecha,
-      formData.usuario,
-      formData.numero
-    ];
-    
-    sheet.appendRow(fila);
-    
-    Logger.log(`Datos guardados: ${JSON.stringify(fila)}`);
-    return 'Registro almacenado correctamente.';
-
-  } catch (e) {
-    Logger.log(`Error al guardar en Sheet: ${e.message}`);
-    // Exponer un error amigable al cliente
-    throw new Error(`Error del servidor al guardar: ${e.message}`);
-  }
-}

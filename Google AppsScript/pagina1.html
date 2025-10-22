@@ -1,17 +1,62 @@
-<div>
-  <h1>Página 1: Registro</h1>
+<div class="pagina1-wrapper">
+  <h1>Pagina 1: Registro</h1>
   <p>Por favor, complete el siguiente formulario.</p>
 
   <style>
-    #statusMessage.success {
-      color: green;
-      font-weight: bold;
-      margin-top: 10px;
+    .pagina1-wrapper {
+      font-family: Arial, sans-serif;
     }
-    #statusMessage.error {
-      color: red;
+
+    .pagina1-wrapper form {
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .pagina1-wrapper label {
       font-weight: bold;
-      margin-top: 10px;
+    }
+
+    .pagina1-wrapper input,
+    .pagina1-wrapper select,
+    .pagina1-wrapper button {
+      padding: 8px;
+      font-size: 14px;
+    }
+
+    .pagina1-wrapper button {
+      cursor: pointer;
+      background-color: #4285f4;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+    }
+
+    .pagina1-wrapper button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    #statusMessage {
+      margin-top: 16px;
+      padding: 10px;
+      border-radius: 4px;
+      display: none;
+    }
+
+    #statusMessage.success {
+      display: block;
+      background-color: #e6f4ea;
+      border: 1px solid #34a853;
+      color: #0b8043;
+    }
+
+    #statusMessage.error {
+      display: block;
+      background-color: #fce8e6;
+      border: 1px solid #ea4335;
+      color: #a50e0e;
     }
   </style>
 
@@ -20,12 +65,10 @@
       <label for="fecha">Fecha</label>
       <input type="date" id="fecha" name="fecha" required>
     </div>
-    <br>
     <div>
       <label for="usuario">Usuario</label>
       <input type="text" id="usuario" name="usuario" maxlength="100" required>
     </div>
-    <br>
     <div>
       <label for="numero">Numero</label>
       <select id="numero" name="numero" required>
@@ -37,9 +80,8 @@
         <option value="5">5</option>
       </select>
     </div>
-    <br>
     <button type="submit" id="submitButton">Enviar</button>
   </form>
 
-  <div id="statusMessage" style="display: none;"></div>
+  <div id="statusMessage" role="alert" aria-live="polite"></div>
 </div>
