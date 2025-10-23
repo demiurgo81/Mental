@@ -46,8 +46,8 @@
       <h3>Navegación</h3>
       <ul>
         <li><a onclick="cargarPagina('inicio')">Inicio</a></li>
-        <li><a onclick="cargarPagina('pagina1')">Ir a Página 1</a></li>
-        <li><a onclick="cargarPagina('pagina2')">Ir a Página 2</a></li>
+        <li><a onclick="cargarPagina('pagina1')">Formulario</a></li>
+        <li><a onclick="cargarPagina('pagina2')">Test Ideologico</a></li>
       </ul>
     </nav>
 
@@ -96,10 +96,9 @@
         // Después de cargar el HTML, ejecutar el JS correspondiente.
         if (nombrePagina === 'pagina1') {
           inicializarFormPagina1();
+        } else if (nombrePagina === 'pagina2') {
+          inicializarPagina2();
         }
-        // else if (nombrePagina === 'paginaX') {
-        //   inicializarOtraPagina();
-        // }
       }
 
       /**
@@ -214,6 +213,172 @@
         
         // Corrección: No mostrar el status al terminar la carga, 
         // los handlers (showStatus) se encargan de eso.
+      }
+
+      // --- SECCIÓN 3: VISUALIZACIÓN DE MAPA PARA PÁGINA 2 ---
+
+      var MARKMAP_SCRIPT_SOURCES = [
+        'https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js',
+        'https://cdn.jsdelivr.net/npm/markmap-view@0.18.12/dist/browser/index.js',
+        'https://cdn.jsdelivr.net/npm/markmap-toolbar@0.18.12/dist/index.js',
+        'https://cdn.jsdelivr.net/npm/markmap-lib@0.18.12/dist/browser/index.iife.js'
+      ];
+      var markmapAssetsPromise = null;
+
+      function inicializarPagina2() {
+        var container = document.getElementById('mindmap');
+        var markdownNode = document.getElementById('pagina2Markdown');
+        if (!container || !markdownNode) {
+          console.warn('No se encontraron los elementos necesarios para inicializar pagina2.');
+          return;
+        }
+
+        if (container.dataset.initialized === 'true') {
+          return;
+        }
+        container.dataset.initialized = 'true';
+
+        obtenerMarkmap_().then(function(markmapGlobal) {
+          var markdownText = markdownNode.textContent || '';
+          if (!markdownText.trim()) {
+            console.warn('El contenido markdown para pagina2 está vacío.');
+            return;
+          }
+
+          container.innerHTML = '';
+
+          var Markmap = markmapGlobal.Markmap;
+          var Toolbar = markmapGlobal.Toolbar;
+          var Transformer = markmapGlobal.Transformer;
+          var deriveOptions = markmapGlobal.deriveOptions;
+
+          var transformer = new Transformer();
+          var result = transformer.transform(markdownText);
+          var frontmatter = result.frontmatter || {};
+          var fmOptions = frontmatter.markmap || {};
+          var options = typeof deriveOptions === 'function' ? deriveOptions(fmOptions) : fmOptions;
+
+          var mindmap = Markmap.create(container, options || {}, result.root);
+          if (mindmap && typeof mindmap.fit === 'function') {
+            requestAnimationFrame(function() {
+              mindmap.fit();
+            });
+          }
+
+          limpiarToolbarsPrevias_();
+          var toolbar = new Toolbar();
+          var toolbarNode = toolbar.render();
+          toolbarNode.style.position = 'absolute';
+          toolbarNode.style.bottom = '20px';
+          toolbarNode.style.right = '20px';
+          toolbarNode.dataset.pagina = 'pagina2';
+          document.body.appendChild(toolbarNode);
+          toolbar.attach(mindmap);
+
+          inicializarModalMarkdown_(markdownText);
+        }).catch(function(error) {
+          console.error('No fue posible inicializar el mapa mental de pagina2:', error);
+        });
+      }
+
+      function obtenerMarkmap_() {
+        if (window.markmap && window.markmap.Markmap && window.markmap.Toolbar && window.markmap.Transformer) {
+          return Promise.resolve(window.markmap);
+        }
+        if (markmapAssetsPromise) {
+          return markmapAssetsPromise;
+        }
+        markmapAssetsPromise = MARKMAP_SCRIPT_SOURCES.reduce(function(promise, src) {
+          return promise.then(function() {
+            return cargarScriptUnaVez_(src);
+          });
+        }, Promise.resolve()).then(function() {
+          if (!window.markmap || !window.markmap.Markmap) {
+            throw new Error('La librería markmap no está disponible en window.');
+          }
+          return window.markmap;
+        });
+        return markmapAssetsPromise;
+      }
+
+      function cargarScriptUnaVez_(src) {
+        return new Promise(function(resolve, reject) {
+          var existente = document.querySelector('script[src="' + src + '"]');
+          if (existente) {
+            if (existente.dataset.loaded === 'true') {
+              resolve();
+              return;
+            }
+            existente.addEventListener('load', function() {
+              existente.dataset.loaded = 'true';
+              resolve();
+            }, { once: true });
+            existente.addEventListener('error', function() {
+              reject(new Error('No se pudo cargar ' + src));
+            }, { once: true });
+            return;
+          }
+
+          var script = document.createElement('script');
+          script.src = src;
+          script.defer = true;
+          script.dataset.loaded = 'false';
+          script.addEventListener('load', function() {
+            script.dataset.loaded = 'true';
+            resolve();
+          }, { once: true });
+          script.addEventListener('error', function() {
+            reject(new Error('No se pudo cargar ' + src));
+          }, { once: true });
+          document.head.appendChild(script);
+        });
+      }
+
+      function limpiarToolbarsPrevias_() {
+        var toolbarNodes = document.querySelectorAll('.markmap-toolbar');
+        toolbarNodes.forEach(function(node) {
+          if (node.dataset.pagina === 'pagina2') {
+            node.remove();
+          }
+        });
+      }
+
+      function inicializarModalMarkdown_(markdownText) {
+        var modal = document.getElementById('markdownModal');
+        var closeBtn = document.getElementById('closeMarkdownBtn');
+        var showBtn = document.getElementById('showMarkdownBtn');
+        var viewer = document.getElementById('markdownViewer');
+        if (!modal || !closeBtn || !showBtn || !viewer) {
+          return;
+        }
+
+        viewer.textContent = markdownText;
+
+        if (modal.dataset.initialized === 'true') {
+          return;
+        }
+        modal.dataset.initialized = 'true';
+
+        var openModal = function() {
+          modal.classList.add('visible');
+        };
+
+        var closeModal = function() {
+          modal.classList.remove('visible');
+        };
+
+        showBtn.addEventListener('click', openModal);
+        closeBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', function(event) {
+          if (event.target === modal) {
+            closeModal();
+          }
+        });
+        document.addEventListener('keydown', function(event) {
+          if (event.key === 'Escape' && modal.classList.contains('visible')) {
+            closeModal();
+          }
+        });
       }
     </script>
   </body>
