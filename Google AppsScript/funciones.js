@@ -1,6 +1,8 @@
 const FORMA1_SPREADSHEET_ID = '1S3qYQGNMIOEnpHlBpku9x9CJgaLKqMH22fn_Rg08MKU';
 const FORMA1_SHEET_NAME = 'forma1';
-const FORMA1_HEADER = ['FECHA', 'USUARIO', 'NUMERO', 'FECHAHORA'];
+const FORMA1_HEADER = ['FECHA', 'USUARIO', 'NUMERO', 'TIPO', 'ACTIVIDAD', 'FECHAHORA'];
+const CATALOGO_SPREADSHEET_ID = '17nygtbMiRWZLbRZRxkoCuz5DMdhYOpDlIs0XV4spF3w';
+const CATALOGO_SHEET_NAME = 'resumen';
 
 function submitForma1Entry(formData) {
   if (!formData) {
@@ -10,6 +12,8 @@ function submitForma1Entry(formData) {
   const rawDate = formData.fecha;
   const rawUsuario = formData.usuario;
   const rawNumero = formData.numero;
+  const rawTipo = formData.tipo;
+  const rawActividad = formData.actividad;
 
   if (!rawDate) {
     throw new Error('La fecha es obligatoria.');
@@ -22,6 +26,16 @@ function submitForma1Entry(formData) {
   const numero = parseInt(rawNumero, 10);
   if (isNaN(numero) || numero < 1 || numero > 5) {
     throw new Error('El numero debe estar entre 1 y 5.');
+  }
+
+  const tipo = String(rawTipo || '').trim();
+  if (!tipo) {
+    throw new Error('El tipo es obligatorio.');
+  }
+
+  const actividad = String(rawActividad || '').trim();
+  if (!actividad) {
+    throw new Error('La actividad es obligatoria.');
   }
 
   const dateParts = String(rawDate).split('-');
@@ -46,6 +60,10 @@ function submitForma1Entry(formData) {
     throw new Error('La fecha proporcionada no es valida.');
   }
 
+  if (!isTipoActividadValido_(tipo, actividad)) {
+    throw new Error('La combinacion de tipo y actividad no es valida.');
+  }
+
   const ss = SpreadsheetApp.openById(FORMA1_SPREADSHEET_ID);
   let sheet = ss.getSheetByName(FORMA1_SHEET_NAME);
   if (!sheet) {
@@ -54,7 +72,7 @@ function submitForma1Entry(formData) {
 
   ensureForma1Header_(sheet);
 
-  sheet.appendRow([fecha, usuario, numero, new Date()]);
+  sheet.appendRow([fecha, usuario, numero, tipo, actividad, new Date()]);
   return 'Registro almacenado correctamente.';
 }
 
@@ -82,6 +100,96 @@ function ensureForma1Header_(sheet) {
     sheet.getRange(1, 1, 1, expected.length).setValues([expected]);
     sheet.getRange(1, 1, 1, expected.length).setFontWeight('bold');
   }
+}
+
+function getCatalogoResumen() {
+  const registros = leerCatalogoResumen_();
+  if (!registros.length) {
+    return {
+      tipos: [],
+      actividades: {}
+    };
+  }
+
+  const actividades = {};
+
+  registros.forEach(function(item) {
+    if (!item || !item.tipo || !item.desplegable) {
+      return;
+    }
+    const tipo = item.tipo;
+    const opcion = item.desplegable;
+    if (!actividades[tipo]) {
+      actividades[tipo] = [];
+    }
+    if (actividades[tipo].indexOf(opcion) === -1) {
+      actividades[tipo].push(opcion);
+    }
+  });
+
+  const tipos = Object.keys(actividades).sort();
+  tipos.forEach(function(tipo) {
+    actividades[tipo].sort();
+  });
+
+  return {
+    tipos: tipos,
+    actividades: actividades
+  };
+}
+
+function leerCatalogoResumen_() {
+  const ss = SpreadsheetApp.openById(CATALOGO_SPREADSHEET_ID);
+  const sheet = ss.getSheetByName(CATALOGO_SHEET_NAME);
+  if (!sheet) {
+    throw new Error('No se encontro la hoja resumen del catalogo.');
+  }
+
+  const values = sheet.getDataRange().getValues();
+  if (!values || values.length < 2) {
+    return [];
+  }
+
+  const header = values[0].map(function(value) {
+    return String(value || '').trim().toLowerCase();
+  });
+
+  const tipoIdx = header.indexOf('tipo');
+  const desplegableIdx = header.indexOf('desplegable');
+
+  if (tipoIdx === -1 || desplegableIdx === -1) {
+    throw new Error('El catalogo debe incluir las columnas tipo y desplegable.');
+  }
+
+  return values.slice(1).reduce(function(acc, row) {
+    const tipo = String(row[tipoIdx] || '').trim();
+    const desplegable = String(row[desplegableIdx] || '').trim();
+    if (!tipo || !desplegable) {
+      return acc;
+    }
+    acc.push({
+      tipo: tipo,
+      desplegable: desplegable
+    });
+    return acc;
+  }, []);
+}
+
+function isTipoActividadValido_(tipo, actividad) {
+  const registros = leerCatalogoResumen_();
+  if (!registros.length) {
+    return false;
+  }
+  const existeTipo = registros.some(function(item) {
+    return item.tipo === tipo;
+  });
+  if (!existeTipo) {
+    return false;
+  }
+  const combinacionValida = registros.some(function(item) {
+    return item.tipo === tipo && item.desplegable === actividad;
+  });
+  return combinacionValida;
 }
 
 /** /INSERTA UN ARREGLO BIDIMENSIONAL EN UNA HOJA DE CALCULO /**/

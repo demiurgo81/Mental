@@ -2,48 +2,121 @@
 <html>
   <head>
     <base target="_top">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
+      *, *::before, *::after {
+        box-sizing: border-box;
+      }
+
       body {
         font-family: Arial, sans-serif;
         margin: 0;
-        display: grid;
-        grid-template-columns: 200px 1fr;
         min-height: 100vh;
+        background-color: #f7f9fc;
+        color: #1f2933;
+        display: grid;
+        grid-template-columns: minmax(180px, 240px) 1fr;
+        overflow-x: hidden;
       }
       nav {
         background-color: #f4f4f4;
         padding: 20px;
         border-right: 1px solid #ddd;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
       }
       nav ul {
         list-style-type: none;
         padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
       }
       nav li {
-        margin-bottom: 10px;
+        margin: 0;
       }
       nav a {
         text-decoration: none;
         color: #007BFF;
         cursor: pointer;
         font-weight: bold;
+        padding: 10px 12px;
+        border-radius: 8px;
+        transition: background-color 0.2s ease, color 0.2s ease;
+        display: block;
       }
       nav a:hover {
-        text-decoration: underline;
+        background-color: rgba(0, 123, 255, 0.12);
+        color: #0056b3;
+      }
+      nav a:focus-visible {
+        outline: 2px solid #0056b3;
+        outline-offset: 2px;
       }
       main {
-        padding: 20px;
+        padding: 24px;
+        background-color: #ffffff;
+        box-shadow: inset 0 1px 0 rgba(15, 23, 42, 0.04);
+        width: 100%;
       }
       #loader {
         display: none; /* Oculto por defecto */
         font-style: italic;
+        padding: 12px 20px;
+      }
+
+      @media (max-width: 900px) {
+        body {
+          grid-template-columns: 1fr;
+          grid-template-rows: auto 1fr;
+        }
+        nav {
+          border-right: none;
+          border-bottom: 1px solid #ddd;
+          position: sticky;
+          top: 0;
+          z-index: 20;
+          background-color: rgba(244, 244, 244, 0.96);
+          backdrop-filter: blur(6px);
+        }
+        nav ul {
+          flex-direction: row;
+          flex-wrap: wrap;
+        }
+        nav a {
+          padding: 10px;
+        }
+        main {
+          padding: 18px;
+        }
+      }
+
+      @media (max-width: 540px) {
+        body {
+          font-size: 15px;
+        }
+        nav {
+          padding: 16px;
+        }
+        nav ul {
+          gap: 6px;
+        }
+        nav a {
+          flex: 1 1 45%;
+          text-align: center;
+        }
+        main {
+          padding: 16px;
+        }
       }
     </style>
   </head>
   <body>
 
     <nav>
-      <h3>Navegación</h3>
+      <h3>Navegacion</h3>
       <ul>
         <li><a onclick="cargarPagina('inicio')">Inicio</a></li>
         <li><a onclick="cargarPagina('pagina1')">Formulario</a></li>
@@ -130,12 +203,112 @@
         var form = document.getElementById('entryForm');
         var statusMessage = document.getElementById('statusMessage');
         var submitButton = document.getElementById('submitButton');
+        var tipoSelect = document.getElementById('tipo');
+        var actividadSelect = document.getElementById('actividad');
+        var catalogoDatos = {
+          tipos: [],
+          actividades: {}
+        };
 
         // Evitar doble binding si el usuario navega rápido
         if (form.dataset.initialized) {
           return;
         }
         form.dataset.initialized = 'true';
+
+        function setSelectOptions(selectElement, options, placeholderText, disable) {
+          if (!selectElement) {
+            return;
+          }
+          selectElement.innerHTML = '';
+
+          var placeholder = document.createElement('option');
+          placeholder.value = '';
+          placeholder.textContent = placeholderText || 'Selecciona una opcion';
+          placeholder.disabled = true;
+          placeholder.selected = true;
+          selectElement.appendChild(placeholder);
+
+          if (Array.isArray(options)) {
+            options.forEach(function(optionValue) {
+              var value = String(optionValue || '').trim();
+              if (!value) {
+                return;
+              }
+
+              var option = document.createElement('option');
+              option.value = value;
+              option.textContent = value;
+              selectElement.appendChild(option);
+            });
+          }
+
+          if (typeof disable === 'boolean') {
+            selectElement.disabled = disable;
+          } else {
+            selectElement.disabled = false;
+          }
+        }
+
+        function manejarCambioTipo() {
+          if (!tipoSelect || !actividadSelect) {
+            return;
+          }
+
+          var seleccionado = tipoSelect.value;
+          if (!seleccionado) {
+            setSelectOptions(actividadSelect, [], 'Selecciona una actividad', true);
+            return;
+          }
+
+          var actividades = (catalogoDatos.actividades && catalogoDatos.actividades[seleccionado]) || [];
+          if (!actividades.length) {
+            setSelectOptions(actividadSelect, [], 'Sin actividades disponibles', true);
+            showStatus('No hay actividades disponibles para el tipo seleccionado.', 'error');
+            return;
+          }
+
+          clearStatus();
+          setSelectOptions(actividadSelect, actividades, 'Selecciona una actividad', false);
+        }
+
+        function cargarCatalogo() {
+          if (!tipoSelect || !actividadSelect) {
+            return;
+          }
+
+          setSelectOptions(tipoSelect, [], 'Cargando tipos...', true);
+          setSelectOptions(actividadSelect, [], 'Selecciona una actividad', true);
+
+          google.script.run
+            .withSuccessHandler(function(datos) {
+              catalogoDatos = datos || { tipos: [], actividades: {} };
+              var tipos = Array.isArray(catalogoDatos.tipos) ? catalogoDatos.tipos : [];
+
+              if (!tipos.length) {
+                setSelectOptions(tipoSelect, [], 'Sin tipos disponibles', true);
+                setSelectOptions(actividadSelect, [], 'Sin actividades disponibles', true);
+                showStatus('No hay tipos disponibles en el catalogo.', 'error');
+                return;
+              }
+
+              setSelectOptions(tipoSelect, tipos, 'Selecciona un tipo', false);
+              setSelectOptions(actividadSelect, [], 'Selecciona una actividad', true);
+            })
+            .withFailureHandler(function(error) {
+              var mensaje = (error && error.message) ? error.message : 'No se pudo cargar el catalogo.';
+              setSelectOptions(tipoSelect, [], 'No disponible', true);
+              setSelectOptions(actividadSelect, [], 'No disponible', true);
+              showStatus(mensaje, 'error');
+            })
+            .getCatalogoResumen();
+        }
+
+        if (tipoSelect) {
+          tipoSelect.addEventListener('change', manejarCambioTipo);
+        }
+
+        cargarCatalogo();
 
         form.addEventListener('submit', function(event) {
           event.preventDefault();
@@ -144,7 +317,9 @@
           var formData = {
             fecha: document.getElementById('fecha').value,
             usuario: document.getElementById('usuario').value.trim(),
-            numero: document.getElementById('numero').value
+            numero: document.getElementById('numero').value,
+            tipo: tipoSelect ? tipoSelect.value : '',
+            actividad: actividadSelect ? actividadSelect.value : ''
           };
 
           if (!isFormValid(formData)) {
@@ -158,6 +333,13 @@
               showStatus(message || 'Registro almacenado correctamente.', 'success');
               alert('Registro enviado con exito');
               form.reset();
+              setSelectOptions(
+                tipoSelect,
+                Array.isArray(catalogoDatos.tipos) ? catalogoDatos.tipos : [],
+                'Selecciona un tipo',
+                !(catalogoDatos.tipos && catalogoDatos.tipos.length)
+              );
+              setSelectOptions(actividadSelect, [], 'Selecciona una actividad', true);
               setLoading(false);
             })
             .withFailureHandler(function(error) {
@@ -183,6 +365,14 @@
         }
         if (!data.numero) {
           showStatus('Selecciona un numero entre 1 y 5.', 'error');
+          return false;
+        }
+        if (!data.tipo) {
+          showStatus('Selecciona un tipo.', 'error');
+          return false;
+        }
+        if (!data.actividad) {
+          showStatus('Selecciona una actividad.', 'error');
           return false;
         }
         return true;

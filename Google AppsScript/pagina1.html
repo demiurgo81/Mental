@@ -5,24 +5,42 @@
   <style>
     .pagina1-wrapper {
       font-family: Arial, sans-serif;
+      padding: 16px;
+      background-color: #f3f4f6;
     }
 
     .pagina1-wrapper form {
-      max-width: 400px;
+      width: min(100%, 480px);
+      margin: 0 auto;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 14px;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08);
     }
 
     .pagina1-wrapper label {
       font-weight: bold;
+      display: block;
+      margin-bottom: 6px;
     }
 
     .pagina1-wrapper input,
     .pagina1-wrapper select,
     .pagina1-wrapper button {
-      padding: 8px;
-      font-size: 14px;
+      padding: 12px;
+      font-size: 15px;
+      border: 1px solid #d0d7e2;
+      border-radius: 8px;
+      width: 100%;
+    }
+
+    .pagina1-wrapper input:focus,
+    .pagina1-wrapper select:focus {
+      outline: 2px solid rgba(66, 133, 244, 0.4);
+      border-color: #4285f4;
     }
 
     .pagina1-wrapper button {
@@ -30,7 +48,14 @@
       background-color: #4285f4;
       color: #fff;
       border: none;
-      border-radius: 4px;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .pagina1-wrapper button:hover:not(:disabled) {
+      background-color: #2f6adf;
+      transform: translateY(-1px);
     }
 
     .pagina1-wrapper button:disabled {
@@ -39,9 +64,10 @@
     }
 
     #statusMessage {
-      margin-top: 16px;
-      padding: 10px;
-      border-radius: 4px;
+      margin: 18px auto 0;
+      width: min(100%, 480px);
+      padding: 12px;
+      border-radius: 8px;
       display: none;
     }
 
@@ -57,6 +83,30 @@
       background-color: #fce8e6;
       border: 1px solid #ea4335;
       color: #a50e0e;
+    }
+
+    @media (max-width: 540px) {
+      .pagina1-wrapper {
+        padding: 12px;
+      }
+
+      .pagina1-wrapper form {
+        border-radius: 10px;
+        padding: 16px;
+        box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+        gap: 12px;
+      }
+
+      .pagina1-wrapper input,
+      .pagina1-wrapper select,
+      .pagina1-wrapper button {
+        font-size: 14px;
+        padding: 10px;
+      }
+
+      #statusMessage {
+        width: 100%;
+      }
     }
   </style>
 
@@ -78,6 +128,18 @@
         <option value="3">3</option>
         <option value="4">4</option>
         <option value="5">5</option>
+      </select>
+    </div>
+    <div>
+      <label for="tipo">Tipo</label>
+      <select id="tipo" name="TIPO" required disabled>
+        <option value="" disabled selected>Cargando tipos...</option>
+      </select>
+    </div>
+    <div>
+      <label for="actividad">Actividad</label>
+      <select id="actividad" name="ACTIVIDAD" required disabled>
+        <option value="" disabled selected>Selecciona una actividad</option>
       </select>
     </div>
     <button type="submit" id="submitButton">Enviar</button>
