@@ -3,6 +3,211 @@ const FORMA1_SHEET_NAME = 'forma1';
 const FORMA1_HEADER = ['FECHA', 'USUARIO', 'NUMERO', 'TIPO', 'ACTIVIDAD', 'FECHAHORA'];
 const CATALOGO_SPREADSHEET_ID = '17nygtbMiRWZLbRZRxkoCuz5DMdhYOpDlIs0XV4spF3w';
 const CATALOGO_SHEET_NAME = 'resumen';
+const CATALOGO_LISTADO_SHEET_NAME = 'listado';
+const CATALOGO_LISTADO_HEADER = ['tipo', 'Escenario', 'Actividad', 'nombre', 'costo', 'desplegable'];
+const CATALOGO_TIPOS_VALIDOS = ['Catalogo', 'Incentivo', 'Multa'];
+
+function obtenerCatalogoSofiaListado() {
+  const sheet = getCatalogoListadoSheet_();
+  const data = sheet.getDataRange().getValues();
+  if (!data || data.length < 2) {
+    return { registros: [], tipos: [], escenarios: [] };
+  }
+  validarHeaderCatalogoListado_(data[0]);
+
+  const registros = [];
+  const tiposSet = {};
+  const escenariosSet = {};
+  for (let i = 1; i < data.length; i++) {
+    const row = data[i];
+    if (!row || row.length < CATALOGO_LISTADO_HEADER.length) {
+      continue;
+    }
+    const tipo = String(row[0] || '').trim();
+    const escenario = String(row[1] || '').trim();
+    const actividad = String(row[2] || '').trim();
+    const nombre = String(row[3] || '').trim();
+    const costo = row[4] === '' || row[4] === null ? null : Number(row[4]);
+    const desplegable = String(row[5] || '').trim();
+
+    const camposVacios = !tipo && !escenario && !actividad && !nombre && (costo === null || isNaN(costo)) && !desplegable;
+    if (camposVacios) {
+      continue;
+    }
+
+    if (tipo) {
+      tiposSet[tipo] = true;
+    }
+    if (escenario) {
+      escenariosSet[escenario] = true;
+    }
+
+    registros.push({
+      rowIndex: i + 1,
+      tipo: tipo,
+      escenario: escenario,
+      actividad: actividad,
+      nombre: nombre,
+      costo: isNaN(costo) ? null : Number(costo),
+      desplegable: desplegable
+    });
+  }
+
+  return {
+    registros: registros,
+    tipos: Object.keys(tiposSet),
+    escenarios: Object.keys(escenariosSet)
+  };
+}
+
+function crearCatalogoSofiaRegistro(payload) {
+  const datos = prepararDatosCatalogo_(payload);
+  const sheet = getCatalogoListadoSheet_();
+  const nuevaFila = [datos.tipo, datos.escenario, datos.actividad, datos.nombre, datos.costo, datos.desplegable];
+  sheet.appendRow(nuevaFila);
+  const rowIndex = sheet.getLastRow();
+  return {
+    rowIndex: rowIndex,
+    tipo: datos.tipo,
+    escenario: datos.escenario,
+    actividad: datos.actividad,
+    nombre: datos.nombre,
+    costo: datos.costo,
+    desplegable: datos.desplegable
+  };
+}
+
+function actualizarCatalogoSofiaRegistro(rowIndex, updates) {
+  const sheet = getCatalogoListadoSheet_();
+  const fila = Number(rowIndex);
+  if (!fila || fila < 2 || fila > sheet.getLastRow()) {
+    throw new Error('Referencia de fila no valida.');
+  }
+  const header = sheet.getRange(1, 1, 1, CATALOGO_LISTADO_HEADER.length).getValues()[0];
+  validarHeaderCatalogoListado_(header);
+
+  const rangoFila = sheet.getRange(fila, 1, 1, CATALOGO_LISTADO_HEADER.length);
+  const valoresActuales = rangoFila.getValues()[0];
+  const tipo = normalizarTipoCatalogo_(valoresActuales[0]);
+
+  const datos = prepararDatosCatalogo_(Object.assign({}, updates, { tipo: tipo }));
+  rangoFila.offset(0, 1, 1, 5).setValues([
+    [datos.escenario, datos.actividad, datos.nombre, datos.costo, datos.desplegable]
+  ]);
+
+  return {
+    rowIndex: fila,
+    tipo: tipo,
+    escenario: datos.escenario,
+    actividad: datos.actividad,
+    nombre: datos.nombre,
+    costo: datos.costo,
+    desplegable: datos.desplegable
+  };
+}
+
+function eliminarCatalogoSofiaRegistro(rowIndex) {
+  const sheet = getCatalogoListadoSheet_();
+  const fila = Number(rowIndex);
+  if (!fila || fila < 2 || fila > sheet.getLastRow()) {
+    throw new Error('Referencia de fila no valida.');
+  }
+  sheet.deleteRow(fila);
+  return true;
+}
+
+function getCatalogoListadoSheet_() {
+  const ss = SpreadsheetApp.openById(CATALOGO_SPREADSHEET_ID);
+  const sheet = ss.getSheetByName(CATALOGO_LISTADO_SHEET_NAME);
+  if (!sheet) {
+    throw new Error('No se encontro la hoja listado en el catalogo.');
+  }
+  return sheet;
+}
+
+function validarHeaderCatalogoListado_(header) {
+  if (!header || header.length < CATALOGO_LISTADO_HEADER.length) {
+    throw new Error('La hoja listado no tiene el formato esperado.');
+  }
+  for (let i = 0; i < CATALOGO_LISTADO_HEADER.length; i++) {
+    const esperado = String(CATALOGO_LISTADO_HEADER[i]).toLowerCase();
+    const actual = String(header[i] || '').toLowerCase();
+    if (esperado !== actual) {
+      throw new Error('El encabezado de la hoja listado no coincide con el formato esperado.');
+    }
+  }
+}
+
+function prepararDatosCatalogo_(datos) {
+  if (!datos) {
+    throw new Error('No se recibieron datos para el catalogo.');
+  }
+  const tipo = normalizarTipoCatalogo_(datos.tipo);
+  const escenario = String(datos.escenario || '').trim();
+  const actividad = String(datos.actividad || '').trim();
+
+  if (!escenario) {
+    throw new Error('El campo Escenario es obligatorio.');
+  }
+  if (!actividad) {
+    throw new Error('El campo Actividad es obligatorio.');
+  }
+
+  const costoEntero = parseCostoEntero_(datos.costo);
+  const costo = ajustarCostoSegunTipo_(tipo, costoEntero);
+  const nombre = construirNombreCatalogo_(escenario, actividad);
+  const desplegable = construirDesplegableCatalogo_(costo, nombre);
+
+  return {
+    tipo: tipo,
+    escenario: escenario,
+    actividad: actividad,
+    costo: costo,
+    nombre: nombre,
+    desplegable: desplegable
+  };
+}
+
+function normalizarTipoCatalogo_(rawTipo) {
+  const texto = String(rawTipo || '').trim();
+  if (!texto) {
+    throw new Error('El campo Tipo es obligatorio.');
+  }
+  const upper = texto.toUpperCase();
+  for (let i = 0; i < CATALOGO_TIPOS_VALIDOS.length; i++) {
+    if (CATALOGO_TIPOS_VALIDOS[i].toUpperCase() === upper) {
+      return CATALOGO_TIPOS_VALIDOS[i];
+    }
+  }
+  throw new Error('Tipo no valido. Valores permitidos: ' + CATALOGO_TIPOS_VALIDOS.join(', ') + '.');
+}
+
+function parseCostoEntero_(valor) {
+  const numero = Number(valor);
+  if (!isFinite(numero) || Math.floor(numero) !== numero) {
+    throw new Error('El costo debe ser un numero entero.');
+  }
+  if (numero === 0) {
+    throw new Error('El costo no puede ser cero.');
+  }
+  return numero;
+}
+
+function ajustarCostoSegunTipo_(tipo, costoEntero) {
+  const absoluto = Math.abs(costoEntero);
+  if (tipo === 'Incentivo') {
+    return absoluto;
+  }
+  return -absoluto;
+}
+
+function construirNombreCatalogo_(escenario, actividad) {
+  return escenario + ': ' + actividad;
+}
+
+function construirDesplegableCatalogo_(costo, nombre) {
+  return costo + '_' + nombre;
+}
 
 function submitForma1Entry(formData) {
   if (!formData) {

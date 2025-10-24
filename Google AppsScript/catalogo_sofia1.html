@@ -1,0 +1,345 @@
+<div class="catalogo-wrapper">
+  <header class="catalogo-header">
+    <h1>Catalogo Sofia</h1>
+    <p>Administre los items del catalogo: filtre, busque, cree, edite y elimine registros de la hoja <strong>listado</strong>.</p>
+  </header>
+
+  <section class="catalogo-filtros" aria-label="Filtros del catalogo">
+    <form id="catalogoFilters" class="filters-grid" autocomplete="off">
+      <div class="field">
+        <label for="filterTipo">Tipo</label>
+        <select id="filterTipo" name="filterTipo">
+          <option value="">Todos los tipos</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="filterEscenario">Escenario</label>
+        <select id="filterEscenario" name="filterEscenario">
+          <option value="">Todos los escenarios</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="filterSearch">Buscar por desplegable</label>
+        <input id="filterSearch" name="filterSearch" type="search" placeholder="Ingresa texto para filtrar" autocomplete="off">
+      </div>
+      <div class="field action">
+        <button type="button" id="btnNuevoCatalogo" class="btn-primary">NUEVO</button>
+      </div>
+    </form>
+  </section>
+
+  <section class="catalogo-tabla" aria-live="polite">
+    <div id="catalogoLoading" class="catalogo-loading">Cargando registros...</div>
+    <table id="catalogoTabla" class="responsive-table" aria-describedby="catalogoTablaDescripcion" hidden>
+      <caption id="catalogoTablaDescripcion">Listado de registros con opciones para editar o eliminar.</caption>
+      <thead>
+        <tr>
+          <th scope="col">Tipo</th>
+          <th scope="col">Escenario</th>
+          <th scope="col">Desplegable</th>
+          <th scope="col" class="acciones">Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="catalogoTablaBody">
+      </tbody>
+    </table>
+    <div id="catalogoEmpty" class="catalogo-empty" hidden>No hay registros que coincidan con los filtros seleccionados.</div>
+  </section>
+</div>
+
+<div id="catalogoModal" class="catalogo-modal hidden" role="dialog" aria-modal="true" aria-labelledby="catalogoModalTitulo">
+  <div class="modal-content">
+    <form id="catalogo_sofia" class="modal-form" novalidate>
+      <h2 id="catalogoModalTitulo">Nuevo registro</h2>
+      <input type="hidden" id="catalogoRowIndex" name="rowIndex">
+
+      <div class="form-grid">
+        <div class="field">
+          <label for="modalTipo">Tipo</label>
+          <select id="modalTipo" name="tipo" required>
+            <option value="" disabled selected>Selecciona un tipo</option>
+            <option value="Catalogo">Catalogo</option>
+            <option value="Incentivo">Incentivo</option>
+            <option value="Multa">Multa</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="modalEscenario">Escenario</label>
+          <input id="modalEscenario" name="escenario" type="text" maxlength="300" required placeholder="Ej. Escenario principal">
+        </div>
+        <div class="field">
+          <label for="modalActividad">Actividad</label>
+          <input id="modalActividad" name="actividad" type="text" maxlength="300" required placeholder="Ej. Actividad destacada">
+        </div>
+        <div class="field">
+          <label for="modalCosto">Costo</label>
+          <input id="modalCosto" name="costo" type="number" step="1" required placeholder="Ingresa un numero entero">
+        </div>
+      </div>
+
+      <div id="catalogoModalError" class="form-error" role="alert" aria-live="assertive" hidden></div>
+
+      <div class="modal-actions">
+        <button type="button" id="catalogoCancelar" class="btn-secondary">Cancelar</button>
+        <button type="submit" id="catalogoGuardar" class="btn-primary">Guardar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<style>
+  .catalogo-wrapper {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding: 16px;
+    background-color: #f5f7fb;
+    min-height: 100%;
+  }
+
+  .catalogo-header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    color: #1f2933;
+  }
+
+  .catalogo-header p {
+    margin: 6px 0 0;
+    color: #52616d;
+  }
+
+  .catalogo-filtros {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+    padding: 20px;
+  }
+
+  .filters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    align-items: end;
+  }
+
+  .field label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 6px;
+    color: #1f2933;
+  }
+
+  .field input,
+  .field select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .field input:focus,
+  .field select:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+  }
+
+  .field.action {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    border: none;
+    border-radius: 10px;
+    padding: 12px 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+    color: #fff;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.28);
+  }
+
+  .btn-secondary {
+    background-color: #e2e8f0;
+    color: #1f2937;
+  }
+
+  .btn-secondary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(148, 163, 184, 0.32);
+  }
+
+  .catalogo-tabla {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 12px 34px rgba(15, 23, 42, 0.09);
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .catalogo-loading,
+  .catalogo-empty {
+    padding: 32px;
+    text-align: center;
+    color: #475569;
+  }
+
+  .responsive-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .responsive-table th,
+  .responsive-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid #e2e8f0;
+    text-align: left;
+  }
+
+  .responsive-table thead {
+    background-color: #f1f5f9;
+  }
+
+  .acciones {
+    text-align: center;
+    width: 140px;
+  }
+
+  .tabla-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .tabla-actions button {
+    border: none;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .tabla-actions .btn-edit {
+    background-color: #38bdf8;
+    color: #0f172a;
+  }
+
+  .tabla-actions .btn-delete {
+    background-color: #f87171;
+    color: #fff;
+  }
+
+  .tabla-actions button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(15, 23, 42, 0.18);
+  }
+
+  .catalogo-modal {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(15, 23, 42, 0.45);
+    padding: 24px;
+    z-index: 1000;
+  }
+
+  .catalogo-modal.hidden {
+    display: none;
+  }
+
+  .modal-content {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 20px 50px rgba(15, 23, 42, 0.3);
+    width: min(520px, 100%);
+    padding: 24px;
+  }
+
+  .modal-form h2 {
+    margin: 0 0 16px;
+    color: #1f2933;
+  }
+
+  .form-grid {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+
+  .form-error {
+    margin-top: 14px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background-color: #fee2e2;
+    color: #b91c1c;
+    border: 1px solid #fecaca;
+  }
+
+  .form-error[hidden] {
+    display: none;
+  }
+
+  .modal-actions {
+    margin-top: 24px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+  }
+
+  @media (max-width: 768px) {
+    .catalogo-wrapper {
+      padding: 12px;
+    }
+
+    .filters-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .field.action {
+      justify-content: stretch;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+      width: 100%;
+    }
+
+    .tabla-actions {
+      flex-direction: column;
+    }
+
+    .tabla-actions button {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .modal-content {
+      padding: 20px;
+    }
+
+    .form-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .acciones {
+      width: auto;
+    }
+  }
+</style>

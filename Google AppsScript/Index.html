@@ -119,21 +119,22 @@
       <h3>Navegacion</h3>
       <ul>
         <li><a onclick="cargarPagina('inicio')">Inicio</a></li>
-        <li><a onclick="cargarPagina('pagina1')">Formulario</a></li>
+        <li><a onclick="cargarPagina('catalogo_sofia1')">Catalogo Sofia</a></li>
         <li><a onclick="cargarPagina('pagina2')">Test Ideologico</a></li>
+        <li><a onclick="cargarPagina('pagina1')">Formulario de Pruenbas</a></li>
       </ul>
     </nav>
 
     <main id="contenido">
-      <h2>Bienvenido a la Página Principal</h2>
-      <p>Seleccione una opción del menú de la izquierda para cargar contenido.</p>
+      <h2>SOFICREDITOS ONLINE</h2>
+      <p>Gestion Financiera del Comportamiento</p>
     </main>
 
     <div id="loader">Cargando...</div>
 
     <script>
     
-      // --- SECCIÓN 1: LÓGICA DE NAVEGACIÓN ---
+      // --- SECCION 1: LOGICA DE NAVEGACION ---
 
       /**
        * Inicia la carga de contenido llamando al servidor (Code.gs).
@@ -142,13 +143,13 @@
       function cargarPagina(nombrePagina) {
         if (nombrePagina === 'inicio') {
           document.getElementById('contenido').innerHTML = 
-            '<h2>Bienvenido a la Página Principal</h2><p>Seleccione una opción del menú de la izquierda para cargar contenido.</p>';
+            '<h2>Bienvenido a la PÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡gina Principal</h2><p>Seleccione una opciÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â³n del menÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âº de la izquierda para cargar contenido.</p>';
           return;
         }
 
         mostrarLoader(true);
         google.script.run
-          // MODIFICADO: Usar función anónima para pasar nombrePagina al handler
+          // MODIFICADO: Usar funciÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â³n anÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â³nima para pasar nombrePagina al handler
           .withSuccessHandler(function(html) {
             mostrarContenido(html, nombrePagina);
           })
@@ -157,20 +158,22 @@
       }
 
       /**
-       * (Success Handler) Inserta el HTML recibido y llama a inicializadores específicos.
+       * (Success Handler) Inserta el HTML recibido y llama a inicializadores especÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â­ficos.
        * @param {string} html - El contenido HTML devuelto por el servidor.
-       * @param {string} nombrePagina - El nombre de la página que se cargó.
+       * @param {string} nombrePagina - El nombre de la pÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡gina que se cargÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â³.
        */
       function mostrarContenido(html, nombrePagina) {
         mostrarLoader(false);
         document.getElementById('contenido').innerHTML = html;
         
         // --- ESTA ES LA CLAVE ---
-        // Después de cargar el HTML, ejecutar el JS correspondiente.
+        // DespuÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â©s de cargar el HTML, ejecutar el JS correspondiente.
         if (nombrePagina === 'pagina1') {
           inicializarFormPagina1();
         } else if (nombrePagina === 'pagina2') {
           inicializarPagina2();
+        } else if (nombrePagina === 'catalogo_sofia1') {
+          inicializarCatalogoSofia();
         }
       }
 
@@ -192,11 +195,11 @@
       }
 
       
-      // --- SECCIÓN 2: LÓGICA DEL FORMULARIO DE PÁGINA 1 ---
-      // (Este código se movió desde pagina1.html)
+      // --- SECCIÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œN 2: LÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œGICA DEL FORMULARIO DE PÃƒÆ’Ã†â€™Ãƒâ€šÃ‚ÂGINA 1 ---
+      // (Este cÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â³digo se moviÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â³ desde pagina1.html)
 
       /**
-       * Esta función se llama DESPUÉS de que pagina1.html se carga.
+       * Esta funciÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â³n se llama DESPUÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â°S de que pagina1.html se carga.
        */
       function inicializarFormPagina1() {
         // Elementos del DOM (ahora podemos encontrarlos)
@@ -210,7 +213,7 @@
           actividades: {}
         };
 
-        // Evitar doble binding si el usuario navega rápido
+        // Evitar doble binding si el usuario navega rÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡pido
         if (form.dataset.initialized) {
           return;
         }
@@ -352,7 +355,7 @@
         });
       }
 
-      // --- Funciones auxiliares para el formulario (movidas aquí) ---
+      // --- Funciones auxiliares para el formulario (movidas aquÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â­) ---
 
       function isFormValid(data) {
         if (!data.fecha) {
@@ -401,13 +404,627 @@
         submitButton.disabled = isLoading;
         submitButton.textContent = isLoading ? 'Enviando...' : 'Enviar';
         
-        // Corrección: No mostrar el status al terminar la carga, 
+        // CorrecciÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â³n: No mostrar el status al terminar la carga, 
         // los handlers (showStatus) se encargan de eso.
       }
 
-      // --- SECCIÓN 3: VISUALIZACIÓN DE MAPA PARA PÁGINA 2 ---
+      // --- SECCIÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œN 3: VISUALIZACIÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œN DE MAPA PARA PÃƒÆ’Ã†â€™Ãƒâ€šÃ‚ÂGINA 2 ---
+
+      // --- SECCION 3: GESTION DEL CATALOGO SOFIA ---
+
+      function inicializarCatalogoSofia() {
+        var formulario = document.getElementById('catalogo_sofia');
+        if (!formulario) {
+          console.warn('No se encontro el formulario catalogo_sofia en el DOM.');
+          return;
+        }
+        if (formulario.dataset.initialized === 'true') {
+          return;
+        }
+        formulario.dataset.initialized = 'true';
+
+        var elementos = {
+          modal: document.getElementById('catalogoModal'),
+          modalTitulo: document.getElementById('catalogoModalTitulo'),
+          filaId: document.getElementById('catalogoRowIndex'),
+          tipo: document.getElementById('modalTipo'),
+          escenario: document.getElementById('modalEscenario'),
+          actividad: document.getElementById('modalActividad'),
+          costo: document.getElementById('modalCosto'),
+          error: document.getElementById('catalogoModalError'),
+          cancelar: document.getElementById('catalogoCancelar'),
+          guardar: document.getElementById('catalogoGuardar'),
+          filtroTipo: document.getElementById('filterTipo'),
+          filtroEscenario: document.getElementById('filterEscenario'),
+          filtroBusqueda: document.getElementById('filterSearch'),
+          botonNuevo: document.getElementById('btnNuevoCatalogo'),
+          tabla: document.getElementById('catalogoTabla'),
+          cuerpoTabla: document.getElementById('catalogoTablaBody'),
+          vacio: document.getElementById('catalogoEmpty'),
+          cargando: document.getElementById('catalogoLoading')
+        };
+
+        if (!elementos.modal || !elementos.cuerpoTabla || !elementos.cargando) {
+          console.warn('No se pudieron localizar los elementos principales del catalogo.');
+          return;
+        }
+
+        var estado = {
+          registros: [],
+          tipos: [],
+          filtros: {
+            tipo: '',
+            escenario: '',
+            texto: ''
+          }
+        };
+
+        function invocarActualizarFormulario() {
+          google.script.run
+            .withFailureHandler(function(error) {
+              var mensaje = (error && error.message) ? error.message : 'No se pudo actualizar el formulario SOFICREDITOS.';
+              console.error(mensaje);
+            })
+            .actualizarFormulario();
+        }
+
+        function mostrarCarga(texto) {
+          if (!elementos.cargando) {
+            return;
+          }
+          elementos.cargando.hidden = false;
+          elementos.cargando.textContent = texto || 'Cargando registros...';
+          if (elementos.tabla) {
+            elementos.tabla.hidden = true;
+          }
+          if (elementos.vacio) {
+            elementos.vacio.hidden = true;
+          }
+        }
+
+        function ocultarCarga() {
+          if (!elementos.cargando) {
+            return;
+          }
+          elementos.cargando.hidden = true;
+        }
+
+        function construirOpciones(select, opciones, placeholder) {
+          if (!select) {
+            return;
+          }
+          var fragment = document.createDocumentFragment();
+          var opcionBase = document.createElement('option');
+          opcionBase.value = '';
+          opcionBase.textContent = placeholder;
+          fragment.appendChild(opcionBase);
+
+          if (Array.isArray(opciones)) {
+            for (var i = 0; i < opciones.length; i++) {
+              var valor = opciones[i];
+              var opcion = document.createElement('option');
+              opcion.value = valor;
+              opcion.textContent = valor;
+              fragment.appendChild(opcion);
+            }
+          }
+
+          select.innerHTML = '';
+          select.appendChild(fragment);
+        }
+
+        function actualizarOpcionesTipo() {
+          if (!elementos.filtroTipo) {
+            return;
+          }
+          var seleccionActual = estado.filtros.tipo;
+          var opciones = Array.isArray(estado.tipos) ? estado.tipos.slice() : [];
+          opciones.sort();
+          construirOpciones(elementos.filtroTipo, opciones, 'Todos los tipos');
+
+          if (seleccionActual && opciones.indexOf(seleccionActual) === -1) {
+            estado.filtros.tipo = '';
+          }
+          elementos.filtroTipo.value = estado.filtros.tipo;
+        }
+
+        function obtenerEscenariosDisponibles() {
+          var base = estado.registros.slice();
+          if (estado.filtros.tipo) {
+            base = base.filter(function(item) {
+              return item && item.tipo === estado.filtros.tipo;
+            });
+          }
+          var mapa = {};
+          for (var i = 0; i < base.length; i++) {
+            var registro = base[i];
+            var valor = registro && registro.escenario;
+            if (valor) {
+              mapa[valor] = true;
+            }
+          }
+          var lista = Object.keys(mapa);
+          lista.sort();
+          return lista;
+        }
+
+        function actualizarOpcionesEscenario() {
+          if (!elementos.filtroEscenario) {
+            return;
+          }
+          var seleccionActual = estado.filtros.escenario;
+          var opciones = obtenerEscenariosDisponibles();
+          construirOpciones(elementos.filtroEscenario, opciones, 'Todos los escenarios');
+
+          if (seleccionActual && opciones.indexOf(seleccionActual) === -1) {
+            estado.filtros.escenario = '';
+          }
+          elementos.filtroEscenario.value = estado.filtros.escenario;
+        }
+
+        function obtenerRegistrosFiltrados() {
+          var texto = estado.filtros.texto ? estado.filtros.texto.toLowerCase() : '';
+          return estado.registros.filter(function(item) {
+            if (!item) {
+              return false;
+            }
+            if (estado.filtros.tipo && item.tipo !== estado.filtros.tipo) {
+              return false;
+            }
+            if (estado.filtros.escenario && item.escenario !== estado.filtros.escenario) {
+              return false;
+            }
+            var desplegable = String(item.desplegable || '').toLowerCase();
+            if (texto && desplegable.indexOf(texto) === -1) {
+              return false;
+            }
+            return true;
+          });
+        }
+
+        function renderTabla() {
+          if (!elementos.cuerpoTabla) {
+            return;
+          }
+          var registrosFiltrados = obtenerRegistrosFiltrados();
+          elementos.cuerpoTabla.innerHTML = '';
+
+          if (!registrosFiltrados.length) {
+            if (elementos.tabla) {
+              elementos.tabla.hidden = true;
+            }
+            if (elementos.vacio) {
+              elementos.vacio.hidden = false;
+            }
+            return;
+          }
+
+          if (elementos.tabla) {
+            elementos.tabla.hidden = false;
+          }
+          if (elementos.vacio) {
+            elementos.vacio.hidden = true;
+          }
+
+          registrosFiltrados.forEach(function(item) {
+            var fila = document.createElement('tr');
+
+            var celdaTipo = document.createElement('td');
+            celdaTipo.textContent = item.tipo || '';
+            fila.appendChild(celdaTipo);
+
+            var celdaEscenario = document.createElement('td');
+            celdaEscenario.textContent = item.escenario || '';
+            fila.appendChild(celdaEscenario);
+
+            var celdaDesplegable = document.createElement('td');
+            celdaDesplegable.textContent = item.desplegable || '';
+            fila.appendChild(celdaDesplegable);
+
+            var celdaAcciones = document.createElement('td');
+            celdaAcciones.className = 'acciones';
+
+            var contenedor = document.createElement('div');
+            contenedor.className = 'tabla-actions';
+
+            var btnEditar = document.createElement('button');
+            btnEditar.type = 'button';
+            btnEditar.className = 'btn-edit';
+            btnEditar.dataset.action = 'editar';
+            btnEditar.dataset.rowIndex = String(item.rowIndex);
+            btnEditar.textContent = 'Editar';
+
+            var btnEliminar = document.createElement('button');
+            btnEliminar.type = 'button';
+            btnEliminar.className = 'btn-delete';
+            btnEliminar.dataset.action = 'eliminar';
+            btnEliminar.dataset.rowIndex = String(item.rowIndex);
+            btnEliminar.textContent = 'Eliminar';
+
+            contenedor.appendChild(btnEditar);
+            contenedor.appendChild(btnEliminar);
+            celdaAcciones.appendChild(contenedor);
+            fila.appendChild(celdaAcciones);
+
+            elementos.cuerpoTabla.appendChild(fila);
+          });
+        }
+
+        function recargarDatos() {
+          mostrarCarga('Cargando registros...');
+          google.script.run
+            .withSuccessHandler(function(respuesta) {
+              var registros = respuesta && respuesta.registros;
+              var tipos = respuesta && respuesta.tipos;
+
+              estado.registros = Array.isArray(registros) ? registros : [];
+              estado.tipos = Array.isArray(tipos) ? tipos.slice() : [];
+
+              actualizarOpcionesTipo();
+              actualizarOpcionesEscenario();
+              renderTabla();
+              ocultarCarga();
+            })
+            .withFailureHandler(function(error) {
+              var mensaje = (error && error.message) ? error.message : 'No se pudieron cargar los registros.';
+              mostrarCarga(mensaje);
+              console.error('Error al obtener el catalogo:', error);
+            })
+            .obtenerCatalogoSofiaListado();
+        }
+
+        function limpiarErrorModal() {
+          if (elementos.error) {
+            elementos.error.textContent = '';
+            elementos.error.hidden = true;
+          }
+        }
+
+        function mostrarErrorModal(mensaje) {
+          if (elementos.error) {
+            elementos.error.textContent = mensaje;
+            elementos.error.hidden = false;
+          } else {
+            alert(mensaje);
+          }
+        }
+
+        function cerrarModal() {
+          if (elementos.modal) {
+            elementos.modal.classList.add('hidden');
+          }
+          formulario.reset();
+          limpiarErrorModal();
+          if (elementos.filaId) {
+            elementos.filaId.value = '';
+          }
+          if (elementos.tipo) {
+            elementos.tipo.disabled = false;
+          }
+        }
+
+        function aplicarReglaCosto() {
+          if (!elementos.tipo || !elementos.costo) {
+            return;
+          }
+          var tipo = elementos.tipo.value;
+          var texto = elementos.costo.value;
+          if (!texto) {
+            return;
+          }
+          var numero = Number(texto);
+          if (!isFinite(numero)) {
+            return;
+          }
+          if (numero % 1 !== 0) {
+            return;
+          }
+          var entero = numero < 0 ? Math.ceil(numero) : Math.floor(numero);
+          if (entero === 0) {
+            return;
+          }
+          if (tipo === 'Incentivo') {
+            elementos.costo.value = String(Math.abs(entero));
+          } else if (tipo) {
+            elementos.costo.value = String(-Math.abs(entero));
+          } else {
+            elementos.costo.value = String(entero);
+          }
+        }
+
+        function abrirModal(modo, registro) {
+          if (!elementos.modal) {
+            return;
+          }
+          limpiarErrorModal();
+          elementos.modal.dataset.mode = modo || 'nuevo';
+
+          if (modo === 'editar' && registro) {
+            if (elementos.modalTitulo) {
+              elementos.modalTitulo.textContent = 'Editar registro';
+            }
+            if (elementos.filaId) {
+              elementos.filaId.value = String(registro.rowIndex || '');
+            }
+            if (elementos.tipo) {
+              elementos.tipo.value = registro.tipo || '';
+              elementos.tipo.disabled = true;
+            }
+            if (elementos.escenario) {
+              elementos.escenario.value = registro.escenario || '';
+            }
+            if (elementos.actividad) {
+              elementos.actividad.value = registro.actividad || '';
+            }
+            if (elementos.costo) {
+              elementos.costo.value = registro.costo !== null && registro.costo !== undefined ? registro.costo : '';
+            }
+          } else {
+            if (elementos.modalTitulo) {
+              elementos.modalTitulo.textContent = 'Nuevo registro';
+            }
+            if (elementos.filaId) {
+              elementos.filaId.value = '';
+            }
+            if (elementos.tipo) {
+              elementos.tipo.disabled = false;
+              elementos.tipo.value = '';
+            }
+            if (elementos.escenario) {
+              elementos.escenario.value = '';
+            }
+            if (elementos.actividad) {
+              elementos.actividad.value = '';
+            }
+            if (elementos.costo) {
+              elementos.costo.value = '';
+            }
+          }
+
+          elementos.modal.classList.remove('hidden');
+          if (modo === 'editar' && elementos.escenario) {
+            elementos.escenario.focus();
+          } else if (elementos.tipo) {
+            elementos.tipo.focus();
+          }
+          aplicarReglaCosto();
+        }
+
+        function prepararPayload() {
+          aplicarReglaCosto();
+
+          var tipo = elementos.tipo ? elementos.tipo.value.trim() : '';
+          var escenario = elementos.escenario ? elementos.escenario.value.trim() : '';
+          var actividad = elementos.actividad ? elementos.actividad.value.trim() : '';
+          var costoTexto = elementos.costo ? elementos.costo.value.trim() : '';
+
+          if (!tipo) {
+            return { valido: false, mensaje: 'Selecciona un tipo.' };
+          }
+          if (['Catalogo', 'Incentivo', 'Multa'].indexOf(tipo) === -1) {
+            return { valido: false, mensaje: 'El tipo seleccionado no es valido.' };
+          }
+          if (!escenario) {
+            return { valido: false, mensaje: 'Ingresa un escenario.' };
+          }
+          if (!actividad) {
+            return { valido: false, mensaje: 'Ingresa una actividad.' };
+          }
+          if (!costoTexto) {
+            return { valido: false, mensaje: 'Ingresa un costo.' };
+          }
+
+          var costoNumero = Number(costoTexto);
+          if (!isFinite(costoNumero)) {
+            return { valido: false, mensaje: 'El costo debe ser numerico.' };
+          }
+          if (costoNumero % 1 !== 0) {
+            return { valido: false, mensaje: 'El costo debe ser un numero entero.' };
+          }
+          var costoEntero = costoNumero < 0 ? Math.ceil(costoNumero) : Math.floor(costoNumero);
+          if (costoEntero === 0) {
+            return { valido: false, mensaje: 'El costo no puede ser cero.' };
+          }
+          var costoAjustado = costoEntero;
+          if (tipo === 'Incentivo') {
+            costoAjustado = Math.abs(costoEntero);
+          } else {
+            costoAjustado = -Math.abs(costoEntero);
+          }
+
+          var modo = elementos.modal && elementos.modal.dataset.mode ? elementos.modal.dataset.mode : 'nuevo';
+          var payload = {
+            tipo: tipo,
+            escenario: escenario,
+            actividad: actividad,
+            costo: costoAjustado
+          };
+
+          var fila = elementos.filaId ? Number(elementos.filaId.value) : null;
+          if (modo === 'editar') {
+            if (!fila || !isFinite(fila)) {
+              return { valido: false, mensaje: 'No se pudo identificar el registro que debe actualizarse.' };
+            }
+            return {
+              valido: true,
+              modo: 'editar',
+              datos: payload,
+              rowIndex: fila
+            };
+          }
+
+          return {
+            valido: true,
+            modo: 'nuevo',
+            datos: payload
+          };
+        }
+
+        if (elementos.filtroTipo) {
+          elementos.filtroTipo.addEventListener('change', function() {
+            estado.filtros.tipo = elementos.filtroTipo.value;
+            estado.filtros.escenario = '';
+            actualizarOpcionesEscenario();
+            renderTabla();
+          });
+        }
+
+        if (elementos.filtroEscenario) {
+          elementos.filtroEscenario.addEventListener('change', function() {
+            estado.filtros.escenario = elementos.filtroEscenario.value;
+            renderTabla();
+          });
+        }
+
+        if (elementos.filtroBusqueda) {
+          elementos.filtroBusqueda.addEventListener('input', function() {
+            estado.filtros.texto = elementos.filtroBusqueda.value.trim().toLowerCase();
+            renderTabla();
+          });
+        }
+
+        if (elementos.botonNuevo) {
+          elementos.botonNuevo.addEventListener('click', function() {
+            abrirModal('nuevo');
+          });
+        }
+
+        if (elementos.cancelar) {
+          elementos.cancelar.addEventListener('click', function() {
+            cerrarModal();
+          });
+        }
+
+        if (elementos.modal) {
+          elementos.modal.addEventListener('click', function(event) {
+            if (event.target === elementos.modal) {
+              cerrarModal();
+            }
+          });
+        }
+
+        if (elementos.tipo) {
+          elementos.tipo.addEventListener('change', aplicarReglaCosto);
+        }
+        if (elementos.costo) {
+          elementos.costo.addEventListener('blur', aplicarReglaCosto);
+          elementos.costo.addEventListener('input', function() {
+            limpiarErrorModal();
+          });
+        }
+
+        if (elementos.cuerpoTabla) {
+          elementos.cuerpoTabla.addEventListener('click', function(event) {
+            var boton = event.target.closest('button');
+            if (!boton) {
+              return;
+            }
+            var accion = boton.dataset.action;
+            var rowIndex = Number(boton.dataset.rowIndex);
+            if (!accion || !rowIndex) {
+              return;
+            }
+            var registro = estado.registros.find(function(item) {
+              return item && item.rowIndex === rowIndex;
+            });
+            if (!registro) {
+              alert('No se encontro el registro seleccionado.');
+              recargarDatos();
+              return;
+            }
+
+            if (accion === 'editar') {
+              abrirModal('editar', registro);
+              return;
+            }
+
+            if (accion === 'eliminar') {
+              var confirmar = confirm('Deseas eliminar el registro seleccionado?');
+              if (!confirmar) {
+                return;
+              }
+              google.script.run
+                .withSuccessHandler(function() {
+                  alert('Registro eliminado.');
+                  recargarDatos();
+                  invocarActualizarFormulario();
+                })
+                .withFailureHandler(function(error) {
+                  var mensaje = (error && error.message) ? error.message : 'No se pudo eliminar el registro.';
+                  alert(mensaje);
+                  recargarDatos();
+                })
+                .eliminarCatalogoSofiaRegistro(rowIndex);
+            }
+          });
+        }
+
+        formulario.addEventListener('submit', function(event) {
+          event.preventDefault();
+          limpiarErrorModal();
+
+          var resultado = prepararPayload();
+          if (!resultado.valido) {
+            mostrarErrorModal(resultado.mensaje);
+            return;
+          }
+
+          if (elementos.guardar) {
+            elementos.guardar.disabled = true;
+          }
+          var textoOriginal = elementos.guardar ? elementos.guardar.textContent : 'Guardar';
+          if (elementos.guardar) {
+            elementos.guardar.textContent = 'Guardando...';
+          }
+
+          var restablecerBoton = function() {
+            if (elementos.guardar) {
+              elementos.guardar.disabled = false;
+              elementos.guardar.textContent = textoOriginal;
+            }
+          };
+
+          var onSuccess = function() {
+            restablecerBoton();
+            cerrarModal();
+            if (resultado.modo === 'editar') {
+              alert('Registro actualizado.');
+            } else {
+              alert('Registro creado.');
+            }
+            recargarDatos();
+            invocarActualizarFormulario();
+          };
+
+          var onError = function(error) {
+            restablecerBoton();
+            var mensaje = (error && error.message) ? error.message : 'Ocurrio un error al guardar.';
+            mostrarErrorModal(mensaje);
+          };
+
+          if (resultado.modo === 'editar') {
+            google.script.run
+              .withSuccessHandler(onSuccess)
+              .withFailureHandler(onError)
+              .actualizarCatalogoSofiaRegistro(resultado.rowIndex, resultado.datos);
+          } else {
+            google.script.run
+              .withSuccessHandler(onSuccess)
+              .withFailureHandler(onError)
+              .crearCatalogoSofiaRegistro(resultado.datos);
+          }
+        });
+
+        recargarDatos();
+
+
+      }
+
+      // --- SECCION 4: VISUALIZACION DE MAPA PARA PAGINA 2 ---
 
       var MARKMAP_SCRIPT_SOURCES = [
+
+
         'https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js',
         'https://cdn.jsdelivr.net/npm/markmap-view@0.18.12/dist/browser/index.js',
         'https://cdn.jsdelivr.net/npm/markmap-toolbar@0.18.12/dist/index.js',
@@ -431,7 +1048,7 @@
         obtenerMarkmap_().then(function(markmapGlobal) {
           var markdownText = markdownNode.textContent || '';
           if (!markdownText.trim()) {
-            console.warn('El contenido markdown para pagina2 está vacío.');
+            console.warn('El contenido markdown para pagina2 estÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡ vacÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â­o.');
             return;
           }
 
@@ -484,7 +1101,7 @@
           });
         }, Promise.resolve()).then(function() {
           if (!window.markmap || !window.markmap.Markmap) {
-            throw new Error('La librería markmap no está disponible en window.');
+            throw new Error('La librerÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â­a markmap no estÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡ disponible en window.');
           }
           return window.markmap;
         });
